@@ -1,5 +1,6 @@
 import React from "react";
 import { type AppType } from "next/app";
+import splitbee from '@splitbee/web';
 import { setTheme } from "@src/utils/theme";
 
 import { trpc } from "../utils/trpc";
@@ -16,6 +17,10 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
   React.useEffect(() => {
     setTheme();
+    splitbee.init({
+      scriptUrl: '/bee.js',
+      apiUrl: '/_hive',
+    });
   }, []);
 
   React.useEffect(() => {

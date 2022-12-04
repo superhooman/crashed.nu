@@ -1,5 +1,6 @@
-import { ArrowRightIcon, BackpackIcon, CheckIcon, Cross1Icon, CrumpledPaperIcon, InfoCircledIcon, MagnifyingGlassIcon, MinusIcon, PlusIcon, UpdateIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, BackpackIcon, Cross1Icon, CrumpledPaperIcon, InfoCircledIcon, MagnifyingGlassIcon, MinusIcon, PlusIcon, UpdateIcon } from "@radix-ui/react-icons";
 import { Button } from "@src/components/Button";
+import splitbee from '@splitbee/web';
 import { Divider } from "@src/components/Divider";
 import { Empty } from "@src/components/Empty";
 import { Input } from "@src/components/Input";
@@ -47,6 +48,11 @@ export const Search: React.FC<{
             level: '1'
         },
         onSubmit: (values) => {
+            splitbee.track('Search', {
+                query,
+                term,
+                level,
+            });
             setQuery(values.query);
             setTerm(values.term);
             setLevel(values.level);

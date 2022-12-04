@@ -18,6 +18,7 @@ import { getWeek } from './utils/getWeek';
 import { getCalendarItems } from './utils/getCalendarItems';
 import { exportData } from './utils/exportData';
 import { trpc } from '@src/utils/trpc';
+import splitbee from '@splitbee/web';
 
 interface BuilderProps {
     courses: Course[];
@@ -47,6 +48,7 @@ export const Builder: React.FC<BuilderProps> = ({ courses, term, restart }) => {
     }, [selected]);
 
     const saveFile = React.useCallback(() => {
+        splitbee.track('Export');
         exportData(selection, courses, schedule);
     }, [selection, courses, schedule]);
 

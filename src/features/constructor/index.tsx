@@ -1,3 +1,4 @@
+import splitbee from "@splitbee/web";
 import { Container } from "@src/components/Container";
 import { Header } from "@src/components/Header";
 import type { Course } from "@src/server/PCC/typings";
@@ -29,7 +30,10 @@ export const Constructor = () => {
                         courses={courses}
                         addCourse={addCourse}
                         removeCourse={removeCourse}
-                        proceed={() => setScreen('builder')}
+                        proceed={() => {
+                            splitbee.track('Proceed');
+                            setScreen('builder')
+                        }}
                     />
                 </Container>
             ) : null}
@@ -37,7 +41,10 @@ export const Constructor = () => {
                 <Builder
                     courses={courses}
                     term={term}
-                    restart={() => setScreen('list')}
+                    restart={() => {
+                        splitbee.track('Restart');
+                        setScreen('list')
+                    }}
                 />
             ) : null}
         </>
