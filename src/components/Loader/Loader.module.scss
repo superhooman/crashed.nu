@@ -1,0 +1,12 @@
+.root {
+    display: block;
+    animation: var(--a-rotate) var(--a-time-xl) linear infinite;
+
+    .icon {
+        display: block;
+    }
+
+    &.secondary {
+        color: var(--c-text-secondary)
+    }
+}

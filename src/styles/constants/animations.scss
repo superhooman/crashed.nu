@@ -1,0 +1,55 @@
+:root {
+  --a-ease: ease;
+  --a-slide: cubic-bezier(0.16, 1, 0.3, 1);
+  --a-time-xs: .2s;
+  --a-time-s: .4s;
+  --a-time-m: .6s;
+  --a-time-l: .8s;
+  --a-time-xl: 1.2s;
+  --a-scale-factor: 0.95;
+  --a-rotate: rotate;
+  --a-fade-in: fadeIn;
+  --a-fade-in-up: fadeInUp;
+  --a-slide-right: slideRightAndFade;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(48px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    transform: translateX(-48px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
+  }
+}

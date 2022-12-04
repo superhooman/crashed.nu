@@ -1,0 +1,9 @@
+.root {
+    padding: var(--l-6);
+    margin: 0 calc(-1 * var(--l-6));
+    box-shadow: 0 1px 0 0 var(--c-neutral-200);
+
+    .footer {
+        margin-top: var(--l-4);
+    }
+}

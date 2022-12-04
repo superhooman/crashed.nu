@@ -1,0 +1,35 @@
+.root {
+    display: flex;
+
+    margin: 0 calc(-1 * var(--l-4));
+    padding: 0 var(--l-4);
+    padding-bottom: var(--l-4);
+    box-shadow: 0 1px 0 0 var(--c-ring);
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: var(--l-4);
+        width: 100%;
+
+        @media screen and (max-width: 768px) {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+
+
+    .noSchedule {
+        line-height: 46px;
+    }
+}
+
+.scheduleItem {
+    line-height: 1.25;
+    width: 100%;
+    text-overflow: ellipsis;
+
+    * {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

@@ -1,0 +1,25 @@
+.root {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-family: var(--t-font-secondary);
+
+    margin: var(--l-4) 0;
+
+    &::after,
+    &::before {
+        content: '';
+        display: block;
+        flex-grow: 1;
+        height: 1px;
+        background-color: var(--c-ring);
+    }
+
+    .content {
+        text-align: center;
+        font-size: .8rem;
+        margin: 0 var(--l-2);
+        flex-shrink: 0;
+        color: var(--c-neutral-400);
+    }
+}

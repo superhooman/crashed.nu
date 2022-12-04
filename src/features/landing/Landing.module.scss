@@ -1,0 +1,19 @@
+.root {
+    height: unset;
+}
+
+.img {
+    border-radius: var(--l-radius-m);
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--c-ring);
+    transition: transform var(--a-time-s) var(--a-slide), box-shadow var(--a-time-s) var(--a-slide);
+
+    &:hover {
+        transform: scale(1.12) translateY(-8px) rotate(1deg);
+        box-shadow: 0 0 0 1px var(--c-ring), 0 8px 64px -32px var(--c-primary-500);
+    }
+
+    * {
+        display: block!important;
+    }
+}

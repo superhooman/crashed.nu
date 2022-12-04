@@ -1,0 +1,59 @@
+.root {
+    &.fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+
+    z-index: 100;
+
+    background-color: var(--c-bg);
+    width: 100%;
+    padding: var(--l-4) 0;
+    box-shadow: 0 1px 0 0 var(--c-ring);
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        line-height: 24px;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: var(--t-font-m);
+        font-weight: bold;
+
+        .glyph {
+            color: var(--c-primary-500);
+        }
+
+        i {
+            font-style: normal;
+            color: var(--c-primary-500);
+        }
+    }
+
+    :global(html.dark) & {
+        .light {
+            display: none;
+        }
+    }
+
+    :global(html:not(.dark)) & {
+        .dark {
+            display: none;
+        }
+    }
+}
+
+.placeholder {
+    height: 60px;
+}

@@ -1,0 +1,115 @@
+.root {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    font-family: var(--t-font-secondary);
+    --focus: 0 0 0 0;
+
+    &:focus {
+        --focus: var(--s-focus);
+    }
+
+    &:disabled {
+        opacity: .8;
+        cursor: not-allowed;
+    }
+
+    &.fullWidth {
+        width: 100%;
+    }
+
+    &.size {
+        &-default {
+            padding: 0 var(--l-3);
+            line-height: var(--l-9);
+            height: var(--l-9);
+            border-radius: var(--l-radius-m);
+            font-size: .8125rem;
+            font-weight: 500;
+
+            .icon {
+                width: 15px;
+                height: 15px;
+            }
+
+            .icon + .content:not(:empty) {
+                margin-left: var(--l-2);
+            }
+        }
+
+        &-small {
+            padding: 0 var(--l-2);
+            line-height: var(--l-7);
+            height: var(--l-7);
+            border-radius: var(--l-radius-s);
+            font-size: .8rem;
+            font-weight: 500;
+
+            .icon {
+                width: 15px;
+                height: 15px;
+            }
+
+            .icon + .content:not(:empty) {
+                margin-left: var(--l-1);
+            }
+        }
+    }
+
+    &.variant {
+        &-primary {
+            background-color: var(--c-primary-600);
+            color: var(--c-white);
+            box-shadow: var(--focus), var(--s-s);
+
+            &:hover {
+                background-color: var(--c-primary-500);
+            }
+
+            &:active:not(:disabled) {
+                background-color: var(--c-primary-700);
+            }
+        }
+
+        &-default {
+            background-color: var(--c-neutral-50);
+            color: var(--c-text);
+            box-shadow: var(--focus), 0 0 0 1px var(--c-ring), var(--s-s);
+
+            &:hover {
+                background-color: var(--c-neutral-100);
+            }
+
+            &:active:not(:disabled) {
+                background-color: var(--c-neutral-200);
+            }
+
+            .icon {
+                color: var(--c-neutral-500);
+            }
+        }
+
+        &-link {
+            background-color: transparent;
+            color: var(--c-primary-500);
+            box-shadow: var(--focus);
+
+            &:hover {
+                color: var(--c-primary-400);
+            }
+
+            &:active:not(:disabled) {
+                color: var(--c-primary-600);
+            }
+        }
+    }
+
+    .icon svg {
+        display: block;
+    }
+
+    .loading {
+        animation: var(--a-rotate) var(--a-time-xl) linear infinite;
+    }
+}

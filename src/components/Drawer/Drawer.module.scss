@@ -1,0 +1,36 @@
+.overlay {
+  background-color: var(--c-backdrop);
+  position: fixed;
+  inset: 0px;
+  z-index: 100;
+}
+
+.wrapper {
+  position: fixed;
+  inset: 0px;
+  z-index: 101;
+  pointer-events: none;
+
+  @media screen and (max-width: 720px) {
+    padding: 0;
+    align-items: flex-end;
+  }
+}
+
+.content {
+  position: relative;
+  padding: var(--l-5) var(--l-6);
+  width: 360px;
+  max-width: 100%;
+  background-color: var(--c-bg);
+  height: 100%;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  box-shadow: 1px 0 0 0 var(--c-ring);
+
+  @media screen and (max-width: 720px) {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}
+

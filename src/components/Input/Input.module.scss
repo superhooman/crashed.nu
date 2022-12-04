@@ -1,0 +1,181 @@
+.root {
+    display: inline-block;
+    font-family: var(--t-font-secondary);
+    --focus: 0 0 0 0;
+
+    &:focus-within {
+        --focus: var(--s-focus);
+    }
+
+    &.disabled {
+        opacity: .8;
+    }
+
+    &.fullWidth {
+        width: 100%;
+    }
+
+    &.size {
+        &-default {
+            .label {
+                font-size: .75rem;
+                margin-bottom: var(--l-2);
+                font-weight: 500;
+            }
+
+            .error {
+                font-size: .75rem;
+                margin-top: var(--l-2);
+            }
+
+            .content {
+                padding: 0 var(--l-3);
+                border-radius: var(--l-radius-m);
+
+                &.noPadding {
+                    padding: 0;
+                }
+            }
+
+            .input {
+                line-height: var(--l-9);
+            }
+
+            .textarea, .input {
+                font-size: .8125rem;
+                font-weight: 500;
+            }
+
+            .textarea {
+                padding: var(--l-2) var(--l-3);
+                min-height: var(--l-9);
+            }
+
+            .icon {
+                width: 15px;
+                height: 15px;
+                margin-right: var(--l-2);
+            }
+
+            .suffix {
+                font-size: .8125rem;
+                margin-right: var(--l-2);
+            }
+        }
+
+        &-small {
+            .label {
+                font-size: .7rem;
+                margin-bottom: var(--l-1);
+                font-weight: 500;
+            }
+
+            .error {
+                font-size: .7rem;
+                margin-top: var(--l-1);
+            }
+
+            .content {
+                padding: 0 var(--l-2);
+                border-radius: var(--l-radius-s);
+
+                &.noPadding {
+                    padding: 0;
+                }
+            }
+
+            .input {
+                line-height: var(--l-7);
+            }
+
+            .textarea {
+                padding: var(--l-1) var(--l-2);
+                min-height: var(--l-7);
+            }
+
+            .textarea, .input {
+                font-size: .8rem;
+                font-weight: 500;
+            }
+
+            .icon {
+                width: var(--l-3);
+                height: var(--l-3);
+                margin-right: var(--l-1);
+            }
+        }
+    }
+
+    &.variant {
+        &-default {
+            .content {
+                box-shadow: var(--focus), 0 0 0 1px var(--c-ring), var(--s-s);
+            }
+
+            &.disabled .content {
+                background-color: var(--c-neutral-100);
+            }
+
+            .label {
+                color: var(--c-text-secondary);
+            }
+
+            .input {
+                &::placeholder {
+                    opacity: 0.8;
+                    color: var(--c-text-secondary)
+                }
+            }
+
+            .icon {
+                color: var(--c-neutral-500);
+            }
+
+            .suffix {
+                color: var(--c-neutral-500);
+            }
+
+            &.errored {
+                --c-ring: var(--c-red);
+
+                .label, .input {
+                    color: var(--c-red);
+                }
+            }
+
+            .error {
+                color: var(--c-red)
+            }
+        }
+    }
+
+    .label {
+        display: block;
+    }
+
+    .input {
+        display: block;
+        flex-grow: 1;
+        font-family: inherit;
+        width: 100%;
+    }
+
+    .textarea {
+        display: block;
+        resize: vertical;
+        font-family: inherit;
+    }
+
+    .icon {
+        flex-shrink: 0;
+    }
+
+    .icon svg {
+        display: block;
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+    }
+}

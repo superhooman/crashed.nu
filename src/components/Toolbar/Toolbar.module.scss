@@ -1,0 +1,10 @@
+.root {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    padding: var(--l-3) 0;
+    box-shadow: 0 -1px 0 0 var(--c-ring), 0 1px 0 1px var(--c-bg);
+    background-color: var(--c-bg);
+    z-index: 100;
+}

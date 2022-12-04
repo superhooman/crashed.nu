@@ -1,0 +1,105 @@
+.root {
+    position: relative;
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    font-family: var(--t-font-secondary);
+    margin: 0 calc(-1 * var(--l-4));
+
+    --block-height: 96px;
+    --header-height: 40px;
+
+    .element {
+        position: absolute;
+        top: 0;
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .buttons {
+        display: none;
+        position: absolute;
+        width: 100%;
+        padding: var(--l-1) var(--l-2);
+        height: var(--header-height);
+
+        @media screen and (max-width: 768px) {
+            display: flex;
+        }
+    }
+
+    .days {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+
+        @media screen and (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+
+        .day:not(.selected) {
+            @media screen and (max-width: 768px) {
+                display: none;
+            }
+        }
+
+        .day.error {
+            .dayTitle {
+                color: var(--c-red);
+            }
+        }
+
+        .day::before {
+            content: "";
+            position: absolute;
+            display: block;
+            height: 100%;
+            width: 1px;
+            background-color: var(--c-ring);
+            transform: translateX(-0.5px);
+        }
+
+        .dayTitle {
+            text-align: center;
+            line-height: var(--header-height);
+            font-size: var(--t-font-s);
+            color: var(--c-text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        .dayItems {
+            position: relative;
+        }
+    }
+
+    .overlap {
+        background-color: var(--c-red);
+        width: 100%;
+        margin: var(--l-1);
+        border-radius: var(--l-radius-s);
+        opacity: 0.4;
+    }
+
+    .times {
+        padding-top: var(--header-height);
+
+        .timeCell {
+            line-height: var(--block-height);
+            font-size: var(--t-font-s);
+            text-align: center;
+            color: var(--c-text-secondary);
+
+            &::before {
+                content: "";
+                position: absolute;
+                display: block;
+                height: 1px;
+                width: 100%;
+                background-color: var(--c-ring);
+            }
+        }
+    }
+}

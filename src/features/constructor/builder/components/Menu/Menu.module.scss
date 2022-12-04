@@ -1,0 +1,25 @@
+.root {
+    width: 100%;
+
+    .item {
+        padding: var(--l-2);
+        border-radius: var(--l-radius-s);
+
+        &:hover {
+            background-color: var(--c-neutral-100);
+        }
+
+        &[data-state="checked"] {
+            background-color: var(--c-primary-600);
+            color: var(--c-white);
+        }
+
+        span {
+            display: block;
+        }
+    }
+
+    .name {
+        font-size: 12px;
+    }
+}

@@ -1,0 +1,56 @@
+.size {
+    &-small {
+        font-size: var(--t-font-s);
+    }
+    &-default {
+        font-size: var(--t-font-m)
+    }
+    &-large {
+        font-size: var(--t-font-l);
+    }
+}
+
+.color {
+    &-default {
+        color: inherit;
+    }
+    &-primary {
+        color: var(--c-primary-500);
+    }
+    &-secondary {
+        color: var(--c-text-secondary);
+    }
+}
+
+.type {
+    &-default {
+        font-family: var(--t-font-secondary);
+    }
+    &-primary {
+        font-family: var(--t-font-primary);
+    }
+}
+
+.align {
+    &-left {
+        text-align: left;
+    }
+
+    &-center {
+        text-align: center;
+    }
+}
+
+.block {
+    display: block;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.overflow {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

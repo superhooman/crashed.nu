@@ -1,0 +1,17 @@
+@import './constants/index.scss';
+
+body {
+  background-color: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--t-font-primary);
+}
+
+html, body {
+  height: 100%;
+}
+
+#__next {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
