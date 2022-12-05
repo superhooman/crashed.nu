@@ -2,13 +2,14 @@ import React from "react";
 import { type AppType } from "next/app";
 import splitbee from '@splitbee/web';
 import { setTheme } from "@src/utils/theme";
+import Head from "next/head";
 
-import { trpc } from "../utils/trpc";
+import { trpc } from "@src/utils/trpc";
+
+import { isMobileContext } from "@src/utils/isMobileContext";
 
 import '@src/styles/reset.css';
 import '@src/styles/global.scss';
-import { isMobileContext } from "@src/utils/isMobileContext";
-import Head from "next/head";
 
 const ProviderIsMobile = isMobileContext.Provider;
 
@@ -25,15 +26,15 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
   React.useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile((typeof window !== 'undefined') && window.innerWidth < 768);
     };
 
-    window.addEventListener('resize', handleResize);
+    (typeof window !== 'undefined') && window.addEventListener('resize', handleResize);
 
     handleResize();
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      (typeof window !== 'undefined') && window.removeEventListener('resize', handleResize);
     }
   }, []);
 

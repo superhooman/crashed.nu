@@ -2,7 +2,6 @@
 import type { ReactNode } from 'react';
 import React from 'react';
 
-import { Drawer } from '@src/components/Drawer';
 import { Button } from '@src/components/Button';
 import { Stack } from '@src/components/Stack';
 
@@ -20,7 +19,6 @@ export const BuilderLayout: React.FC<BuilderLayoutProps> = ({ side, children, bu
     const [drawer, setDrawer] = React.useState(false);
 
     const openDrawer = React.useCallback(() => setDrawer(true), []);
-    const closeDrawer = React.useCallback(() => setDrawer(false), []);
 
     return (
         <div className={cls.root}>
@@ -37,7 +35,6 @@ export const BuilderLayout: React.FC<BuilderLayoutProps> = ({ side, children, bu
                         {button}
                     </Stack>
                     {children}
-                    {/* <Footer /> */}
                 </div>
             </main>
         </div>

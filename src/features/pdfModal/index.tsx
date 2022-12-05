@@ -21,7 +21,7 @@ export const PdfModal = () => {
                             <Paragraph size="small">We have <Text bold size="small" color="primary">GEOL 101</Text> there!</Paragraph>
                         </Stack>
                         <Stack alignItems="center" gap={8}>
-                            <Link href="/constructor/pdf">
+                            <Link href="/pdf">
                                 <Button variant="primary" size="small" icon={<HeartIcon />}>Try it!</Button>
                             </Link>
                             <Button onClick={() => setOpen(false)} size="small">Nah</Button>

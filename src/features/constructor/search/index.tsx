@@ -37,8 +37,6 @@ export const Search: React.FC<{
     const [query, setQuery] = React.useState('');
     const [level, setLevel] = React.useState('1');
 
-    const endpoint = pdf ? 'pdf' : 'pcc'
-
     const isMobile = useIsMobile();
 
     const [selectedCourse, setSelectedCourse] = React.useState<Course | null>(null);
@@ -64,7 +62,7 @@ export const Search: React.FC<{
         },
     });
 
-    const { data: semesters } = trpc[endpoint].semesters.useQuery(undefined, {
+    const { data: semesters } = trpc.pcc.semesters.useQuery({ pdf }, {
         onSuccess: (data) => {
             setFieldValue('term', values.term || data[0]?.value);
         }
@@ -72,10 +70,11 @@ export const Search: React.FC<{
 
     const coursesEnabled = !!query && !!term && !!level;
 
-    const { data: coursesList, hasNextPage, fetchNextPage, isLoading, isFetchingNextPage } = trpc[endpoint].search.useInfiniteQuery({
+    const { data: coursesList, hasNextPage, fetchNextPage, isLoading, isFetchingNextPage } = trpc.pcc.search.useInfiniteQuery({
         query,
         term,
         level,
+        pdf,
     }, {
         enabled: coursesEnabled,
         getNextPageParam: (lastPage) => lastPage.cursor,
@@ -308,10 +307,10 @@ const AboutCourse: React.FC<{
 }
 
 const Schedule: React.FC<{ course: Course, term: string, pdf: boolean }> = ({ course, term, pdf }) => {
-    const endpoint = pdf ? 'pdf' : 'pcc';
-    const { data: schedules, isLoading } = trpc[endpoint].schedule.useQuery({
+    const { data: schedules, isLoading } = trpc.pcc.schedule.useQuery({
         id: course.id,
         term,
+        pdf,
     });
 
     const types = React.useMemo<string[]>(() => {

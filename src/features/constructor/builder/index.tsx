@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeftIcon, DownloadIcon, UpdateIcon } from '@radix-ui/react-icons';
+import { ArrowLeftIcon, DownloadIcon } from '@radix-ui/react-icons';
 
 import { Button } from '@src/components/Button';
 import { Header } from '@src/components/Header';
@@ -33,8 +33,7 @@ const getInitialSelection = (courses: Course[]) => courses.reduce((res: Selected
 }, {});
 
 export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf }) => {
-    const endpoint = pdf ? 'pdf' : 'pcc';
-    const { data: schedule, isLoading } = trpc[endpoint].schedulesForIds.useQuery({ ids: courses.map(({ id }) => id), term });
+    const { data: schedule, isLoading } = trpc.pcc.schedulesForIds.useQuery({ ids: courses.map(({ id }) => id), term, pdf });
     const [selection, setSelection] = React.useState<SelectedSchedule>(getInitialSelection(courses));
     const [selected, setSelected] = React.useState(courses[0]?.id || '');
     const week = React.useMemo(() => getWeek(getCalendarItems(selection, courses, schedule)), [selection, courses, schedule]);

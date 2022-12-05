@@ -5,6 +5,7 @@ export const queryFormSchema = z.object({
     level: z.string(),
     term: z.string(),
     cursor: z.number().optional(),
+    pdf: z.boolean().optional(),
 });
 
 export type QueryFormSchema = z.infer<typeof queryFormSchema>;
