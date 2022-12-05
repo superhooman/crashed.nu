@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, ArrowRightIcon, BackpackIcon, CardStackMinusIcon, CardStackPlusIcon, CookieIcon, Cross1Icon, CrumpledPaperIcon, InfoCircledIcon, MagnifyingGlassIcon, MinusIcon, PlusIcon, UpdateIcon } from "@radix-ui/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, BackpackIcon, CardStackMinusIcon, CardStackPlusIcon, CookieIcon, Cross1Icon, CrumpledPaperIcon, InfoCircledIcon, MagnifyingGlassIcon, MinusIcon, UpdateIcon } from "@radix-ui/react-icons";
 import { Button } from "@src/components/Button";
 import splitbee from '@splitbee/web';
 import { Divider } from "@src/components/Divider";
@@ -111,12 +111,12 @@ export const Search: React.FC<{
                             <Card>
                                 <Stack gap={8} alignItems="start">
                                     <CookieIcon style={{ flexShrink: 0 }} />
-                                    <Stack direction="column" gap={8}>
+                                    <Stack direction="column" gap={8} alignItems="start">
                                         <Text size="small">
-                                            This is experimental registrar PDF source!{' '}
+                                            This is experimental registrar PDF source{' '}
                                         </Text>
                                         <Link href="/constructor">
-                                            <Button size="small" icon={<ArrowLeftIcon />}>
+                                            <Button type="button" size="small" icon={<ArrowLeftIcon />}>
                                                 Return to main
                                             </Button>
                                         </Link>
