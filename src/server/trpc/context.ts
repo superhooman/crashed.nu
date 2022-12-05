@@ -1,5 +1,6 @@
 import { type inferAsyncReturnType } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
+import { prisma } from "../db/client";
 
 /**
  * Replace this with an object if you want to pass things to createContextInner
@@ -12,7 +13,9 @@ type CreateContextOptions = Record<string, never>;
  * @see https://create.t3.gg/en/usage/trpc#-servertrpccontextts
  **/
 export const createContextInner = async (opts: CreateContextOptions) => {
-  return {};
+  return {
+    prisma,
+  };
 };
 
 /**

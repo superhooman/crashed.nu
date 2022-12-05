@@ -24,6 +24,7 @@ interface BuilderProps {
     courses: Course[];
     term: string;
     restart: () => void;
+    pdf: boolean;
 }
 
 const getInitialSelection = (courses: Course[]) => courses.reduce((res: SelectedSchedule, course) => {
@@ -31,8 +32,9 @@ const getInitialSelection = (courses: Course[]) => courses.reduce((res: Selected
     return res;
 }, {});
 
-export const Builder: React.FC<BuilderProps> = ({ courses, term, restart }) => {
-    const { data: schedule, isLoading } = trpc.pcc.schedulesForIds.useQuery({ ids: courses.map(({ id }) => id), term });
+export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf }) => {
+    const endpoint = pdf ? 'pdf' : 'pcc';
+    const { data: schedule, isLoading } = trpc[endpoint].schedulesForIds.useQuery({ ids: courses.map(({ id }) => id), term });
     const [selection, setSelection] = React.useState<SelectedSchedule>(getInitialSelection(courses));
     const [selected, setSelected] = React.useState(courses[0]?.id || '');
     const week = React.useMemo(() => getWeek(getCalendarItems(selection, courses, schedule)), [selection, courses, schedule]);

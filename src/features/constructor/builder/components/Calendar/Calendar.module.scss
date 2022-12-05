@@ -8,6 +8,11 @@
     --block-height: 96px;
     --header-height: 40px;
 
+    @media print {
+        --block-height: 64px;
+        --header-height: 24px;
+    }
+
     .element {
         position: absolute;
         top: 0;

@@ -6,6 +6,10 @@
     padding-bottom: var(--l-4);
     box-shadow: 0 1px 0 0 var(--c-ring);
 
+    @media print {
+        display: none;
+    }
+
     .grid {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));

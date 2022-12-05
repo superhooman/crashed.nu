@@ -3,6 +3,8 @@ import { type NextPage } from "next";
 
 import { Constructor } from "@src/features/constructor";
 import Head from "next/head";
+import { PdfModal } from "@src/features/pdfModal";
+import { Container } from "@src/components/Container";
 
 const ConstructorPage: NextPage = () => {
   return (
@@ -25,6 +27,7 @@ const ConstructorPage: NextPage = () => {
         <meta property="twitter:image" content="https://crashed.nu/cover.png" />
       </Head>
       <Constructor />
+      <Container><PdfModal /></Container>
     </>
   );
 };

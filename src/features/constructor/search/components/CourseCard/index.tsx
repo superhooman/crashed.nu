@@ -9,9 +9,10 @@ import cls from './CourseCard.module.scss';
 
 interface CourseCardProps {
     course: Course;
+    pdf?: boolean;
 }
 
-export const CourseCard: React.FC<React.PropsWithChildren<CourseCardProps>> = ({ course, children }) => {
+export const CourseCard: React.FC<React.PropsWithChildren<CourseCardProps>> = ({ course, children, pdf }) => {
     const { abbr, title, credits, department, school, academicLevel } = course;
 
     return (
@@ -19,9 +20,13 @@ export const CourseCard: React.FC<React.PropsWithChildren<CourseCardProps>> = ({
             <Text color="secondary" size="small">{abbr}</Text>
             <Stack direction="column" gap={4}>
                 <Paragraph bold type="primary">{title}</Paragraph>
-                <Property label="School" value={school} />
-                <Property label="Department" value={department} />
-                <Property label="Level" value={academicLevel} />
+                {pdf ? (null) : (
+                    <>
+                        <Property label="School" value={school} />
+                        <Property label="Department" value={department} />
+                        <Property label="Level" value={academicLevel} />
+                    </>
+                )}
                 <Property label="ECTS Credits" value={credits} />
             </Stack>
             {children && (

@@ -6,7 +6,7 @@ import React from "react";
 import { Builder } from "./builder";
 import { Search } from "./search";
 
-export const Constructor = () => {
+export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
     const [term, setTerm] = React.useState('');
     const [courses, setCourses] = React.useState<Course[]>([]);
     const [screen, setScreen] = React.useState<'list' | 'builder'>('list');
@@ -23,13 +23,14 @@ export const Constructor = () => {
         <>
             {screen === 'list' ? (
                 <Container>
-                    <Header fixed />
+                    <Header fixed sub={pdf ? "pdf" : undefined} />
                     <Search
                         term={term}
                         setTerm={setTerm}
                         courses={courses}
                         addCourse={addCourse}
                         removeCourse={removeCourse}
+                        pdf={pdf}
                         proceed={() => {
                             splitbee.track('Proceed');
                             setScreen('builder')
@@ -41,6 +42,7 @@ export const Constructor = () => {
                 <Builder
                     courses={courses}
                     term={term}
+                    pdf={pdf}
                     restart={() => {
                         splitbee.track('Restart');
                         setScreen('list')

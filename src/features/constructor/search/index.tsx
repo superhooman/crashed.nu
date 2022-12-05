@@ -1,4 +1,4 @@
-import { ArrowRightIcon, BackpackIcon, Cross1Icon, CrumpledPaperIcon, InfoCircledIcon, MagnifyingGlassIcon, MinusIcon, PlusIcon, UpdateIcon } from "@radix-ui/react-icons";
+import { ArrowRightIcon, BackpackIcon, CardStackMinusIcon, CardStackPlusIcon, CookieIcon, Cross1Icon, CrumpledPaperIcon, InfoCircledIcon, MagnifyingGlassIcon, MinusIcon, PlusIcon, UpdateIcon } from "@radix-ui/react-icons";
 import { Button } from "@src/components/Button";
 import splitbee from '@splitbee/web';
 import { Divider } from "@src/components/Divider";
@@ -22,6 +22,8 @@ import React from "react"
 import cls from './Search.module.scss';
 import { CourseCard } from "./components/CourseCard";
 import { ScheduleItem } from "./components/ScheduleItem";
+import { Card } from "@src/components/Card";
+import Link from "next/link";
 
 export const Search: React.FC<{
     term: string;
@@ -30,9 +32,12 @@ export const Search: React.FC<{
     addCourse: (course: Course) => void;
     removeCourse: (course: Course) => void;
     proceed: () => void;
-}> = ({ term, setTerm, courses, addCourse, removeCourse, proceed }) => {
+    pdf: boolean;
+}> = ({ term, setTerm, courses, addCourse, removeCourse, proceed, pdf }) => {
     const [query, setQuery] = React.useState('');
     const [level, setLevel] = React.useState('1');
+
+    const endpoint = pdf ? 'pdf' : 'pcc'
 
     const isMobile = useIsMobile();
 
@@ -59,7 +64,7 @@ export const Search: React.FC<{
         },
     });
 
-    const { data: semesters } = trpc.pcc.semesters.useQuery(undefined, {
+    const { data: semesters } = trpc[endpoint].semesters.useQuery(undefined, {
         onSuccess: (data) => {
             setFieldValue('term', values.term || data[0]?.value);
         }
@@ -67,7 +72,7 @@ export const Search: React.FC<{
 
     const coursesEnabled = !!query && !!term && !!level;
 
-    const { data: coursesList, hasNextPage, fetchNextPage, isLoading, isFetchingNextPage } = trpc.pcc.search.useInfiniteQuery({
+    const { data: coursesList, hasNextPage, fetchNextPage, isLoading, isFetchingNextPage } = trpc[endpoint].search.useInfiniteQuery({
         query,
         term,
         level,
@@ -103,6 +108,19 @@ export const Search: React.FC<{
             <div data-full={isMobile} className={cls.col}>
                 <form className={cls.form} onSubmit={handleSubmit}>
                     <Stack direction="column" gap={16}>
+                        {pdf ? (
+                            <Card>
+                                <Stack gap={8} alignItems="center">
+                                    <CookieIcon />
+                                    <Text size="small">
+                                        This is experimental registart pdf source!{' '}
+                                        <Link href="/constructor">
+                                            <Text size="small" color="primary">← Go back</Text>
+                                        </Link>
+                                    </Text>
+                                </Stack>
+                            </Card>
+                        ) : null}
                         <Input
                             id="query"
                             label="Search"
@@ -112,12 +130,14 @@ export const Search: React.FC<{
                             placeholder="Course abbr (ex. CSCI 152) or title"
                             {...getFieldProps('query')}
                         />
-                        <Select
-                            label="Level"
-                            value={values.level}
-                            items={LEVELS}
-                            onValueChange={(v) => setFieldValue('level', v)}
-                        />
+                        {pdf ? null : (
+                            <Select
+                                label="Level"
+                                value={values.level}
+                                items={LEVELS}
+                                onValueChange={(v) => setFieldValue('level', v)}
+                            />
+                        )}
                         {semesters && semesters.length > 1 ? (
                             <Select
                                 label="Semester"
@@ -135,12 +155,12 @@ export const Search: React.FC<{
                         coursesList?.pages.length ? (
                             <Stack className={cls.list} grow={1} direction="column">
                                 {coursesList.pages.flatMap(({ items }) => items).map((course) => (
-                                    <CourseCard key={course.id} course={course}>
+                                    <CourseCard pdf={pdf} key={course.id} course={course}>
                                         {
                                             courses.map((c) => c.id).includes(course.id) ? (
                                                 <Button
                                                     onClick={() => toggleCourse(course)}
-                                                    icon={<MinusIcon />}
+                                                    icon={<CardStackMinusIcon />}
                                                 >
                                                     Remove
                                                 </Button>
@@ -148,7 +168,7 @@ export const Search: React.FC<{
                                                 <Button
                                                     onClick={() => toggleCourse(course)}
                                                     variant="primary"
-                                                    icon={<PlusIcon />}
+                                                    icon={<CardStackPlusIcon />}
                                                 >
                                                     Add
                                                 </Button>
@@ -191,6 +211,7 @@ export const Search: React.FC<{
                             term={term}
                             toggleCourse={toggleCourse}
                             added={courses.map((c) => c.id).includes(selectedCourse.id)}
+                            pdf={pdf}
                         />
                     ) : null}
                 </Modal>
@@ -204,6 +225,7 @@ export const Search: React.FC<{
                                     term={term}
                                     toggleCourse={toggleCourse}
                                     added={courses.map((c) => c.id).includes(selectedCourse.id)}
+                                    pdf={pdf}
                                 />
                             </div>
                         ) : (
@@ -269,23 +291,25 @@ const AboutCourse: React.FC<{
     term: string,
     toggleCourse: (course: Course) => void,
     added: boolean,
-}> = ({ course, term, toggleCourse, added }) => {
+    pdf: boolean,
+}> = ({ course, term, toggleCourse, added, pdf }) => {
     return (
         <>
-            <CourseCard course={course}>
+            <CourseCard pdf={pdf} course={course}>
                 {added ? (
-                    <Button fullWidth icon={<MinusIcon />} onClick={() => toggleCourse(course)}>Remove</Button>
+                    <Button fullWidth icon={<CardStackMinusIcon />} onClick={() => toggleCourse(course)}>Remove</Button>
                 ) : (
-                    <Button fullWidth icon={<PlusIcon />} variant="primary" onClick={() => toggleCourse(course)}>Add to cart</Button>
+                    <Button fullWidth icon={<CardStackPlusIcon />} variant="primary" onClick={() => toggleCourse(course)}>Add to cart</Button>
                 )}
             </CourseCard>
-            <Schedule course={course} term={term} />
+            <Schedule course={course} term={term} pdf={pdf} />
         </>
     )
 }
 
-const Schedule: React.FC<{ course: Course, term: string }> = ({ course, term }) => {
-    const { data: schedules, isLoading } = trpc.pcc.schedule.useQuery({
+const Schedule: React.FC<{ course: Course, term: string, pdf: boolean }> = ({ course, term, pdf }) => {
+    const endpoint = pdf ? 'pdf' : 'pcc';
+    const { data: schedules, isLoading } = trpc[endpoint].schedule.useQuery({
         id: course.id,
         term,
     });

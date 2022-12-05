@@ -1,0 +1,16 @@
+.root {
+    position: fixed;
+    bottom: calc(60px + 8px);
+    z-index: 20;
+
+    transform: translateY(24px);
+    opacity: 0;
+    pointer-events: none;
+    transition: all var(--a-time-s) var(--a-slide);
+
+    &[data-open="true"] {
+        opacity: 1;
+        pointer-events: all;
+        transform: none;
+    }
+}
