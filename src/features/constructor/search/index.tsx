@@ -1,4 +1,4 @@
-import { ArrowRightIcon, BackpackIcon, CardStackMinusIcon, CardStackPlusIcon, CookieIcon, Cross1Icon, CrumpledPaperIcon, InfoCircledIcon, MagnifyingGlassIcon, MinusIcon, PlusIcon, UpdateIcon } from "@radix-ui/react-icons";
+import { ArrowLeftIcon, ArrowRightIcon, BackpackIcon, CardStackMinusIcon, CardStackPlusIcon, CookieIcon, Cross1Icon, CrumpledPaperIcon, InfoCircledIcon, MagnifyingGlassIcon, MinusIcon, PlusIcon, UpdateIcon } from "@radix-ui/react-icons";
 import { Button } from "@src/components/Button";
 import splitbee from '@splitbee/web';
 import { Divider } from "@src/components/Divider";
@@ -109,14 +109,18 @@ export const Search: React.FC<{
                     <Stack direction="column" gap={16}>
                         {pdf ? (
                             <Card>
-                                <Stack gap={8} alignItems="center">
-                                    <CookieIcon />
-                                    <Text size="small">
-                                        This is experimental registart pdf source!{' '}
+                                <Stack gap={8} alignItems="start">
+                                    <CookieIcon style={{ flexShrink: 0 }} />
+                                    <Stack direction="column" gap={8}>
+                                        <Text size="small">
+                                            This is experimental registrar PDF source!{' '}
+                                        </Text>
                                         <Link href="/constructor">
-                                            <Text size="small" color="primary">← Go back</Text>
+                                            <Button size="small" icon={<ArrowLeftIcon />}>
+                                                Return to main
+                                            </Button>
                                         </Link>
-                                    </Text>
+                                    </Stack>
                                 </Stack>
                             </Card>
                         ) : null}
