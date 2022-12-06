@@ -9,8 +9,8 @@
     --header-height: 40px;
 
     @media print {
-        --block-height: 64px;
-        --header-height: 24px;
+        --block-height: 56px;
+        --header-height: 20px;
     }
 
     .element {
@@ -73,6 +73,10 @@
             align-items: center;
             justify-content: center;
             gap: 4px;
+
+            @media print {
+                font-size: 8px;
+            }
         }
 
         .dayItems {
@@ -96,6 +100,10 @@
             font-size: var(--t-font-s);
             text-align: center;
             color: var(--c-text-secondary);
+
+            @media print {
+                font-size: 8px;
+            }
 
             &::before {
                 content: "";

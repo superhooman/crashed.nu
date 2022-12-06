@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeftIcon, DownloadIcon } from '@radix-ui/react-icons';
+import { ArrowLeftIcon, DownloadIcon, FileIcon } from '@radix-ui/react-icons';
 
 import { Button } from '@src/components/Button';
 import { Header } from '@src/components/Header';
@@ -7,7 +7,7 @@ import { BuilderLayout } from './layout';
 import type { Course } from '@src/server/PCC/typings';
 import { Stack } from '@src/components/Stack';
 import { Loader } from '@src/components/Loader';
-import { Text } from '@src/components/Typography';
+import { Paragraph, Text } from '@src/components/Typography';
 import { Divider } from '@src/components/Divider';
 
 import { Calendar } from './components/Calendar';
@@ -19,6 +19,9 @@ import { getCalendarItems } from './utils/getCalendarItems';
 import { exportData } from './utils/exportData';
 import { trpc } from '@src/utils/trpc';
 import splitbee from '@splitbee/web';
+import Tooltip from '@src/components/Tooltip/Tooltip';
+import { Modal, ModalTitle } from '@src/components/Modal';
+import { Video } from './components/Video';
 
 interface BuilderProps {
     courses: Course[];
@@ -37,6 +40,8 @@ export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf })
     const [selection, setSelection] = React.useState<SelectedSchedule>(getInitialSelection(courses));
     const [selected, setSelected] = React.useState(courses[0]?.id || '');
     const week = React.useMemo(() => getWeek(getCalendarItems(selection, courses, schedule)), [selection, courses, schedule]);
+
+    const [printModal, setPrintModal] = React.useState(false);
 
     const getSelectionHandler = React.useCallback((type: string) => (v: string) => {
         setSelection((s) => ({
@@ -59,6 +64,7 @@ export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf })
     }, [selected]);
 
     const selectionSchedule = selection?.[selected];
+
 
     return (
         <>
@@ -106,7 +112,14 @@ export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf })
                         <Divider />
                         <Stack justifyContent="space-between">
                             <Button icon={<ArrowLeftIcon />} variant="link" size="small" onClick={restart}>Go back</Button>
-                            <Button icon={<DownloadIcon />} variant="link" size="small" onClick={saveFile}>Download</Button>
+                            <Stack gap={8}>
+                                <Tooltip delayDuration={0} content="Export as txt">
+                                    <Button icon={<DownloadIcon />} variant="link" size="small" onClick={saveFile} />
+                                </Tooltip>
+                                <Tooltip delayDuration={0} content="Export as pdf">
+                                    <Button icon={<FileIcon />} variant="link" size="small" onClick={() => setPrintModal(true)} />
+                                </Tooltip>
+                            </Stack>
                         </Stack>
                     </Stack>
                 )}
@@ -119,6 +132,26 @@ export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf })
                     />
                 ) : null}
                 <Calendar week={week} />
+                <Modal maxWidth="lg" open={printModal} onOpenChange={setPrintModal}>
+                    <ModalTitle>Export as PDF</ModalTitle>
+                    <Stack direction="column" gap={12}>
+                        <div>
+                            <Paragraph size="small">In order to export your schedule as PDF-file, we use built-in print functionality that is not customizable from our side.</Paragraph>
+                            <br />
+                            <Paragraph size="small">But you can make it better:</Paragraph>
+                            <Paragraph size="small">- Disable headers and footers</Paragraph>
+                            <Paragraph size="small">- Disable margins</Paragraph>
+                            <Paragraph size="small">- Enable background graphics</Paragraph>
+
+                        </div>
+                        <Video />
+                        <Button onClick={() => {
+                            setPrintModal(false);
+                            setTimeout(() => window.print(), 500);
+                        }} fullWidth variant="primary">Export</Button>
+                        <Button onClick={() => setPrintModal(false)} fullWidth>Cancel</Button>
+                    </Stack>
+                </Modal>
             </BuilderLayout>
         </>
     );

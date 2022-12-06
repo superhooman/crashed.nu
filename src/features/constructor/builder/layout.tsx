@@ -22,7 +22,7 @@ export const BuilderLayout: React.FC<BuilderLayoutProps> = ({ side, children, bu
 
     return (
         <div className={cls.root}>
-            <Modal open={drawer} onOpenChange={setDrawer}>
+            <Modal noPrint open={drawer} onOpenChange={setDrawer}>
                 {side}
             </Modal>
             <aside className={cls.side}>

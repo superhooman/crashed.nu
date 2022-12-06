@@ -9,6 +9,7 @@ import cls from './Modal.module.scss';
 
 interface Props extends Dialog.DialogProps {
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg';
+  noPrint?: boolean;
 }
 
 export const ModalTitle = withClassName(Dialog.Title, cls.title);
@@ -19,7 +20,7 @@ export const ModalActions: React.FC<HTMLAttributes<HTMLDivElement>> = ({ classNa
   <div className={clsx(cls.actions, className)} {...props} />
 );
 
-const Modal: React.FC<Props> = ({ children, maxWidth = 'sm', open, ...props }) => {
+const Modal: React.FC<Props> = ({ children, maxWidth = 'sm', open, noPrint, ...props }) => {
   const transitions = useTransition(open, {
     from: { opacity: 0, y: 48 },
     enter: { opacity: 1, y: 0 },
@@ -34,7 +35,7 @@ const Modal: React.FC<Props> = ({ children, maxWidth = 'sm', open, ...props }) =
       {transitions((styles, item) => (
         item ? (
           <Dialog.Portal forceMount className={cls.portal}>
-            <Dialog.Overlay forceMount asChild>
+            <Dialog.Overlay forceMount asChild className={clsx(noPrint && cls.noPrint)}>
               <animated.div
                 style={{
                   opacity: styles.opacity,
@@ -42,7 +43,7 @@ const Modal: React.FC<Props> = ({ children, maxWidth = 'sm', open, ...props }) =
                 className={cls.overlay}
               />
             </Dialog.Overlay>
-            <div className={cls.wrapper}>
+            <div className={clsx(cls.wrapper, noPrint && cls.noPrint)}>
               <Dialog.Content asChild forceMount>
                 <animated.div style={styles} className={cls.content} data-width={maxWidth}>
                   {children}

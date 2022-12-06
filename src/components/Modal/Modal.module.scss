@@ -20,6 +20,12 @@
   }
 }
 
+.noPrint {
+  @media print {
+    display: none;
+  }
+}
+
 .content {
   position: relative;
   padding: 24px;
