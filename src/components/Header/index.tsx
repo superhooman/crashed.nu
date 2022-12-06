@@ -1,13 +1,14 @@
-import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
+import { GearIcon, MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 
-import { toggleTheme } from '@src/utils/theme';
-import { Button } from 'src/components/Button';
-
 import cls from './Header.module.scss';
 import { Container } from '../Container';
+import { Select } from '../Select';
+import { themeContext } from '@src/utils/theme';
+import { Stack } from '../Stack';
+import { Text } from '../Typography';
 
 export const Glyph: React.FC<React.ComponentProps<'svg'>> = ({ ...props }) => (
     <svg
@@ -36,6 +37,8 @@ export const Header: React.FC<Props> = ({ className, sub, children, fixed, noCon
             ({ children }: { children: React.ReactNode }) => <div className={cls.container}>{children}</div>
             : ({ children }: { children: React.ReactNode }) => <Container className={cls.container}>{children}</Container>
     }, [noContainer]);
+
+    const { theme, setTheme } = React.useContext(themeContext)
 
     return (
         (
@@ -66,16 +69,29 @@ export const Header: React.FC<Props> = ({ className, sub, children, fixed, noCon
                             ) : null}
                         </span>
                         {children}
-                        <Button
-                            icon={(
-                                <div>
-                                    <MoonIcon className={cls.light} />
-                                    <SunIcon className={cls.dark} />
-                                </div>
-                            )}
-                            size="small"
-                            variant="link"
-                            onClick={toggleTheme}
+                        <Select
+                            value={theme}
+                            onValueChange={setTheme}
+                            items={[
+                                { label: (
+                                    <Stack alignItems="center" gap={8}>
+                                        <SunIcon className={cls.icon} />
+                                        <Text size="small">Light</Text>
+                                    </Stack>
+                                ), value: 'light' },
+                                { label: (
+                                    <Stack alignItems="center" gap={8}>
+                                        <MoonIcon className={cls.icon} />
+                                        <Text size="small">Dark</Text>
+                                    </Stack>
+                                ), value: 'dark' },
+                                { label: (
+                                    <Stack alignItems="center" gap={8}>
+                                        <GearIcon className={cls.icon} />
+                                        <Text size="small">Auto</Text>
+                                    </Stack>
+                                ), value: 'system' },
+                            ]}
                         />
                     </Wrap>
                 </nav>
