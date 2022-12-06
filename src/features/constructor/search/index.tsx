@@ -21,7 +21,7 @@ import React from "react"
 
 import cls from './Search.module.scss';
 import { CourseCard } from "./components/CourseCard";
-import { ScheduleItem } from "./components/ScheduleItem";
+import { ScheduleItem, ScheduleItemSkeleton } from "./components/ScheduleItem";
 import { Card } from "@src/components/Card";
 import Link from "next/link";
 
@@ -338,9 +338,10 @@ const Schedule: React.FC<{ course: Course, term: string, pdf: boolean }> = ({ co
                 </React.Fragment>
             ))}
             {isLoading ? (
-                <Stack gap={8} alignItems="center" justifyContent="center">
-                    <Loader secondary />
-                    <Text size="small" color="secondary">Loading...</Text>
+                <Stack direction="column" gap={12}>
+                    <ScheduleItemSkeleton />
+                    <ScheduleItemSkeleton />
+                    <ScheduleItemSkeleton />
                 </Stack>
             ) : null}
         </Stack>

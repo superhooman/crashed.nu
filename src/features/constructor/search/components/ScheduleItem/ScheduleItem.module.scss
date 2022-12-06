@@ -17,5 +17,18 @@
             background-color: var(--c-primary-600);
             color: var(--c-white);
         }
+
+        &[data-skeleton] {
+            animation: shimmer 1.2s linear infinite;
+
+            @keyframes shimmer {
+                0%, 100% {
+                    opacity: 0.5;
+                }
+                50% {
+                    opacity: 1;
+                }
+            }
+        }
     }
 }

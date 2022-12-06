@@ -16,6 +16,12 @@ export const Text: React.FC<React.ComponentProps<'span'> & TextProps & { block?:
     <span className={clsx(className, cls[`size-${size}`], cls[`color-${color}`], cls[`type-${type}`], cls[`align-${align}`], block && cls.block, bold && cls.bold, overflow && cls.overflow)} {...props} />
 );
 
+export const TextSkeleton: React.FC<React.ComponentProps<'span'> & TextProps & { block?: boolean }> = ({ className, size = 'default', color = 'default', align = 'left', type = 'default', block, bold, overflow, ...props }) => (
+    <span className={clsx(className, cls[`size-${size}`], cls[`color-${color}`], cls[`type-${type}`], cls[`align-${align}`], block && cls.block, bold && cls.bold, overflow && cls.overflow)}>
+        <span className={cls.skeleton} />
+    </span>
+);
+
 export const Paragraph: React.FC<React.ComponentProps<'p'> & TextProps> = ({ className, size = 'default', color = 'default', align = 'left', type = 'default', bold, overflow, ...props }) => (
     <p className={clsx(className, cls[`size-${size}`], cls[`color-${color}`], cls[`type-${type}`], cls[`align-${align}`], bold && cls.bold, overflow && cls.overflow)} {...props} />
 );
