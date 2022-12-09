@@ -1,4 +1,6 @@
 .root {
+    position: relative;
+
     .day {
         display: flex;
         align-items: center;
@@ -29,6 +31,24 @@
                     opacity: 1;
                 }
             }
+        }
+    }
+
+    .capacity {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        .number {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--t-font-s);
+            font-weight: bold;
+            color: var(--c-text-secondary);
+            cursor: default;
         }
     }
 }
