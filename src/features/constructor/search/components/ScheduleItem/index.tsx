@@ -47,7 +47,7 @@ export const ScheduleItem: React.FC<{ schedule: Schedule }> = ({ schedule }) => 
                 </Stack>
                 <Stack direction="column" gap={4}>
                     <Property label="Instructor" value={schedule.faculty} />
-                    <Property label="Capacity" value={schedule.capacity} />
+                    <Property label="Capacity" value={`${schedule.enr}/${schedule.capacity}`} />
                     <Property label="Room" value={schedule.room} />
                     <Property label="Time" value={schedule.times} />
                 </Stack>
