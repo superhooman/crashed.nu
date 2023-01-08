@@ -83,7 +83,7 @@ export const getServerSideProps: GetServerSideProps<Props, { id: string }> = asy
             schedule: scheduleObject,
             owner,
             sharable,
-            url: env.NEXTAUTH_URL + '/schedule/' + id,
+            url: 'https://crashed.nu/schedule/' + id,
         }
     }
 }
