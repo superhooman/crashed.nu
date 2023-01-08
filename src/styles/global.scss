@@ -15,3 +15,13 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+
+.notifications {
+  & > div > div {
+    background-color: var(--c-bg);
+    color: var(--c-text);
+    border-radius: var(--l-radius-m);
+    box-shadow: var(--s-s), 0 0 0 1px var(--c-ring);
+    font-size: 13px;
+  }
+}

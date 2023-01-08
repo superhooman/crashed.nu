@@ -1,6 +1,6 @@
 import type { Item, Time } from '@src/types/time';
 
-const pad2 = (n: number) => `${n > 9 ? '' : 0}${n}`;
+export const pad2 = (n: number) => `${n > 9 ? '' : 0}${n}`;
 
 export const parseTime = (str: string): Time => {
   const [time, modifier] = str.split(' ');

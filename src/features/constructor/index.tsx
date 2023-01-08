@@ -38,9 +38,9 @@ export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
                             setScreen('builder')
                         }}
                     />
-                    {pdf || wasOnNext ? null : (
+                    {/* {pdf || wasOnNext ? null : (
                         <PdfModal />
-                    )}
+                    )} */}
                 </Container>
             ) : null}
             {screen === 'builder' ? (

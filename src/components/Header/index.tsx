@@ -10,10 +10,10 @@ import { themeContext } from '@src/utils/theme';
 import { Stack } from '../Stack';
 import { Text } from '../Typography';
 
-export const Glyph: React.FC<React.ComponentProps<'svg'>> = ({ ...props }) => (
+export const Glyph: React.FC<React.ComponentProps<'svg'> & { size?: number }> = ({ size = 16, ...props }) => (
     <svg
-        width="16"
-        height="16"
+        width={size}
+        height={size}
         viewBox="0 0 24 24"
         shapeRendering="geometricPrecision"
         fill="none"

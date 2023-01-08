@@ -5,6 +5,11 @@
     font-family: var(--t-font-secondary);
     margin: 0 calc(-1 * var(--l-4));
 
+    &.schedule {
+        margin-top: calc(-1 * var(--l-4));
+        margin-bottom: calc(-1 * var(--l-4));
+    }
+
     --block-height: 96px;
     --header-height: 40px;
 
@@ -92,6 +97,44 @@
         opacity: 0.4;
     }
 
+    .now {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        opacity: 0.8;
+        margin-top: -7px;
+
+        &::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 1px;
+            background-color: var(--c-neutral-500);
+        }
+
+        &::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: var(--c-neutral-500);
+        }
+
+        .nowTime {
+            font-size: 10px;
+            line-height: 16px;
+            flex-shrink: 0;
+            padding: 0 8px;
+            border: var(--c-neutral-500) 1px solid;
+            border-radius: 3px;
+            background-color: var(--c-bg);
+        }
+    }
+
     .times {
         padding-top: var(--header-height);
 
@@ -113,6 +156,18 @@
                 width: 100%;
                 background-color: var(--c-ring);
             }
+        }
+    }
+
+    .today {
+        position: fixed;
+        left: 64px;
+        bottom: 8px;
+        z-index: 10;
+        width: calc(100% - 72px);
+
+        @media screen and (min-width: 769px) {
+            display: none;
         }
     }
 }

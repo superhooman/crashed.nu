@@ -1,0 +1,47 @@
+.root {
+    position: relative;
+    padding: var(--l-1) var(--l-2);
+    padding-left: 10px;
+    background-color: var(--c-bg);
+    margin: var(--l-1);
+    border-radius: var(--l-radius-s);
+    width: 100%;
+    z-index: 1;
+    overflow: hidden;
+    box-shadow: var(--s-s);
+
+    .text {
+        display: block;
+        font-size: 11px;
+    }
+
+    @media print {
+        box-shadow: none;
+
+        .text {
+            font-size: 8px;
+        }
+    }
+
+    .details {
+        opacity: 0.8;
+    }
+
+    .color {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.2;
+    }
+
+    .colorLine {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+    }
+}

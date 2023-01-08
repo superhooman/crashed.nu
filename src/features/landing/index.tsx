@@ -18,7 +18,8 @@ export const Landing: React.FC = () => {
                 direction="column"
                 alignItems="center"
                 justifyContent="center"
-                gap={32}
+                gap={24}
+                minHeight="100%"
             >
                 <Stack
                     direction="column"
@@ -28,8 +29,9 @@ export const Landing: React.FC = () => {
                 >
                     <Paragraph align="center" color="primary"><Glyph /></Paragraph>
                     <Paragraph bold align="center" type="primary" size="large">crashed.<Text bold type="primary" color="primary" size="large">nu</Text></Paragraph>
-                    <Paragraph align="center" color="secondary">A collection (soon) of some useful tools</Paragraph>
+                    <Paragraph align="center" color="secondary">A collection of some useful tools</Paragraph>
                 </Stack>
+                <Schedule />
                 <Constructor />
                 <Divider />
                 <Text size="small" color="secondary">Made by <a href="https://t.me/iamsuperhooman"><Text  size="small" color="primary">superhooman</Text></a> with ❤️</Text>
@@ -37,6 +39,25 @@ export const Landing: React.FC = () => {
         </Container>
     );
 };
+
+const Schedule: React.FC = () => (
+    <Link href={ROUTES.SCHEDULE}>
+        <Stack
+            direction="column"
+            gap={8}
+        >
+            <div className={cls.img}>
+                <Image
+                    src="/img/schedule.png"
+                    alt="Schedule"
+                    width="280"
+                    height="160"
+                />
+            </div>
+            <Text size="small" color="secondary" align="center">Schedule</Text>
+        </Stack>
+    </Link>
+);
 
 const Constructor: React.FC = () => (
     <Link href={ROUTES.CONSTRUCTOR}>

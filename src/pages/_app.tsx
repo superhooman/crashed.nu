@@ -1,5 +1,7 @@
 import React from "react";
 import App, { type AppContext, type AppType } from "next/app";
+import { type Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
 import splitbee from '@splitbee/web';
 import type { Theme } from "@src/utils/theme";
 import { saveTheme } from "@src/utils/theme";
@@ -12,6 +14,7 @@ import { isMobileContext } from "@src/utils/isMobileContext";
 
 import '@src/styles/reset.css';
 import '@src/styles/global.scss';
+import { Toaster } from "react-hot-toast";
 
 const ProviderIsMobile = isMobileContext.Provider;
 
@@ -20,7 +23,12 @@ const ThemeProvider = themeContext.Provider;
 const LIGHT_THEME_COLOR = '#ffffff';
 const DARK_THEME_COLOR = '#171717';
 
-const MyApp: AppType = ({ Component, pageProps }) => {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+const MyApp: AppType<{ session: Session | null }> = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}) => {
   const [isMobile, setIsMobile] = React.useState(false);
   const [theme, setThemeValue] = React.useState((pageProps as { theme?: Theme }).theme || 'system');
 
@@ -55,26 +63,31 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       theme,
       setTheme,
     }}>
-      <ProviderIsMobile value={isMobile}>
-        <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-          {
-            theme === 'system' ? (
-              <>
-                <meta name="theme-color" media="(prefers-color-scheme: light)" content={LIGHT_THEME_COLOR} />
-                <meta name="theme-color" media="(prefers-color-scheme: dark)" content={DARK_THEME_COLOR} />
-              </>
-            ) : (
-              <meta name="theme-color" content={theme === 'light' ? LIGHT_THEME_COLOR : DARK_THEME_COLOR} />
-            )
-          }
-        </Head>
-        <Component {...pageProps} />
-      </ProviderIsMobile>
+      <SessionProvider session={session}>
+        <Toaster containerClassName="notifications" />
+        <ProviderIsMobile value={isMobile}>
+          <Head>
+            <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+            {
+              theme === 'system' ? (
+                <>
+                  <meta name="theme-color" media="(prefers-color-scheme: light)" content={LIGHT_THEME_COLOR} />
+                  <meta name="theme-color" media="(prefers-color-scheme: dark)" content={DARK_THEME_COLOR} />
+                </>
+              ) : (
+                <meta name="theme-color" content={theme === 'light' ? LIGHT_THEME_COLOR : DARK_THEME_COLOR} />
+              )
+            }
+          </Head>
+          <Component {...pageProps} />
+        </ProviderIsMobile>
+      </SessionProvider>
     </ThemeProvider>
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 

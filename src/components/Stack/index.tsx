@@ -12,7 +12,17 @@ interface Props extends HTMLAttributes<HTMLDivElement> {
   grow?: CSSProperties['flexGrow'];
   fullWidth?: boolean;
   wrap?: boolean;
-  minHeight?: number;
+  minHeight?: number | string;
+}
+
+const getMinHeight = (minHeight?: number | string) => {
+  if (!minHeight) return 'unset';
+
+  if (typeof minHeight === 'number') {
+    return `${minHeight}px`;
+  }
+
+  return minHeight;
 }
 
 export const Stack = React.forwardRef<HTMLDivElement, Props>(
@@ -26,7 +36,7 @@ export const Stack = React.forwardRef<HTMLDivElement, Props>(
         gap: ${gap}px;
         flex-grow: ${grow};
         flex-wrap: ${wrap ? 'wrap' : 'unset'};
-        min-height: ${minHeight ? `${minHeight}px` : 'unset'}
+        min-height: ${getMinHeight(minHeight)}
       }
     `}</style>
       <div

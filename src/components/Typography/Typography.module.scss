@@ -1,3 +1,20 @@
+.title {
+    font-weight: bold;
+    font-family: var(--t-font-primary);
+}
+
+h1.title {
+    font-size: var(--t-font-xl);    
+}
+
+h2.title {
+    font-size: var(--t-font-l);
+}
+
+h3.title {
+    font-size: var(--t-font-m);
+}
+
 .size {
     &-small {
         font-size: var(--t-font-s);
@@ -105,4 +122,12 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.gutterBottom {
+    margin-block-end: 1em;
+
+    &.title {
+        margin-block-end: 0.67em;
+    }
 }
