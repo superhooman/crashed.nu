@@ -90,7 +90,7 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
 
     const shareLink = React.useCallback(async () => {
         splitbee.track('Share');
-        if (navigator.canShare && navigator.canShare()) {
+        if (typeof navigator.share !== 'undefined') {
             await navigator.share({
                 title: 'Schedule',
                 url,
