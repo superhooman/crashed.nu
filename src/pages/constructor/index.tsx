@@ -1,4 +1,5 @@
 import React from "react";
+import type { GetServerSideProps} from "next";
 import { type NextPage } from "next";
 
 import { Constructor } from "@src/features/constructor";
@@ -18,3 +19,11 @@ const ConstructorPage: NextPage = () => {
 };
 
 export default ConstructorPage;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {
+      
+    }
+  }
+}
