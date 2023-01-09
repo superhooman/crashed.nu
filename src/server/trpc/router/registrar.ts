@@ -1,4 +1,7 @@
+import { RESTRICTED_OR_RESERVED_SLUGS } from "@src/constants/slugs";
+import { ALHPANUM_UNDERSCORE_DOT, shortSchema } from "@src/schemas/short";
 import Registrar from "@src/server/registrar";
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { protectedProcedure, router } from "../trpc";
 
@@ -44,4 +47,83 @@ export const registrarRouter = router({
 
             return true;
         }),
+    short: protectedProcedure
+        .query(async ({ ctx: { session, prisma } }) => {
+            const id = session.user.id;
+
+            const schedule = await prisma.userSchedule.findUnique({ where: { userId: id, }, select: { short: true } });
+
+            if (!schedule) {
+                throw new TRPCError({ code: 'NOT_FOUND' });
+            }
+
+            return schedule.short;
+        }),
+    checkShort: protectedProcedure
+        .input(z.object({
+            slug: z.string(),
+        }))
+        .query(async ({ ctx: { prisma, session }, input: { slug } }) => {
+            if (slug.length < 3 || slug.length > 32) {
+                return false;
+            }
+            if (!ALHPANUM_UNDERSCORE_DOT.test(slug)) {
+                return false;
+            }
+            if (RESTRICTED_OR_RESERVED_SLUGS.includes(slug)) {
+                return false;
+            }
+
+            const used = await prisma.userSchedule.findUnique({
+                where: {
+                    short: slug,
+                },
+                select: {
+                    short: true,
+                    user: true,
+                },
+            });
+
+            if (used?.user.id === session.user.id) {
+                return true;
+            }
+
+            if (used) {
+                return false;
+            }
+
+            return true;
+        }),
+    setShort: protectedProcedure
+        .input(shortSchema)
+        .mutation(async ({ ctx: { prisma, session }, input: { slug } }) => {
+            const used = await prisma.userSchedule.findUnique({
+                where: {
+                    short: slug,
+                },
+                select: {
+                    short: true,
+                    user: true,
+                },
+            });
+
+            if (used?.user.id === session.user.id) {
+                return used.short;
+            }
+
+            if (used) {
+                return false;
+            }
+
+            await prisma.userSchedule.update({
+                where: {
+                    userId: session.user.id,
+                },
+                data: {
+                    short: slug,
+                }
+            });
+
+            return slug;
+        })
 });

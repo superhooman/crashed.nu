@@ -57,7 +57,7 @@
                 margin-right: var(--l-2);
             }
 
-            .suffix {
+            .prefix {
                 font-size: .8125rem;
                 margin-right: var(--l-2);
             }
@@ -110,6 +110,7 @@
         &-default {
             .content {
                 box-shadow: var(--focus), 0 0 0 1px var(--c-ring), var(--s-s);
+                overflow: hidden;
             }
 
             &.disabled .content {
@@ -131,8 +132,17 @@
                 color: var(--c-neutral-500);
             }
 
-            .suffix {
+            .suffix, .prefix {
                 color: var(--c-neutral-500);
+            }
+
+            .prefix {
+                line-height: 36px;
+                display: block;
+                margin-left: calc(-1 * var(--l-3));
+                padding: 0 var(--l-3);
+                box-shadow: 1px 0 0 0 var(--c-ring);
+                background-color: var(--c-neutral-100);
             }
 
             &.errored {

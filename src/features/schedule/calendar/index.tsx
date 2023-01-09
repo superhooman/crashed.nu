@@ -1,4 +1,4 @@
-import { CalendarIcon, ExitIcon, FileIcon, HeartIcon, Share2Icon, UpdateIcon } from "@radix-ui/react-icons";
+import { CalendarIcon, ExitIcon, FileIcon, HeartIcon, Link1Icon, Share2Icon, UpdateIcon } from "@radix-ui/react-icons";
 import { signOut } from "next-auth/react"
 import { Button } from "@src/components/Button";
 import { Header } from "@src/components/Header";
@@ -20,6 +20,7 @@ import { useRouter } from "next/router";
 import { Divider } from "@src/components/Divider";
 import { Tooltip } from "@src/components/Tooltip";
 import { PrintModal } from "@src/features/constructor/builder/components/PrintModal";
+import { ShortModal } from "./components/ShortModal";
 
 const indexToDay = (i: number): WeekDay => {
     switch (i) {
@@ -81,6 +82,7 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
     const week = React.useMemo(() => getWeek(schedule), [schedule]);
     const [sharable, setSharable] = React.useState(sharableProp);
     const [printModal, setPrintModal] = React.useState(false);
+    const [shortModal, setShortModal] = React.useState(false);
 
     const { mutateAsync: share, isLoading: shareLoading } = trpc.registrar.share.useMutation({
         onSuccess: () => {
@@ -100,6 +102,8 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
             toast.success('Copied to clipboard!');
         }
     }, [url]);
+
+    const isShort = url.includes('/s/');
 
     const sidebarContent = React.useMemo(() => {
         if (owner) {
@@ -145,6 +149,11 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
                                 </Button>
                             )
                         }
+                        {isShort ? null : (
+                            <Button onClick={() => setShortModal(true)} fullWidth icon={<Link1Icon />}>
+                                Shorten link
+                            </Button>
+                        )}
                         <Link href={`/api/cal/${query.id}`} download>
                             <Button fullWidth icon={<CalendarIcon />}>Download iCal</Button>
                         </Link>
@@ -167,7 +176,7 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
                 </Link>
             </Stack>
         );
-    }, [sharable, owner, shareLoading, share, shareLink, url, query.id])
+    }, [sharable, owner, shareLoading, share, shareLink, url, query.id, isShort])
 
     return (
         <ScheduleLayout
@@ -199,6 +208,7 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
         >
             <Calendar week={week} schedule />
             <PrintModal open={printModal} onOpenChange={setPrintModal} />
+            <ShortModal open={shortModal} onOpenChange={setShortModal} />
         </ScheduleLayout>
     )
 };

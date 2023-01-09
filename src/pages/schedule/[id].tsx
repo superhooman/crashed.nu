@@ -78,13 +78,21 @@ export const getServerSideProps: GetServerSideProps<Props, { id: string }> = asy
         preferences: JSON.parse(schedule.preferences as string),
     } as unknown as UserSchedule;
 
+    let url = '';
+
+    if (schedule.short) {
+        url = 'https://crashed.nu/s/' + schedule.short;
+    } else {
+        url = 'https://crashed.nu/schedule/' + id;
+    }
+
     return {
         props: {
             schedule: scheduleObject,
             name: schedule.user.name || 'Someone',
             owner,
             sharable,
-            url: 'https://crashed.nu/schedule/' + id,
+            url,
         }
     }
 }

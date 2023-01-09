@@ -13,12 +13,13 @@ interface BaseProps {
 
 type InputProps = Omit<React.ComponentProps<'input'>, 'type' | 'size'> & BaseProps & {
     type?: 'text' | 'password' | 'number' | 'email' | 'tel' | 'url' | 'date' | 'datetime-local';
-    suffix?: string;
+    prefix?: string;
+    suffix?: React.ReactNode;
     icon?: React.ReactNode;
 };
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>((
-    { type = 'text', variant = 'default', size = 'default', className, icon = null, suffix, label, fullWidth, error, ...props },
+    { type = 'text', variant = 'default', size = 'default', className, icon = null, prefix, suffix, label, fullWidth, error, ...props },
     ref
 ) => (
     <div className={clsx(
@@ -32,13 +33,14 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((
         {label && <label className={cls.label} htmlFor={props.id}>{label}</label>}
         <div className={cls.content}>
             {icon && <div className={cls.icon}>{icon}</div>}
-            {suffix && <div className={cls.suffix}>{suffix}</div>}
+            {prefix && <div className={cls.prefix}>{prefix}</div>}
             <input
                 className={clsx(cls.input, className)}
                 ref={ref}
                 type={type}
                 {...props}
             />
+            {suffix && <div className={cls.suffix}>{suffix}</div>}
         </div>
         {typeof error === 'string' ? (
             <span className={cls.error}>{error}</span>
