@@ -7,7 +7,7 @@ import { BuilderLayout } from './layout';
 import type { Course } from '@src/server/PCC/typings';
 import { Stack } from '@src/components/Stack';
 import { Loader } from '@src/components/Loader';
-import { Paragraph, Text } from '@src/components/Typography';
+import { Text } from '@src/components/Typography';
 import { Divider } from '@src/components/Divider';
 
 import { Calendar } from './components/Calendar';
@@ -20,8 +20,7 @@ import { exportData } from './utils/exportData';
 import { trpc } from '@src/utils/trpc';
 import splitbee from '@splitbee/web';
 import Tooltip from '@src/components/Tooltip/Tooltip';
-import { Modal, ModalTitle } from '@src/components/Modal';
-import { Video } from './components/Video';
+import { PrintModal } from './components/PrintModal';
 
 interface BuilderProps {
     courses: Course[];
@@ -64,7 +63,6 @@ export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf })
     }, [selected]);
 
     const selectionSchedule = selection?.[selected];
-
 
     return (
         <>
@@ -132,26 +130,7 @@ export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf })
                     />
                 ) : null}
                 <Calendar week={week} />
-                <Modal maxWidth="lg" open={printModal} onOpenChange={setPrintModal}>
-                    <ModalTitle>Export as PDF</ModalTitle>
-                    <Stack direction="column" gap={12}>
-                        <div>
-                            <Paragraph size="small">In order to export your schedule as PDF-file, we use built-in print functionality that is not customizable from our side.</Paragraph>
-                            <br />
-                            <Paragraph size="small">But you can make it better:</Paragraph>
-                            <Paragraph size="small">- Disable headers and footers</Paragraph>
-                            <Paragraph size="small">- Disable margins</Paragraph>
-                            <Paragraph size="small">- Enable background graphics</Paragraph>
-
-                        </div>
-                        <Video />
-                        <Button onClick={() => {
-                            setPrintModal(false);
-                            setTimeout(() => window.print(), 500);
-                        }} fullWidth variant="primary">Export</Button>
-                        <Button onClick={() => setPrintModal(false)} fullWidth>Cancel</Button>
-                    </Stack>
-                </Modal>
+                <PrintModal open={printModal} onOpenChange={setPrintModal} />
             </BuilderLayout>
         </>
     );

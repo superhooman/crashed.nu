@@ -22,6 +22,7 @@
     "@trpc/next": "^10.0.0",
     "@trpc/react-query": "^10.0.0",
     "@trpc/server": "^10.0.0",
+    "@vercel/og": "^0.0.22",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.3",
     "formik": "^2.2.9",

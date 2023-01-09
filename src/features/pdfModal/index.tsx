@@ -1,4 +1,4 @@
-import { CookieIcon, Cross1Icon, HeartIcon } from "@radix-ui/react-icons";
+import { HeartIcon } from "@radix-ui/react-icons";
 import { Button } from "@src/components/Button";
 import { Card } from "@src/components/Card";
 import { Stack } from "@src/components/Stack";

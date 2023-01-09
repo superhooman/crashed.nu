@@ -133,6 +133,10 @@
             border-radius: 3px;
             background-color: var(--c-bg);
         }
+
+        @media print {
+            display: none;
+        }
     }
 
     .times {

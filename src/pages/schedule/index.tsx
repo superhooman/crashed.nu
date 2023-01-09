@@ -3,6 +3,7 @@ import { Registrar } from "@src/features/schedule/registrar";
 import { type GetServerSideProps } from "next";
 import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 import { prisma } from '@src/server/db/client';
+import { getQuery } from "@src/utils/getQuery";
 
 const Schedule = () => {
     return (
@@ -41,7 +42,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         },
     });
 
-    if (!schedule) {
+    const refetch = getQuery(ctx.query.refetch);
+
+    if (!schedule || refetch) {
         return {
             props: {
                 session,

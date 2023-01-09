@@ -1,4 +1,4 @@
-import { CalendarIcon, ExitIcon, HeartIcon, Share2Icon } from "@radix-ui/react-icons";
+import { CalendarIcon, ExitIcon, FileIcon, HeartIcon, Share2Icon, UpdateIcon } from "@radix-ui/react-icons";
 import { signOut } from "next-auth/react"
 import { Button } from "@src/components/Button";
 import { Header } from "@src/components/Header";
@@ -17,6 +17,9 @@ import { Text } from "@src/components/Typography";
 import Link from "next/link";
 import splitbee from "@splitbee/web";
 import { useRouter } from "next/router";
+import { Divider } from "@src/components/Divider";
+import { Tooltip } from "@src/components/Tooltip";
+import { PrintModal } from "@src/features/constructor/builder/components/PrintModal";
 
 const indexToDay = (i: number): WeekDay => {
     switch (i) {
@@ -77,6 +80,7 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
     const { query } = useRouter();
     const week = React.useMemo(() => getWeek(schedule), [schedule]);
     const [sharable, setSharable] = React.useState(sharableProp);
+    const [printModal, setPrintModal] = React.useState(false);
 
     const { mutateAsync: share, isLoading: shareLoading } = trpc.registrar.share.useMutation({
         onSuccess: () => {
@@ -86,12 +90,12 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
 
     const shareLink = React.useCallback(async () => {
         splitbee.track('Share');
-        try {
+        if (navigator.canShare && navigator.canShare()) {
             await navigator.share({
                 title: 'Schedule',
                 url,
             });
-        } catch (_e) {
+        } else {
             navigator.clipboard.writeText(url);
             toast.success('Copied to clipboard!');
         }
@@ -122,7 +126,12 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
                                             }}
                                         />
                                     </BaseCard>
-                                    <Button onClick={shareLink} icon={<Share2Icon />} fullWidth>Share</Button>
+                                    <Stack gap={8}>
+                                        <Button variant="primary" onClick={shareLink} icon={<Share2Icon />} fullWidth>Share</Button>
+                                        <Tooltip delayDuration={0} content="Export as pdf">
+                                            <Button icon={<FileIcon />} onClick={() => setPrintModal(true)} />
+                                        </Tooltip>
+                                    </Stack>
                                 </>
                             ) : (
                                 <Button
@@ -138,6 +147,12 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
                         }
                         <Link href={`/api/cal/${query.id}`} download>
                             <Button fullWidth icon={<CalendarIcon />}>Download iCal</Button>
+                        </Link>
+                        <Divider />
+                        <Link href="/schedule?refetch=1">
+                            <Button fullWidth icon={<UpdateIcon />}>
+                                Resync schedule
+                            </Button>
                         </Link>
                     </Stack>
                     <Button onClick={() => signOut({ callbackUrl: '/' })} icon={<ExitIcon />}>Logout</Button>
@@ -183,6 +198,7 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
             )}
         >
             <Calendar week={week} schedule />
+            <PrintModal open={printModal} onOpenChange={setPrintModal} />
         </ScheduleLayout>
     )
 };

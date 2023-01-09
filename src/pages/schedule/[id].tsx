@@ -11,14 +11,15 @@ interface Props {
     owner: boolean;
     sharable: boolean;
     url: string;
+    name: string;
 }
 
-const SchedulePage: NextPage<Props> = ({ schedule, owner, sharable, url }) => {
+const SchedulePage: NextPage<Props> = ({ schedule, owner, sharable, url, name }) => {
     return (
         <>
             <Head
-                title="crashed.nu - schedule"
-                description="Shared schedule"
+                title={`crashed.nu - ${name}`}
+                description={`${name}'s schedule`}
                 url={url}
                 image="https://crashed.nu/cover2.png"
             />
@@ -48,7 +49,7 @@ export const getServerSideProps: GetServerSideProps<Props, { id: string }> = asy
         }
     }
 
-    const schedule = await prisma.userSchedule.findUnique({ where: { id }});
+    const schedule = await prisma.userSchedule.findUnique({ where: { id }, include: { user: true }});
 
     if (!schedule) {
         return {
@@ -80,6 +81,7 @@ export const getServerSideProps: GetServerSideProps<Props, { id: string }> = asy
     return {
         props: {
             schedule: scheduleObject,
+            name: schedule.user.name || 'Someone',
             owner,
             sharable,
             url: 'https://crashed.nu/schedule/' + id,

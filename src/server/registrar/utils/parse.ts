@@ -120,7 +120,7 @@ export const parseSchedule = (json: string) => {
                 if (!preferences.classes.includes(item.id)) {
                     preferences.classes.push(item.id);
                 }
-                if (week[i]?.map((x) => x.id).includes(item.id)) return;
+                if (week[i]?.map((x) => `${x.id}${x.title}`).includes(`${item.id}${item.title}`)) return;
                 week[i]?.push(item);
             }
         });
