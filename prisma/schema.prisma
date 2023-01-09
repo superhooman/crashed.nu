@@ -88,7 +88,7 @@ model UserSchedule {
   data          Json
   preferences   Json
   date          DateTime  @default(now())
-  shared        Boolean   @default(false)
+  shared        Boolean   @default(true)
 
   user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
