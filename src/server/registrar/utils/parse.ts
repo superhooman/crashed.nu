@@ -22,7 +22,7 @@ const COLORS = [
     "#616161"
 ];
 
-const COURSE_ABBR_TITLE_REGEXP = /([A-Z]{3,4} \d{3}) (.*?)</;
+const COURSE_ABBR_TITLE_REGEXP = /([A-Z]{3,4} \d{3}[A-Z]?) (.*?)</;
 
 type RegistrarDay = {
     TIME: string;
