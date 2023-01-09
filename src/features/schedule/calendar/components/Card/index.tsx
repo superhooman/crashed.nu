@@ -21,7 +21,7 @@ export const Card: React.FC<CardProps> = ({ item, preferences }) => (
         }} />
         <Text className={cls.text} bold size="small">{item.id} • {item.title}</Text>
         <div className={cls.details}>
-            {/* <Text className={cls.text} size="small">Instr.: {item.teacher}</Text> */}
+            <Text overflow className={cls.text} size="small">{item.label}</Text>
             <Text className={cls.text} size="small">Time: {getTimeRange({ startTime: item.time.start, endTime: item.time.end })}</Text>
             <Text className={cls.text} size="small">Room: {item.cab}</Text>
         </div>
