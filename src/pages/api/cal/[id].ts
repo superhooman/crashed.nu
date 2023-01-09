@@ -50,8 +50,8 @@ const handler: NextApiHandler = async (req, res) => {
     for (const i in week) {
         for (const item of week[i]!) {
             const event = calendar.createEvent({
-                start: format(currentWeek[i]!, 'yyyy-MM-dd') + 'T' + pad2(item.time.start.hh) + ':' + pad2(item.time.start.mm) + ':00+06:00',
-                end: format(currentWeek[i]!, 'yyyy-MM-dd') + 'T' + pad2(item.time.end.hh) + ':' + pad2(item.time.end.mm) + ':00+06:00',
+                start: format(currentWeek[i]!, 'yyyy-MM-dd') + 'T' + pad2(item.time.start.hh) + ':' + pad2(item.time.start.mm) + ':00',
+                end: format(currentWeek[i]!, 'yyyy-MM-dd') + 'T' + pad2(item.time.end.hh) + ':' + pad2(item.time.end.mm) + ':00',
                 summary: item.id + ' ' + item.label + ' ' + item.title,
                 description: item.teacher,
                 location: item.cab,

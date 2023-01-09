@@ -4,7 +4,6 @@ import { type NextPage, type GetServerSideProps } from "next";
 import { prisma } from '@src/server/db/client';
 import { type UserSchedule } from "@src/server/registrar/utils/parse";
 import { Schedule } from '@src/features/schedule/calendar';
-import { env } from '@src/env/server.mjs';
 import { Head } from '@src/components/Head';
 
 interface Props {
