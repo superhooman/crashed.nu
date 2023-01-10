@@ -5,6 +5,7 @@ import { env } from "@src/env/server.mjs";
 import { prisma } from "@src/server/db/client";
 import type { UserSchedule } from "@src/server/registrar/utils/parse";
 import { pad2 } from "@src/utils/data/time";
+import { getCurrentSemester, getSemesterDates } from "@src/utils/getCurrentSemester";
 
 const getCurrentWeek = () => {
     const now = new Date();
@@ -38,14 +39,17 @@ const handler: NextApiHandler = async (req, res) => {
 
     const currentWeek = getCurrentWeek();
 
+    const semester = getCurrentSemester(new Date());
+
     const calendar = ical({
         timezone: 'Asia/Almaty',
         url: env.NEXTAUTH_URL,
-        // TODO: Calculate semester
-        name: 'Spring 2023',
+        name: `${semester.semester} ${semester.year}`,
     });
 
     const week = JSON.parse(schedule.data as string) as UserSchedule['data'];
+
+    const range = getSemesterDates(semester);
 
     for (const i in week) {
         for (const item of week[i]!) {
@@ -58,7 +62,7 @@ const handler: NextApiHandler = async (req, res) => {
             });
             event.repeating({
                 freq: ICalEventRepeatingFreq.WEEKLY,
-                until: new Date("May 4 2023 00:00:00 UTC")
+                until: range.end,
             });
         }
     }
