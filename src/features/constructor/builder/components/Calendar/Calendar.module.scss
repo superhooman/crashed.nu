@@ -79,6 +79,13 @@
             justify-content: center;
             gap: 4px;
 
+            @media screen and (min-width: 769px) {
+                .selected {
+                    font-weight: bold;
+                    color: var(--c-primary-500);
+                }
+            }
+
             @media print {
                 font-size: 8px;
             }

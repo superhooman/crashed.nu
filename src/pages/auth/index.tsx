@@ -1,6 +1,7 @@
 import { Head } from "@src/components/Head";
 import { AuthForm } from "@src/features/auth/form";
-import type { NextPage } from "next";
+import { getServerAuthSession } from "@src/server/common/get-server-auth-session";
+import type { GetServerSideProps, NextPage } from "next";
 
 const TITLE = 'crashed.nu - auth';
 const DESCRIPTION = 'Sign in with your University account.';
@@ -19,3 +20,20 @@ const AuthPage: NextPage = () => {
 }
 
 export default AuthPage;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+    const session = await getServerAuthSession(ctx);
+
+    if (session) {
+        return {
+            redirect: {
+                destination: '/schedule',
+                permanent: false,
+            }
+        }
+    }
+
+    return {
+        props: {},
+    }
+};

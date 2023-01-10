@@ -69,11 +69,12 @@ const getDayFromDate = (date: Date) => {
 }
 
 export const Calendar: React.FC<CalendarProps> = ({ week, schedule }) => {
-    const [selected, setSelected] = React.useState<WeekDay>('M');
     const [today, setToday] = React.useState<WeekDay | 'SS'>(() => {
         const current = new Date();
         return getDayFromDate(current);
     });
+
+    const [selected, setSelected] = React.useState<WeekDay>(() => today === 'SS' ? 'M' : today);
 
     const [now, setNow] = React.useState(() => {
         const current = new Date();
@@ -143,7 +144,7 @@ export const Calendar: React.FC<CalendarProps> = ({ week, schedule }) => {
                             {overlap[key].length > 0 ? (
                                 <ExclamationTriangleIcon height={15} width={15} />
                             ) : null}
-                            <span>{label}</span>
+                            <span className={key === today ? cls.selected : ''}>{label}</span>
                         </div>
                         <div className={cls.dayItems}>
                             {week[key]?.map(({ startTime, endTime, content }, i) => (

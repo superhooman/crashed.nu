@@ -1,0 +1,22 @@
+.root {
+    display: block;
+
+    .mobile {
+        display: none;
+        visibility: hidden;
+
+        @media screen and (max-width: 720px) {
+            display: block;
+            visibility: visible;
+        }
+    }
+    .desktop {
+        display: block;
+        visibility: visible;
+
+        @media screen and (max-width: 720px) {
+            display: none;
+            visibility: hidden;
+        }
+    }
+}

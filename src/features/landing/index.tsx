@@ -10,6 +10,7 @@ import cls from './Landing.module.scss';
 import { ROUTES } from '@src/constants/routes';
 import Link from 'next/link';
 import { Divider } from '@src/components/Divider';
+import { Copyright } from '@src/components/Copyright';
 
 export const Landing: React.FC = () => {
     return (
@@ -34,7 +35,7 @@ export const Landing: React.FC = () => {
                 <Schedule />
                 <Constructor />
                 <Divider />
-                <Text size="small" color="secondary">Made by <a href="https://t.me/iamsuperhooman"><Text  size="small" color="primary">superhooman</Text></a> with ❤️</Text>
+                <Copyright />
             </Stack>
         </Container>
     );

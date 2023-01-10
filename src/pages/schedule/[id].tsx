@@ -28,6 +28,7 @@ const SchedulePage: NextPage<Props> = ({ schedule, owner, sharable, url, name })
                 schedule={schedule}
                 sharable={sharable}
                 url={url}
+                name={name}
             />
         </>
     )
