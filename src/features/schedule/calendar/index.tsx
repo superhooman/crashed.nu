@@ -18,7 +18,6 @@ import Link from "next/link";
 import splitbee from "@splitbee/web";
 import { useRouter } from "next/router";
 import { Divider } from "@src/components/Divider";
-import { Tooltip } from "@src/components/Tooltip";
 import { PrintModal } from "@src/features/constructor/builder/components/PrintModal";
 import { ShortModal } from "./components/ShortModal";
 import { Adaptive } from "@src/components/Adaptive";

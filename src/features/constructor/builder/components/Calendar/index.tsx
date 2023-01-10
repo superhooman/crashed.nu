@@ -78,8 +78,10 @@ export const Calendar: React.FC<CalendarProps> = ({ week, schedule }) => {
 
     const [now, setNow] = React.useState(() => {
         const current = new Date();
+        const timezone = (current.getTimezoneOffset() / 60) + 6;
+
         return {
-            hh: current.getHours(),
+            hh: current.getHours() + timezone,
             mm: current.getMinutes(),
         }
     });
