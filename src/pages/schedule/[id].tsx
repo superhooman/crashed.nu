@@ -5,6 +5,7 @@ import { prisma } from '@src/server/db/client';
 import { type UserSchedule } from "@src/server/registrar/utils/parse";
 import { Schedule } from '@src/features/schedule/calendar';
 import { Head } from '@src/components/Head';
+import { ROUTES } from '@src/constants/routes';
 
 interface Props {
     schedule: UserSchedule;
@@ -21,7 +22,6 @@ const SchedulePage: NextPage<Props> = ({ schedule, owner, sharable, url, name })
                 title={`crashed.nu - ${name}`}
                 description={`${name}'s schedule`}
                 url={url}
-                image="https://crashed.nu/cover2.png"
             />
             <Schedule
                 owner={owner}
@@ -38,13 +38,14 @@ export default SchedulePage;
 
 export const getServerSideProps: GetServerSideProps<Props, { id: string }> = async (ctx) => {
     const session = await getServerAuthSession(ctx);
+    const destination = ROUTES.SCHEDULE.get();
 
     const id = ctx.params?.id;
 
     if (!id) {
         return {
             redirect: {
-                destination: '/schedule',
+                destination,
                 permanent: false,
             }
         }
@@ -55,7 +56,7 @@ export const getServerSideProps: GetServerSideProps<Props, { id: string }> = asy
     if (!schedule) {
         return {
             redirect: {
-                destination: '/schedule',
+                destination,
                 permanent: false,
             }
         }
@@ -66,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<Props, { id: string }> = asy
     if (!owner && !schedule.shared) {
         return {
             redirect: {
-                destination: '/schedule',
+                destination,
                 permanent: false,
             }
         }
@@ -82,9 +83,9 @@ export const getServerSideProps: GetServerSideProps<Props, { id: string }> = asy
     let url = '';
 
     if (schedule.short) {
-        url = 'https://crashed.nu/s/' + schedule.short;
+        url = ROUTES.SCHEDULE_SHORT.getWithParams({ id: schedule.short }, { full: true });
     } else {
-        url = 'https://crashed.nu/schedule/' + id;
+        url = ROUTES.SCHEDULE_ID.getWithParams({ id }, { full: true });
     }
 
     return {

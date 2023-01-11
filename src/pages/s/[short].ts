@@ -1,5 +1,6 @@
 import type { GetServerSideProps } from "next"
 import { prisma } from '@src/server/db/client';
+import { ROUTES } from "@src/constants/routes";
 
 export default function Short() {
     return null;
@@ -24,7 +25,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     return {
         redirect: {
-            destination: `/schedule/${schedule.id}`,
+            destination: ROUTES.SCHEDULE_ID.getWithParams({ id: schedule.id }),
             permanent: true,
         },
     };

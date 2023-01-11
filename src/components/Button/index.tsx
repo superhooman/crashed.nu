@@ -5,10 +5,25 @@ import React from 'react';
 import cls from './Button.module.scss';
 
 type Props = React.ComponentProps<'button'> & {
+    /**
+     * Button size
+     */
     size?: 'default' | 'small';
+    /**
+     * Button variant
+     */
     variant?: 'primary' | 'default' | 'link';
+    /**
+     * Icon component
+     */
     icon?: React.ReactNode;
+    /**
+     * Makes button fill all available space
+     */
     fullWidth?: boolean;
+    /**
+     * Shows loading indicator instead of icon
+     */
     isLoading?: boolean;
 };
 

@@ -1,4 +1,5 @@
 import { Head } from "@src/components/Head";
+import { ROUTES } from "@src/constants/routes";
 import { AuthForm } from "@src/features/auth/form";
 import { getServerAuthSession } from "@src/server/common/get-server-auth-session";
 import type { GetServerSideProps, NextPage } from "next";
@@ -12,7 +13,7 @@ const AuthPage: NextPage = () => {
             <Head
                 title={TITLE}
                 description={DESCRIPTION}
-                url="https://crashed.nu/auth"
+                url={ROUTES.AUTH.get({ full: true })}
             />
             <AuthForm />
         </>
@@ -27,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (session) {
         return {
             redirect: {
-                destination: '/schedule',
+                destination: ROUTES.SCHEDULE.get(),
                 permanent: false,
             }
         }

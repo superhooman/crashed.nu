@@ -5,6 +5,7 @@ import { Loader } from "@src/components/Loader";
 import { Modal, ModalTitle } from "@src/components/Modal";
 import { Stack } from "@src/components/Stack";
 import { Paragraph } from "@src/components/Typography";
+import { ROUTES } from "@src/constants/routes";
 import { ALHPANUM_UNDERSCORE_DOT } from "@src/schemas/short";
 import { trpc } from "@src/utils/trpc";
 import useDebounce from "@src/utils/useDebounce";
@@ -84,7 +85,7 @@ export const ShortModal: React.FC<Props> = ({ open, onOpenChange }) => {
                 <Input
                     placeholder="slug"
                     fullWidth
-                    prefix="crashed.nu/s/"
+                    prefix={ROUTES.SCHEDULE_SHORT.getWithParams({ id: '' })}
                     suffix={(
                         <div className={cls.suffix}>
                             {suffix}

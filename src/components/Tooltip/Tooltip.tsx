@@ -6,10 +6,10 @@ export interface TooltipProps extends TooltipBase.TooltipProps {
     arrow?: boolean;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ children, content, arrow, ...props }) => {
+const Tooltip: React.FC<TooltipProps> = ({ children, content, arrow, delayDuration = 0, ...props }) => {
     return (
         <TooltipBase.Provider>
-            <TooltipBase.Root {...props}>
+            <TooltipBase.Root delayDuration={delayDuration} {...props}>
                 <TooltipBase.Trigger asChild>
                     {children}
                 </TooltipBase.Trigger>

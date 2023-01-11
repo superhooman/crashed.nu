@@ -7,11 +7,12 @@ import React from "react"
 import { signIn } from "next-auth/react"
 import { ArrowLeftIcon } from "@radix-ui/react-icons"
 import Link from "next/link"
+import { ROUTES } from "@src/constants/routes"
 
 export const AuthForm = () => {
     const handleSignIn = React.useCallback(() => {
         signIn('google', {
-            callbackUrl: '/schedule',
+            callbackUrl: ROUTES.SCHEDULE.get(),
         });
     }, []);
 

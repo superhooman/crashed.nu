@@ -23,6 +23,7 @@ import { ShortModal } from "./components/ShortModal";
 import { Adaptive } from "@src/components/Adaptive";
 import { Input } from "@src/components/Input";
 import { Copyright } from "@src/components/Copyright";
+import { ROUTES } from "@src/constants/routes";
 
 const indexToDay = (i: number): WeekDay => {
     switch (i) {
@@ -177,7 +178,7 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
                             <Button fullWidth icon={<CalendarIcon />}>Download iCal</Button>
                         </Link>
                         <Divider />
-                        <Link href="/schedule?refetch=1">
+                        <Link href={ROUTES.SCHEDULE.get({ query: { refetch: 1 } })}>
                             <Button fullWidth icon={<UpdateIcon />}>
                                 Resync schedule
                             </Button>
@@ -193,7 +194,7 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
         return (
             <Stack direction="column" gap={12} fullWidth>
                 <Text size="small" color="secondary">You are viewing {name}&apos;s schedule. Sign in to see your own!</Text>
-                <Link href="/auth">
+                <Link href={ROUTES.AUTH.get()}>
                     <Button variant="primary" fullWidth icon={<HeartIcon />}>Sign in</Button>
                 </Link>
             </Stack>

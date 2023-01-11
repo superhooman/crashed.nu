@@ -6,7 +6,9 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.5",
@@ -42,6 +44,13 @@
     "zod": "^3.18.0"
   },
   "devDependencies": {
+    "@storybook/addon-essentials": "^7.0.0-beta.24",
+    "@storybook/addon-interactions": "^7.0.0-beta.24",
+    "@storybook/addon-links": "^7.0.0-beta.24",
+    "@storybook/blocks": "^7.0.0-beta.24",
+    "@storybook/nextjs": "^7.0.0-beta.24",
+    "@storybook/react": "^7.0.0-beta.24",
+    "@storybook/testing-library": "^0.0.13",
     "@types/js-cookie": "^3.0.2",
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.14",
@@ -51,7 +60,10 @@
     "@typescript-eslint/parser": "^5.33.0",
     "eslint": "^8.26.0",
     "eslint-config-next": "13.0.2",
+    "eslint-plugin-storybook": "^0.6.10",
     "prisma": "^4.7.1",
+    "storybook": "^7.0.0-beta.24",
+    "storybook-dark-mode": "^2.0.5",
     "typescript": "^4.8.4"
   },
   "ct3aMetadata": {

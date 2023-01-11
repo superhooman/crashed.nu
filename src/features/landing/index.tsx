@@ -42,7 +42,7 @@ export const Landing: React.FC = () => {
 };
 
 const Schedule: React.FC = () => (
-    <Link href={ROUTES.SCHEDULE}>
+    <Link href={ROUTES.SCHEDULE.get()}>
         <Stack
             direction="column"
             gap={8}
@@ -61,7 +61,7 @@ const Schedule: React.FC = () => (
 );
 
 const Constructor: React.FC = () => (
-    <Link href={ROUTES.CONSTRUCTOR}>
+    <Link href={ROUTES.CONSTRUCTOR.get()}>
         <Stack
             direction="column"
             gap={8}

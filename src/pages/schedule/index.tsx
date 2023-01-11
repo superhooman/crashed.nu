@@ -4,6 +4,7 @@ import { type GetServerSideProps } from "next";
 import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 import { prisma } from '@src/server/db/client';
 import { getQuery } from "@src/utils/getQuery";
+import { ROUTES } from "@src/constants/routes";
 
 const Schedule = () => {
     return (
@@ -11,8 +12,7 @@ const Schedule = () => {
             <Head
                 title="crashed.nu - schedule"
                 description="Your schedule"
-                url="https://crashed.nu/schedule"
-                image="https://crashed.nu/cover2.png"
+                url={ROUTES.SCHEDULE.get({ full: true })}
             />
             <Registrar />
         </>
@@ -27,7 +27,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (!session || !session.user) {
         return {
             redirect: {
-                destination: '/auth',
+                destination: ROUTES.AUTH.get(),
                 permanent: false,
             }
         }
@@ -54,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     return {
         redirect: {
-            destination: '/schedule/' + schedule.id,
+            destination: ROUTES.SCHEDULE_ID.getWithParams({ id: schedule.id }),
             permanent: false,
         }
     }

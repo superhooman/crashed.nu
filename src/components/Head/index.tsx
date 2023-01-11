@@ -1,3 +1,4 @@
+import { DOMAIN } from "@src/constants/routes";
 import HeadTag from "next/head";
 
 interface HeadProps {
@@ -11,7 +12,7 @@ export const Head: React.FC<HeadProps> = ({
     title,
     description,
     url,
-    image = "https://crashed.nu/cover.png",
+    image = `${DOMAIN}/cover2.png`
 }) => {
     return (
         <HeadTag>

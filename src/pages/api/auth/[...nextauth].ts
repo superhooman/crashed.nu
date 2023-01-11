@@ -5,6 +5,9 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db/client";
+import { ROUTES } from "@src/constants/routes";
+
+const authPath = ROUTES.AUTH.get();
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
@@ -17,8 +20,8 @@ export const authOptions: NextAuthOptions = {
     },
   },
   pages: {
-    signIn: "/auth",
-    error: "/auth",
+    signIn: authPath,
+    error: authPath,
   },
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
