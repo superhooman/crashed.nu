@@ -80,6 +80,18 @@ const getWeek = (schedule: UserSchedule) => {
     return week;
 }
 
+// Helps to render everything right
+// Making the server render as it is in GMT+6
+const getTimeWithTimezoneOffset = () => {
+    const current = new Date();
+    const timezone = (current.getTimezoneOffset() / 60) + 6;
+
+    return {
+        hh: current.getHours() + timezone,
+        mm: current.getMinutes(),
+    }
+}
+
 interface Props {
     schedule: UserSchedule;
     owner: boolean;
@@ -241,6 +253,7 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
                 showTodayButton
                 showCurrentTime
                 highlightCurrentDay
+                getCurrentTime={getTimeWithTimezoneOffset}
             />
             <PrintModal open={printModal} onOpenChange={setPrintModal} />
             <ShortModal open={shortModal} onOpenChange={setShortModal} />
