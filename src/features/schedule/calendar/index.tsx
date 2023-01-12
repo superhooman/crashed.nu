@@ -204,7 +204,6 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
                         </Link>
                     </Stack>
                     <Stack direction="column" gap={12}>
-                        <Button onClick={() => signOut({ callbackUrl: '/' })} icon={<ExitIcon />}>Logout</Button>
                         <Copyright />
                     </Stack>
                 </Stack>

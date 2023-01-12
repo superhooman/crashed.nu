@@ -85,7 +85,7 @@ export const ShortModal: React.FC<Props> = ({ open, onOpenChange }) => {
                 <Input
                     placeholder="slug"
                     fullWidth
-                    prefix={ROUTES.SCHEDULE_SHORT.getWithParams({ id: '' })}
+                    prefix={ROUTES.SCHEDULE_SHORT.getWithParams({ id: '' }, { full: true })}
                     suffix={(
                         <div className={cls.suffix}>
                             {suffix}

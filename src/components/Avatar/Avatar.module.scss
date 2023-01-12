@@ -1,0 +1,16 @@
+.root {
+    position: relative;
+    display: block;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: var(--c-neutral-200);
+
+    .image {
+        position: absolute;
+        inset: 0;
+        height: 100%;
+        width: 100%;
+        background-position: center;
+        background-size: cover;
+    }
+}

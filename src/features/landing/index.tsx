@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React from 'react';
 
 import { Container } from '@src/components/Container';
-import { Glyph } from '@src/components/Header';
+import { Glyph, Header } from '@src/components/Header';
 import { Stack } from '@src/components/Stack';
 import { Paragraph, Text } from '@src/components/Typography';
 
@@ -14,30 +14,33 @@ import { Copyright } from '@src/components/Copyright';
 
 export const Landing: React.FC = () => {
     return (
-        <Container className={cls.root}>
-            <Stack
-                direction="column"
-                alignItems="center"
-                justifyContent="center"
-                gap={24}
-                minHeight="100%"
-            >
+        <>
+            <Header />
+            <Container className={cls.root}>
                 <Stack
                     direction="column"
                     alignItems="center"
                     justifyContent="center"
-                    gap={8}
+                    gap={24}
+                    minHeight="100%"
                 >
-                    <Paragraph align="center" color="primary"><Glyph /></Paragraph>
-                    <Paragraph bold align="center" type="primary" size="large">crashed.<Text bold type="primary" color="primary" size="large">nu</Text></Paragraph>
-                    <Paragraph align="center" color="secondary">A collection of some useful tools</Paragraph>
+                    <Stack
+                        direction="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        gap={8}
+                    >
+                        <Paragraph align="center" color="primary"><Glyph /></Paragraph>
+                        <Paragraph bold align="center" type="primary" size="large">crashed.<Text bold type="primary" color="primary" size="large">nu</Text></Paragraph>
+                        <Paragraph align="center" color="secondary">A collection of some useful tools</Paragraph>
+                    </Stack>
+                    <Schedule />
+                    <Constructor />
+                    <Divider />
+                    <Copyright />
                 </Stack>
-                <Schedule />
-                <Constructor />
-                <Divider />
-                <Copyright />
-            </Stack>
-        </Container>
+            </Container>
+        </>
     );
 };
 
