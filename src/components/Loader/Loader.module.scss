@@ -1,6 +1,6 @@
 .root {
-    display: block;
-    animation: var(--a-rotate) var(--a-time-xl) linear infinite;
+    display: inline-block;
+    animation: var(--a-rotate) var(--a-time-xl) steps(12) infinite;
 
     .icon {
         display: block;

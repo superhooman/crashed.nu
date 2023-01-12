@@ -1,6 +1,6 @@
-import { UpdateIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
 import React from 'react';
+import { LoadingIcon } from '../Icon';
 
 import cls from './Button.module.scss';
 
@@ -45,7 +45,7 @@ export const Button = React.forwardRef<HTMLButtonElement, Props>((
     >
         {Boolean(icon) || isLoading ? (
             <div className={cls.icon}>
-                {isLoading ? <UpdateIcon className={cls.loading} /> : icon}
+                {isLoading ? <LoadingIcon className={cls.loading} /> : icon}
             </div>
         ) : null}
         <span className={cls.content}>{children}</span>

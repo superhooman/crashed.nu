@@ -8,8 +8,8 @@ const Home: NextPage = () => {
   return (
     <>
         <Head
-            title="crashed.nu - a collection of useful tools"
-            description="Get your perfect schedule in constructor!"
+            title="crashed.nu - home"
+            description="A collection of some useful tools"
             url={DOMAIN}
         />
         <Landing />

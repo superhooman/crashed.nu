@@ -67,7 +67,7 @@ export const getServerSideProps: GetServerSideProps<Props, { id: string }> = asy
     if (!owner && !schedule.shared) {
         return {
             redirect: {
-                destination,
+                destination: ROUTES.PRIVATE.get(),
                 permanent: false,
             }
         }

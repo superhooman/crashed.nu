@@ -24,6 +24,7 @@ import { Copyright } from "@src/components/Copyright";
 import { ROUTES } from "@src/constants/routes";
 import { SubjectCard } from "@src/components/SubjectCard";
 import { PrintModal } from "@src/features/printModal";
+import { Menu } from "./components/Menu";
 
 const indexToDay = (i: number): WeekDay => {
     switch (i) {
@@ -100,124 +101,10 @@ interface Props {
     name: string;
 }
 
-export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, owner, url, name }) => {
-    const { query } = useRouter();
+export const Schedule: React.FC<Props> = ({ schedule, sharable, owner, url, name }) => {
     const week = React.useMemo(() => getWeek(schedule), [schedule]);
-    const [sharable, setSharable] = React.useState(sharableProp);
     const [printModal, setPrintModal] = React.useState(false);
     const [shortModal, setShortModal] = React.useState(false);
-
-    const { mutateAsync: share, isLoading: shareLoading } = trpc.registrar.share.useMutation({
-        onSuccess: () => {
-            setSharable(true);
-        },
-    });
-
-    const copyLink = React.useCallback(async () => {
-        navigator.clipboard.writeText(url);
-        toast.success('Copied to clipboard!');
-    }, [url]);
-
-    const shareLink = React.useCallback(async () => {
-        splitbee.track('Share');
-        if (typeof navigator.share !== 'undefined') {
-            await navigator.share({
-                title: 'Schedule',
-                url,
-            });
-        } else {
-            copyLink();
-        }
-    }, [url, copyLink]);
-
-    const isShort = url.includes('/s/');
-
-    const sidebarContent = React.useMemo(() => {
-        if (owner) {
-            return (
-                <Stack direction="column" justifyContent="space-between" fullWidth gap={24}>
-                    <Stack
-                        direction="column"
-                        gap={12}
-                        fullWidth
-                    >
-                        {
-                            sharable ? (
-                                <>
-                                    <Adaptive
-                                        mobile={(
-                                            <BaseCard>
-                                                <QRCode
-                                                    value={url || 'none'}
-                                                    bgColor="var(--c-bg)"
-                                                    fgColor="var(--c-text)"
-                                                    style={{
-                                                        height: 'auto',
-                                                        maxWidth: '100%',
-                                                        minWidth: '100%',
-                                                        display: 'block',
-                                                    }}
-                                                />
-                                            </BaseCard>
-                                        )}
-                                    />
-                                    <Adaptive
-                                        mobile={
-                                            <Button variant="primary" onClick={shareLink} icon={<Share2Icon />} fullWidth>Share</Button>
-                                        }
-                                        desktop={
-                                            <Stack gap={8}>
-                                                <Input value={url} disabled fullWidth />
-                                                <Button variant="primary" onClick={copyLink} icon={<CopyIcon />} />
-                                            </Stack>
-                                        }
-                                    />
-                                    {isShort ? null : (
-                                        <Button onClick={() => setShortModal(true)} fullWidth icon={<Link1Icon />}>
-                                            Shorten link
-                                        </Button>
-                                    )}
-                                    <Button icon={<FileIcon />} onClick={() => setPrintModal(true)}>
-                                        Export as PDF
-                                    </Button>
-                                </>
-                            ) : (
-                                <Button
-                                    isLoading={shareLoading}
-                                    fullWidth
-                                    variant="primary"
-                                    icon={<Share2Icon />}
-                                    onClick={() => share()}
-                                >
-                                    Share my schedule
-                                </Button>
-                            )
-                        }
-                        <Link href={`/api/cal/${query.id}`} download>
-                            <Button fullWidth icon={<CalendarIcon />}>Download iCal</Button>
-                        </Link>
-                        <Divider />
-                        <Link href={ROUTES.SCHEDULE.get({ query: { refetch: 1 } })}>
-                            <Button fullWidth icon={<UpdateIcon />}>
-                                Resync schedule
-                            </Button>
-                        </Link>
-                    </Stack>
-                    <Stack direction="column" gap={12}>
-                        <Copyright />
-                    </Stack>
-                </Stack>
-            )
-        }
-        return (
-            <Stack direction="column" gap={12} fullWidth>
-                <Text size="small" color="secondary">You are viewing {name}&apos;s schedule. Sign in to see your own!</Text>
-                <Link href={ROUTES.AUTH.get()}>
-                    <Button variant="primary" fullWidth icon={<HeartIcon />}>Sign in</Button>
-                </Link>
-            </Stack>
-        );
-    }, [sharable, owner, shareLoading, share, shareLink, url, query.id, isShort, copyLink, name])
 
     return (
         <ScheduleLayout
@@ -242,7 +129,14 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
                         alignItems="stretch"
                         justifyContent="stretch"
                     >
-                        {sidebarContent}
+                        <Menu
+                            isSharable={sharable}
+                            isOwner={owner}
+                            url={url}
+                            name={name}
+                            setPrintModal={setPrintModal}
+                            setShortModal={setShortModal}
+                        />
                     </Stack>
                 </Stack>
             )}

@@ -110,6 +110,6 @@
     }
 
     .loading {
-        animation: var(--a-rotate) var(--a-time-xl) linear infinite;
+        animation: var(--a-rotate) var(--a-time-xl) steps(12) infinite;
     }
 }

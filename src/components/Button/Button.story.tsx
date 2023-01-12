@@ -52,3 +52,11 @@ export const WithIcon: Story = {
     icon: <HeartFilledIcon />,
   },
 };
+
+export const IsLoading: Story = {
+  args: {
+    variant: 'primary',
+    isLoading: true,
+    children: 'Button',
+  },
+};

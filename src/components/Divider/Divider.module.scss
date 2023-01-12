@@ -6,6 +6,10 @@
 
     margin: var(--l-4) 0;
 
+    &.noMargin {
+        margin: 0;
+    }
+
     &::after,
     &::before {
         content: '';

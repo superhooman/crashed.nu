@@ -15,8 +15,8 @@ import { Copyright } from '@src/components/Copyright';
 export const Landing: React.FC = () => {
     return (
         <>
-            <Header />
-            <Container className={cls.root}>
+            <Header fixed />
+            <Container noHeight className={cls.root}>
                 <Stack
                     direction="column"
                     alignItems="center"

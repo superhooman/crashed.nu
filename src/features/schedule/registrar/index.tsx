@@ -11,8 +11,14 @@ import { useSession } from "next-auth/react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import splitbee from "@splitbee/web";
+import Link from "next/link";
+import { ROUTES } from "@src/constants/routes";
 
-export const Registrar = () => {
+interface Props {
+    refetch?: boolean;
+}
+
+export const Registrar: React.FC<Props> = ({ refetch }) => {
     const { push } = useRouter();
     const { data: session } = useSession();
     const { mutateAsync, isLoading } = trpc.registrar.sync.useMutation({
@@ -80,16 +86,25 @@ export const Registrar = () => {
                             <Input value={pass} onChange={handlePassChange} placeholder="Registrar password" type={showPass ? 'text' : 'password'} fullWidth icon={<LockClosedIcon />} />
                             <Button onClick={toggleShowPass} type="button" icon={showPass ? <EyeOpenIcon /> : <EyeClosedIcon />} />
                         </Stack>
-                        <Button
-                            isLoading={isLoading}
-                            type="submit"
-                            variant="primary"
-                            icon={<UpdateIcon />}
-                            fullWidth
-                            disabled={!pass}
-                        >
-                            Sync with registrar
-                        </Button>
+                        <Stack direction="column" gap={8}>
+                            <Button
+                                isLoading={isLoading}
+                                type="submit"
+                                variant="primary"
+                                icon={<UpdateIcon />}
+                                fullWidth
+                                disabled={!pass}
+                            >
+                                Sync with registrar
+                            </Button>
+                            {refetch && (
+                                <Link href={ROUTES.SCHEDULE.get()}>
+                                    <Button fullWidth>
+                                        Cancel
+                                    </Button>
+                                </Link>
+                            )}
+                        </Stack>
                         <Text size="small" color="secondary">We don&apos;t store your credentials. You are sending it to the registrar using our API just to get schedule.</Text>
                     </Stack>
                 </form>

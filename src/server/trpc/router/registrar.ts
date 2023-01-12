@@ -35,17 +35,18 @@ export const registrarRouter = router({
             return schedule.id;
         }),
     share: protectedProcedure
-        .mutation(async ({ ctx: { session, prisma } }) => {
+        .input(z.boolean())
+        .mutation(async ({ ctx: { session, prisma }, input }) => {
             await prisma.userSchedule.update({
                 where: {
                     userId: session.user.id,
                 },
                 data: {
-                    shared: true,
+                    shared: input,
                 },
             });
 
-            return true;
+            return input;
         }),
     short: protectedProcedure
         .query(async ({ ctx: { session, prisma } }) => {

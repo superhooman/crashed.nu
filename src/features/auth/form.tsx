@@ -8,6 +8,7 @@ import { signIn } from "next-auth/react"
 import { ArrowLeftIcon } from "@radix-ui/react-icons"
 import Link from "next/link"
 import { ROUTES } from "@src/constants/routes"
+import { Glyph } from "@src/components/Header"
 
 export const AuthForm = () => {
     const handleSignIn = React.useCallback(() => {
@@ -32,17 +33,20 @@ export const AuthForm = () => {
                     direction="column"
                     gap={8}
                 >
+                    <Text color="primary">
+                        <Glyph size={24} />
+                    </Text>
                     <Paragraph bold>Sign in</Paragraph>
                     <Text size="small" color="secondary">Use your @nu.edu.kz Google account</Text>
                 </Stack>
                 <Button onClick={handleSignIn} fullWidth icon={<GoogleIcon />}>Sign in with Google</Button>
                 <Link legacyBehavior href="/">
                     <Button
-                        variant="link"
                         icon={<ArrowLeftIcon />}
                         fullWidth
+                        variant="link"
                     >
-                        Go back
+                        Back to home
                     </Button>
                 </Link>
             </Stack>

@@ -43,5 +43,6 @@ export const ROUTES = {
     SCHEDULE: new Route('/schedule'),
     SCHEDULE_ID: new Route('/schedule/:id'),
     SCHEDULE_SHORT: new Route('/s/:id'),
+    PRIVATE: new Route('/error/private'),
     PRIVACY: new Route('/privacy'),
 };
