@@ -10,7 +10,6 @@ import { Loader } from '@src/components/Loader';
 import { Text } from '@src/components/Typography';
 import { Divider } from '@src/components/Divider';
 
-import { Calendar } from './components/Calendar';
 import { Menu } from './components/Menu';
 import { Schedules } from './components/Schedules';
 import type { SelectedSchedule } from './types';
@@ -20,7 +19,8 @@ import { exportData } from './utils/exportData';
 import { trpc } from '@src/utils/trpc';
 import splitbee from '@splitbee/web';
 import Tooltip from '@src/components/Tooltip/Tooltip';
-import { PrintModal } from './components/PrintModal';
+import { Calendar } from '@src/components/Calendar';
+import { PrintModal } from '@src/features/printModal';
 
 interface BuilderProps {
     courses: Course[];

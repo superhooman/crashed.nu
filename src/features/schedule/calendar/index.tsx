@@ -4,13 +4,12 @@ import { Button } from "@src/components/Button";
 import { Header } from "@src/components/Header";
 import { Card as BaseCard } from "@src/components/Card";
 import { Stack } from "@src/components/Stack";
-import { Calendar } from "@src/features/constructor/builder/components/Calendar";
+import { Calendar } from "@src/components/Calendar";
 import type { UserSchedule } from "@src/server/registrar/utils/parse";
 import type { Item, WeekDay } from "@src/types/time";
 import { trpc } from "@src/utils/trpc";
 import React from "react";
 import QRCode from "react-qr-code";
-import { Card } from "./components/Card";
 import { ScheduleLayout } from "./layout";
 import { toast } from "react-hot-toast";
 import { Text } from "@src/components/Typography";
@@ -18,12 +17,13 @@ import Link from "next/link";
 import splitbee from "@splitbee/web";
 import { useRouter } from "next/router";
 import { Divider } from "@src/components/Divider";
-import { PrintModal } from "@src/features/constructor/builder/components/PrintModal";
 import { ShortModal } from "./components/ShortModal";
 import { Adaptive } from "@src/components/Adaptive";
 import { Input } from "@src/components/Input";
 import { Copyright } from "@src/components/Copyright";
 import { ROUTES } from "@src/constants/routes";
+import { SubjectCard } from "@src/components/SubjectCard";
+import { PrintModal } from "@src/features/printModal";
 
 const indexToDay = (i: number): WeekDay => {
     switch (i) {
@@ -58,9 +58,16 @@ const getWeek = (schedule: UserSchedule) => {
         day.forEach((item) => {
             const card: Item = {
                 content: (
-                    <Card
-                        item={item}
-                        preferences={schedule.preferences}
+                    <SubjectCard
+                        time={{
+                            startTime: item.time.start,
+                            endTime: item.time.end,
+                        }}
+                        abbr={item.id}
+                        title={item.title}
+                        label={item.label}
+                        room={item.cab}
+                        color={schedule.preferences.colors[item.id]}
                     />
                 ),
                 startTime: item.time.start,
@@ -229,7 +236,12 @@ export const Schedule: React.FC<Props> = ({ schedule, sharable: sharableProp, ow
                 </Stack>
             )}
         >
-            <Calendar week={week} schedule />
+            <Calendar
+                week={week}
+                showTodayButton
+                showCurrentTime
+                highlightCurrentDay
+            />
             <PrintModal open={printModal} onOpenChange={setPrintModal} />
             <ShortModal open={shortModal} onOpenChange={setShortModal} />
         </ScheduleLayout>

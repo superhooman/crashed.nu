@@ -3,12 +3,6 @@
     display: grid;
     grid-template-columns: 56px 1fr;
     font-family: var(--t-font-secondary);
-    margin: 0 calc(-1 * var(--l-4));
-
-    &.schedule {
-        margin-top: calc(-1 * var(--l-4));
-        margin-bottom: calc(-1 * var(--l-4));
-    }
 
     --block-height: 96px;
     --header-height: 40px;
@@ -65,6 +59,7 @@
             display: block;
             height: 100%;
             width: 1px;
+            z-index: 11;
             background-color: var(--c-ring);
             transform: translateX(-0.5px);
         }
@@ -79,7 +74,14 @@
             justify-content: center;
             gap: 4px;
 
+            background: var(--c-bg);
+            box-shadow: 0 1px 0 0 var(--c-ring);
+
             @media screen and (min-width: 769px) {
+                position: sticky;
+                top: 0;
+                z-index: 10;
+
                 .selected {
                     font-weight: bold;
                     color: var(--c-primary-500);
@@ -155,11 +157,15 @@
             text-align: center;
             color: var(--c-text-secondary);
 
+            &:first-of-type {
+                box-shadow: 0 1px 0 0 var(--c-ring) inset;
+            }
+
             @media print {
                 font-size: 8px;
             }
 
-            &::before {
+            &:not(:last-of-type)::after {
                 content: "";
                 position: absolute;
                 display: block;
@@ -172,10 +178,9 @@
 
     .today {
         position: fixed;
-        left: 64px;
-        bottom: 8px;
+        right: 20px;
+        bottom: 20px;
         z-index: 10;
-        width: calc(100% - 72px);
 
         @media screen and (min-width: 769px) {
             display: none;

@@ -1,8 +1,8 @@
 import type { Item, WeekDay } from '@src/types/time';
 import { getEndTime, getStartTime, parseTime } from '@src/utils/data/time';
 import type { SelectedCourse } from '../types';
-import { WEEK_DAYS } from 'src/features/constructor/builder/components/Calendar';
-import { Card } from '@src/features/constructor/builder/components/Card';
+import { WEEK_DAYS } from '@src/components/Calendar';
+import { SubjectCard } from '@src/components/SubjectCard';
 
 export const getWeek = (items: SelectedCourse[]) => {
     const week: Record<WeekDay, Item[]> = {
@@ -38,10 +38,12 @@ export const getWeek = (items: SelectedCourse[]) => {
 
             const card: Item = {
                 content: (
-                    <Card
-                        course={course}
-                        schedule={schedule}
-                        range={range}
+                    <SubjectCard
+                        abbr={course.abbr}
+                        title={schedule.st}
+                        time={range}
+                        label={schedule.faculty}
+                        room={schedule.room}
                     />
                 ),
                 ...range,

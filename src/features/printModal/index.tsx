@@ -3,7 +3,7 @@ import { Modal, ModalTitle } from "@src/components/Modal";
 import { Stack } from "@src/components/Stack";
 import { Paragraph } from "@src/components/Typography";
 import React from "react";
-import { Video } from "../Video";
+import { Video } from "./components/Video";
 
 interface Props {
     open: boolean;

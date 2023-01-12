@@ -25,9 +25,7 @@
 
     .header {
         display: none;
-        margin: calc(-1 * var(--l-4));
         padding: var(--l-3) var(--l-4);
-        margin-bottom: var(--l-4);
         box-shadow: 0 1px 0 0 var(--c-ring);
         position: sticky;
         top: 0;
@@ -43,7 +41,6 @@
         flex-grow: 1;
 
         .content {
-            padding: var(--l-4);
             max-width: 1280px;
             margin: auto;
         }
