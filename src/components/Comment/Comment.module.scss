@@ -1,0 +1,8 @@
+.root {
+    box-shadow: 0 1px 0 0 var(--c-ring);
+    padding: var(--l-2) 0;
+
+    .content {
+        font-size: 13px;
+    }
+}

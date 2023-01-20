@@ -1,0 +1,9 @@
+.root {
+    padding-top: var(--l-8);
+    padding-bottom: var(--l-8);
+    max-width: 600px;
+
+    .name {
+        line-height: 1.2;
+    }
+}

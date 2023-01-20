@@ -1,0 +1,47 @@
+.root {
+  height: 64px;
+  width: 64px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border-radius: var(--l-rounded-md);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--c-ring);
+
+  .image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .overlay, .loader {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    z-index: 1;
+  }
+
+  .loader {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--c-bg-semi-transparent);
+  }
+
+  .overlay {
+    padding: var(--l-1);
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    background: linear-gradient(
+        to bottom left,
+        var(--c-bg-semi-transparent) 25%,
+        var(--c-bg-transparent) 60%
+    );
+  }
+
+  .removeButton {
+    display: flex;
+  }
+}

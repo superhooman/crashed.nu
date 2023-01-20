@@ -17,6 +17,11 @@ export const serverSchema = z.object({
   ),
   GOOGLE_CLIENT_ID: z.string(),
   GOOGLE_SECRET: z.string(),
+  S3_ENDPOINT: z.string(),
+  S3_ACCESS_KEY: z.string(),
+  S3_SECRET_KEY: z.string(),
+  S3_BUCKET_NAME: z.string(),
+  S3_TENANT_ID: z.string(),
 });
 
 /**

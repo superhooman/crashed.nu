@@ -14,7 +14,11 @@ import { isMobileContext } from "@src/utils/isMobileContext";
 
 import '@src/styles/reset.css';
 import '@src/styles/global.scss';
+import "@src/styles/markdown.css";
 import { Toaster } from "react-hot-toast";
+import { AttachmentPreview } from "@src/features/social/AttachmentPreview";
+import { useRouter } from "next/router";
+import { stringifyUrl } from "query-string";
 
 const ProviderIsMobile = isMobileContext.Provider;
 
@@ -25,19 +29,43 @@ const DARK_THEME_COLOR = '#171717';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-const MyApp: AppType<{ session: Session | null }> = ({
+const MyApp: AppType<{ session: Session | null, dev: boolean }> = ({
   Component,
-  pageProps: { session, ...pageProps },
+  pageProps: { session, dev, ...pageProps },
 }) => {
+  const router = useRouter();
+
+  const { aid } = router.query;
+
+  const [aPreview, setAPreview] = React.useState(() => !!aid);
   const [isMobile, setIsMobile] = React.useState(false);
   const [theme, setThemeValue] = React.useState((pageProps as { theme?: Theme }).theme || 'system');
 
   React.useEffect(() => {
-    splitbee.init({
+    const id = aid as string;
+    if (id) {
+      setAPreview(true);
+    }
+  }, [aid]);
+
+  React.useEffect(() => {
+    if (!aPreview) {
+      router.push(stringifyUrl({
+        url: router.pathname,
+        query: {
+          ...router.query,
+          aid: undefined,
+        },
+      }), undefined, { shallow: true });
+    }
+  }, [aPreview]);
+
+  React.useEffect(() => {
+    !dev && splitbee.init({
       scriptUrl: '/bee.js',
       apiUrl: '/_hive',
     });
-  }, []);
+  }, [dev]);
 
   const setTheme = React.useCallback((theme: Theme) => {
     setThemeValue(theme);
@@ -80,6 +108,11 @@ const MyApp: AppType<{ session: Session | null }> = ({
             }
           </Head>
           <Component {...pageProps} />
+          <AttachmentPreview
+            id={aid as string}
+            open={aPreview}
+            onOpenChange={setAPreview}
+          />
         </ProviderIsMobile>
       </SessionProvider>
     </ThemeProvider>
@@ -93,7 +126,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
   const theme = getThemeServer(appContext.ctx.req);
 
-  return { ...appProps, pageProps: { ...appProps.pageProps, theme } };
+  return { ...appProps, pageProps: { ...appProps.pageProps, theme, dev: process.env.NODE_ENV === 'development' } };
 }
 
 export default trpc.withTRPC(MyApp);

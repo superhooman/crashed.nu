@@ -1,6 +1,6 @@
 import { Head } from "@src/components/Head";
 import { ROUTES } from "@src/constants/routes";
-import { Error } from "@src/features/error";
+import { DefaultError } from "@src/features/error/DefaultError";
 import type { NextPage } from "next";
 
 const PrivatePage: NextPage = () => {
@@ -11,7 +11,7 @@ const PrivatePage: NextPage = () => {
                 description="The schedule you are trying to access is private"
                 url={ROUTES.PRIVATE.get({ full: true })}
             />
-            <Error
+            <DefaultError
                 title="Private"
                 text="The schedule you are trying to access is private"
             />

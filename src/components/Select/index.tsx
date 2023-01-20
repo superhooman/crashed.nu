@@ -1,4 +1,4 @@
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
+import { CaretSortIcon, CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons';
 import * as SelectBase from '@radix-ui/react-select';
 
 import cls from './Select.module.scss';
@@ -21,7 +21,7 @@ export const Select: React.FC<Props> = ({ label, items, ...props }) => {
                 <div className={cls.select}>
                     <SelectBase.Value className={cls.value} />
                     <SelectBase.Icon>
-                        <ChevronDownIcon className={cls.chevron} />
+                        <CaretSortIcon className={cls.chevron} />
                     </SelectBase.Icon>
                 </div>
             </SelectBase.Trigger>

@@ -3,7 +3,7 @@
  * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
  * This is especially useful for Docker builds.
  */
-!process.env.SKIP_ENV_VALIDATION && (await import("./src/env/server.mjs"));
+import { env } from "./src/env/server.mjs";
 
 /** @type {import("next").NextConfig} */
 const config = {
@@ -31,6 +31,10 @@ const config = {
       {
         source: '/_hive/:slug',
         destination: 'https://hive.splitbee.io/:slug',
+      },
+      {
+        source: '/s3/:folder/:path*',
+        destination: `${env.S3_ENDPOINT}/${env.S3_TENANT_ID}%3A${env.S3_BUCKET_NAME}/:folder/:path*`,
       },
     ];
   },

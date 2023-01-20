@@ -20,7 +20,7 @@ html, body {
   & > div > div {
     background-color: var(--c-bg);
     color: var(--c-text);
-    border-radius: var(--l-radius-m);
+    border-radius: var(--l-rounded-md);
     box-shadow: var(--s-s), 0 0 0 1px var(--c-ring);
     font-size: 13px;
     font-family: var(--t-font-secondary);

@@ -1,0 +1,61 @@
+.root {
+    box-shadow: 0 1px 0 0 var(--c-ring);
+    padding: var(--l-4) 0;
+
+    .content {
+        margin: var(--l-3) 0;
+    }
+
+    .photos {
+        overflow: hidden;
+        position: relative;
+        border-radius: var(--l-rounded-md);
+        margin: var(--l-3) 0;
+
+        .placeholder {
+            padding-bottom: 56.25%;
+            width: 100%;
+        }
+
+        .items {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .photo {
+            flex-grow: 1;
+            height: 100%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            &:not(:last-of-type) {
+                margin-right: var(--l-0_5);
+            }
+        }
+    }
+
+    .buttons {
+        margin-left: -8px;
+    }
+
+    .button {
+        color: var(--c-text-secondary);
+
+        &.liked, &.liked:hover, &.liked:active {
+            color: var(--c-red);
+
+            .icon {
+                color: var(--c-red);
+            }
+        }
+    }
+}

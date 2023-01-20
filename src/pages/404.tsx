@@ -1,6 +1,6 @@
 import { Head } from "@src/components/Head";
 import { ROUTES } from "@src/constants/routes";
-import { Error } from "@src/features/error";
+import { DefaultError } from "@src/features/error/DefaultError";
 import type { NextPage } from "next";
 
 const NotFound: NextPage = () => {
@@ -11,7 +11,7 @@ const NotFound: NextPage = () => {
                 description="The page you are trying to access does not exist"
                 url={ROUTES.PRIVATE.get({ full: true })}
             />
-            <Error
+            <DefaultError
                 title="Not Found"
                 text="The page you are trying to access does not exist"
             />

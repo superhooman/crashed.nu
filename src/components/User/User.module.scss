@@ -1,0 +1,32 @@
+.root {
+    position: relative;
+
+    .icon {
+        height: 8px;
+        width: 8px;
+        display: block;
+    }
+
+    .admin {
+        position: absolute;
+        bottom: -1px;
+        left: -1px;
+        z-index: 1;
+        border-radius: 4px;
+        background: linear-gradient(var(--c-primary-500), var(--c-primary-700));
+        color: var(--c-white);
+        padding: 3px;
+    }
+
+    &.small {
+        .icon {
+            height: 6px;
+            width: 6px;
+        }
+
+        .admin {
+            border-radius: 2px;
+            padding: 2px;
+        }
+    }
+}

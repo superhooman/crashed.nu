@@ -12,7 +12,7 @@ type Props = React.ComponentProps<'button'> & {
     /**
      * Button variant
      */
-    variant?: 'primary' | 'default' | 'link';
+    variant?: 'primary' | 'default' | 'link' | 'ghost';
     /**
      * Icon component
      */
@@ -25,31 +25,45 @@ type Props = React.ComponentProps<'button'> & {
      * Shows loading indicator instead of icon
      */
     isLoading?: boolean;
+    /**
+     * Link to navigate to
+     */
+    href?: string;
+    /**
+     * Disable paddings
+     */
+    disablePaddings?: boolean;
 };
 
-export const Button = React.forwardRef<HTMLButtonElement, Props>((
-    { children, variant = 'default', size = 'default', icon = null, className, fullWidth, isLoading, disabled, ...props },
+export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Props>((
+    { children, variant = 'default', size = 'default', icon = null, className, fullWidth, isLoading, disabled, disablePaddings, ...props },
     ref,
-) => (
-    <button
-        ref={ref}
-        className={clsx(
-            cls.root,
-            cls[`variant-${variant}`],
-            cls[`size-${size}`],
-            className,
-            fullWidth && cls.fullWidth
-        )}
-        disabled={disabled || isLoading}
-        {...props}
-    >
-        {Boolean(icon) || isLoading ? (
-            <div className={cls.icon}>
-                {isLoading ? <LoadingIcon className={cls.loading} /> : icon}
-            </div>
-        ) : null}
-        <span className={cls.content}>{children}</span>
-    </button>
-));
+) => {
+    const Element = props.href ? 'a' : 'button';
+    return (
+        <Element
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            ref={ref}
+            className={clsx(
+                cls.root,
+                cls[`variant-${variant}`],
+                cls[`size-${size}`],
+                className,
+                fullWidth && cls.fullWidth,
+                disablePaddings && cls.disablePaddings,
+            )}
+            disabled={disabled || isLoading}
+            {...props}
+        >
+            {Boolean(icon) || isLoading ? (
+                <div className={cls.icon}>
+                    {isLoading ? <LoadingIcon className={cls.loading} /> : icon}
+                </div>
+            ) : null}
+            <span className={cls.content}>{children}</span>
+        </Element>
+    );
+});
 
 Button.displayName = 'Button';

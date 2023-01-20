@@ -1,5 +1,5 @@
 import { Head } from "@src/components/Head";
-import { Registrar } from "@src/features/schedule/registrar";
+import { Registrar } from "@src/features/schedule/Registrar";
 import type { NextPage} from "next";
 import { type GetServerSideProps } from "next";
 import { getServerAuthSession } from '@src/server/common/get-server-auth-session';

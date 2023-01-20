@@ -4,7 +4,7 @@ import React from 'react';
 
 import cls from './Header.module.scss';
 import { Container } from '../Container';
-import { User } from '@src/features/user';
+import { User } from '@src/features/common/User';
 
 export const Glyph: React.FC<React.ComponentProps<'svg'> & { size?: number }> = ({ size = 16, ...props }) => (
     <svg
@@ -22,7 +22,7 @@ export const Glyph: React.FC<React.ComponentProps<'svg'> & { size?: number }> = 
 );
 
 type Props = React.ComponentProps<'nav'> & {
-    sub?: string;
+    sub?: React.ReactNode;
     fixed?: boolean;
     noContainer?: boolean;
 };

@@ -3,7 +3,7 @@
 }
 
 .img {
-    border-radius: var(--l-radius-m);
+    border-radius: var(--l-rounded-md);
     overflow: hidden;
     box-shadow: 0 0 0 1px var(--c-ring);
     transition: transform var(--a-time-s) var(--a-slide), box-shadow var(--a-time-s) var(--a-slide);

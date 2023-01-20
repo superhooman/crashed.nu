@@ -1,15 +1,16 @@
 .root {
   z-index: 101;
   background-color: var(--c-bg);
-  border-radius: var(--l-radius-m);
+  border-radius: var(--l-rounded-md);
   padding: var(--l-1);
   box-shadow: var(--s-s), 0 0 0 1px var(--c-ring);
   min-width: 120px;
+  transform-origin: top right;
 }
 
 .icon {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
 }
 
 .item, .label {
@@ -22,7 +23,7 @@
   align-items: center;
   height: 32px;
   font-size: 0.8125rem;
-  border-radius: var(--l-radius-m);
+  border-radius: var(--l-rounded-md);
   color: var(--c-text-secondary);
   font-family: var(--t-font-secondary);
   cursor: default;

@@ -41,6 +41,7 @@ class Registrar {
                 const redirect = res.headers.location;
 
                 if (!redirect?.includes('my-registrar')) {
+                    console.log('INVALID CREDENTIALS', redirect);
                     return reject('Invalid credentials');
                 }
 

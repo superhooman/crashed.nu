@@ -4,13 +4,16 @@
         top: 0;
         left: 0;
     }
+    height: 64px;
 
-    z-index: 100;
+    z-index: 101;
 
-    background-color: var(--c-bg);
     width: 100%;
     padding: var(--l-4) 0;
     box-shadow: 0 1px 0 0 var(--c-ring);
+
+    background: linear-gradient(to bottom, var(--c-bg), var(--c-bg-transparent-header));
+    backdrop-filter: blur(8px);
 
     .container {
         display: flex;
@@ -55,6 +58,6 @@
 }
 
 .placeholder {
-    height: 68px;
+    height: 64px;
     flex-shrink: 0;
 }

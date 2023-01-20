@@ -45,4 +45,10 @@ export const ROUTES = {
     SCHEDULE_SHORT: new Route('/s/:id'),
     PRIVATE: new Route('/error/private'),
     PRIVACY: new Route('/privacy'),
+
+    POST: new Route('/post/:id'),
+    SUB: new Route('/sub/:id'),
+    PROFILE: new Route('/profile/:id'),
+
+    ATTACHMENT_UPLOAD: new Route('/api/upload/:id'),
 };

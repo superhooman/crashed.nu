@@ -1,0 +1,13 @@
+.root {
+    padding: var(--l-2);
+    .attachment {
+        border-radius: var(--l-rounded-md);
+        display: block;
+        max-height: 100%;
+        box-shadow: 0 0 0 1px var(--c-ring);
+    
+        @media screen and (max-width: 768px) {
+            margin-top: var(--l-4);
+        }
+    }    
+}

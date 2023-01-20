@@ -50,32 +50,44 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>((
 
 Input.displayName = 'Input';
 
-type TextAreaProps = React.ComponentProps<'textarea'> & BaseProps;
+type TextAreaProps = React.ComponentProps<'textarea'> & BaseProps & {
+    maxLength?: number;
+};
 
 export const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>((
-    { variant = 'default', size = 'default', className, label, fullWidth, error, ...props },
+    { variant = 'default', size = 'default', className, label, fullWidth, error, maxLength, ...props },
     ref
-) => (
-    <div className={clsx(
-        cls.root,
-        cls[`variant-${variant}`],
-        cls[`size-${size}`],
-        props.disabled && cls.disabled,
-        fullWidth && cls.fullWidth,
-        error && cls.error,
-    )}>
-        {label && <label className={cls.label} htmlFor={props.id}>{label}</label>}
-        <div className={clsx(cls.content, cls.noPadding)}>
-            <textarea
-                className={clsx(cls.textarea, className)}
-                ref={ref}
-                {...props}
-            />
+) => {
+    const length = String(props.value ?? '').length;
+    const errored = Boolean(error) || (maxLength && (length > maxLength));
+
+    return (
+        <div className={clsx(
+            cls.root,
+            cls[`variant-${variant}`],
+            cls[`size-${size}`],
+            props.disabled && cls.disabled,
+            fullWidth && cls.fullWidth,
+            errored && cls.errored,
+        )}>
+            {label && <label className={cls.label} htmlFor={props.id}>{label}</label>}
+            <div className={clsx(cls.content, cls.noPadding)}>
+                <textarea
+                    className={clsx(cls.textarea, className)}
+                    ref={ref}
+                    {...props}
+                />
+            </div>
+            {typeof error === 'string' ? (
+                <span className={cls.error}>{error}</span>
+            ) : null}
+            {maxLength && (
+                <div className={clsx(cls.maxLength, length > maxLength ? cls.error : '')}>
+                    {length}/{maxLength}
+                </div>
+            )}
         </div>
-        {typeof error === 'string' ? (
-            <span className={cls.error}>{error}</span>
-        ) : null}
-    </div>
-));
+    )
+});
 
 TextArea.displayName = 'TextArea';

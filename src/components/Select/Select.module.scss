@@ -26,7 +26,7 @@
         font-size: .8125rem;
         font-weight: 500;
         padding: var(--l-2) var(--l-3);
-        border-radius: var(--l-radius-m);
+        border-radius: var(--l-rounded-md);
         background-color: var(--c-bg);
         box-shadow: var(--focus), 0 0 0 1px var(--c-ring), var(--s-s);
 
@@ -50,7 +50,7 @@
 
 .content {
     padding: var(--l-2);
-    border-radius: var(--l-radius-m);
+    border-radius: var(--l-rounded-md);
     background-color: var(--c-bg);
     z-index: 101;
     box-sizing: border-box;
@@ -72,7 +72,7 @@
     .item {
         display: flex;
         align-items: center;
-        border-radius: var(--l-radius-m);
+        border-radius: var(--l-rounded-md);
         padding: var(--l-2);
         font-size: 0.8125rem;
         cursor: default;

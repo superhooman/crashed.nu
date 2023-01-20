@@ -1,7 +1,7 @@
 import { ExitIcon, GearIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Avatar } from "@src/components/Avatar";
 import { Button } from "@src/components/Button";
-import Menu, { MenuItem, MenuItemWithIcon, MenuSeparator } from "@src/components/Menu/Menu";
+import Menu, { MenuItemWithIcon, MenuSeparator } from "@src/components/Menu/Menu";
 import { Select } from "@src/components/Select";
 import { Stack } from "@src/components/Stack";
 import { Text } from "@src/components/Typography";
@@ -35,6 +35,8 @@ export const User: React.FC<UserProps> = ({ showFallback, showName = true }) => 
 
     return (
         <Menu
+            modal={false}
+            sideOfset={24}
             content={(
                 <>
                     <Stack className={cls.menuCustomItem} direction="column" gap={4}>

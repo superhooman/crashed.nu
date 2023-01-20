@@ -20,7 +20,7 @@ import { trpc } from '@src/utils/trpc';
 import splitbee from '@splitbee/web';
 import Tooltip from '@src/components/Tooltip/Tooltip';
 import { Calendar } from '@src/components/Calendar';
-import { PrintModal } from '@src/features/printModal';
+import { PrintModal } from '@src/features/common/PrintModal';
 
 interface BuilderProps {
     courses: Course[];

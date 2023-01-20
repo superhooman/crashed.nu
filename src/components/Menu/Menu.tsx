@@ -1,5 +1,6 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { DotFilledIcon } from '@radix-ui/react-icons';
+import { AnimatePresence, motion } from "framer-motion";
 import clsx from 'clsx';
 import React, { type HTMLAttributes, type ReactNode } from 'react';
 
@@ -7,7 +8,6 @@ import { withClassName } from '../_hocs/withClassName';
 import { Stack } from '../Stack';
 
 import cls from './Menu.module.scss';
-import { config, useTransition, animated } from 'react-spring';
 
 export const withIcon = <T extends { children?: ReactNode }>(Component: React.ComponentType<T>) => {
   const ComponentWithClassName = (props: T & { icon: ReactNode }) => {
@@ -92,13 +92,6 @@ const Menu: React.FC<Props> = ({
     setOpen(propsOpen);
   }, [propsOpen]);
 
-  const transitions = useTransition(open, {
-    from: { opacity: 0, y: 48 },
-    enter: { opacity: 1, y: 0 },
-    leave: { opacity: 0, y: 48 },
-    config: config.stiff,
-  });
-
   return (
     <DropdownMenu.Root
       open={open}
@@ -108,8 +101,8 @@ const Menu: React.FC<Props> = ({
       <DropdownMenu.Trigger asChild>
         {children}
       </DropdownMenu.Trigger>
-      {transitions((styles, item) => (
-        item ? (
+      <AnimatePresence>
+        {open ? (
           <DropdownMenu.Portal forceMount>
             <DropdownMenu.Content
               sideOffset={sideOfset}
@@ -118,13 +111,22 @@ const Menu: React.FC<Props> = ({
               asChild
               forceMount
             >
-              <animated.div style={styles} className={cls.root}>
+              <motion.div
+                className={cls.root}
+                initial={{ scale: 0.2, opacity: 0 }}
+                animate={{
+                  scale: 1,
+                  opacity: 1,
+                  transition: { type: "spring", duration: 0.5 },
+                }}
+                exit={{ scale: 0.2, opacity: 0, transition: { duration: 0.1 } }}
+              >
                 {content}
-              </animated.div>
+              </motion.div>
             </DropdownMenu.Content>
           </DropdownMenu.Portal>
-        ) : null
-      ))}
+        ) : null}
+      </AnimatePresence>
     </DropdownMenu.Root>
   )
 };

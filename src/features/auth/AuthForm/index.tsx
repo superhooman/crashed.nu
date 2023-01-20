@@ -10,12 +10,18 @@ import Link from "next/link"
 import { ROUTES } from "@src/constants/routes"
 import { Glyph } from "@src/components/Header"
 
-export const AuthForm = () => {
+interface Props {
+    callbackUrl?: string;
+}
+
+export const AuthForm: React.FC<Props> = ({
+    callbackUrl = ROUTES.SCHEDULE.get(),
+}) => {
     const handleSignIn = React.useCallback(() => {
         signIn('google', {
-            callbackUrl: ROUTES.SCHEDULE.get(),
+            callbackUrl,
         });
-    }, []);
+    }, [callbackUrl]);
 
     return (
         <Container style={{

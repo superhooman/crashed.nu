@@ -1,0 +1,9 @@
+.root {
+    font-size: 14px;
+    font-family: var(--t-font-secondary);
+    overflow-wrap: break-word;
+
+    .fallback {
+        white-space: pre-wrap;
+    }
+}

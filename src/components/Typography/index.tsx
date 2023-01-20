@@ -18,9 +18,11 @@ interface TitleProps {
     gutterBottom?: boolean;
 }
 
-export const Text: React.FC<React.ComponentProps<'span'> & TextProps & { block?: boolean }> = ({ className, size = 'default', color = 'default', align = 'left', type = 'default', block, bold, overflow, ...props }) => (
-    <span className={clsx(className, cls[`size-${size}`], cls[`color-${color}`], cls[`type-${type}`], cls[`align-${align}`], block && cls.block, bold && cls.bold, overflow && cls.overflow)} {...props} />
-);
+export const Text = React.forwardRef<HTMLSpanElement, React.ComponentProps<'span'> & TextProps & { block?: boolean }>(({ className, size = 'default', color = 'default', align = 'left', type = 'default', block, bold, overflow, ...props }, ref) => (
+    <span ref={ref} className={clsx(className, cls[`size-${size}`], cls[`color-${color}`], cls[`type-${type}`], cls[`align-${align}`], block && cls.block, bold && cls.bold, overflow && cls.overflow)} {...props} />
+));
+
+Text.displayName = 'Text';
 
 export const TextSkeleton: React.FC<React.ComponentProps<'span'> & TextProps & { block?: boolean }> = ({ className, size = 'default', color = 'default', align = 'left', type = 'default', block, bold, overflow, ...props }) => (
     <span className={clsx(className, cls[`size-${size}`], cls[`color-${color}`], cls[`type-${type}`], cls[`align-${align}`], block && cls.block, bold && cls.bold, overflow && cls.overflow)}>

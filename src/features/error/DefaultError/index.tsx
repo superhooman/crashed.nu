@@ -11,7 +11,7 @@ interface Props {
     text: string;
 }
 
-export const Error: React.FC<Props> = ({ title, text }) => {
+export const DefaultError: React.FC<Props> = ({ title, text }) => {
     return (
         <Container style={{
             maxWidth: 360,

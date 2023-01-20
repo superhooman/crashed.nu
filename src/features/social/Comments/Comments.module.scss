@@ -1,0 +1,18 @@
+.root {
+    padding: 8px 0;
+    box-shadow: 0 1px 0 0 var(--c-ring);
+}
+
+.padded {
+    padding-left: 44px;
+
+    @media screen and (max-width: 768px) {
+        padding-left: 16px;
+    }
+}
+
+.avatar {
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}

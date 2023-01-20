@@ -3,7 +3,7 @@ import { getServerAuthSession } from "@src/server/common/get-server-auth-session
 import { type NextPage, type GetServerSideProps } from "next";
 import { prisma } from '@src/server/db/client';
 import { type UserSchedule } from "@src/server/registrar/utils/parse";
-import { Schedule } from '@src/features/schedule/calendar';
+import { Calendar } from '@src/features/schedule/Calendar';
 import { Head } from '@src/components/Head';
 import { ROUTES } from '@src/constants/routes';
 
@@ -23,7 +23,7 @@ const SchedulePage: NextPage<Props> = ({ schedule, owner, sharable, url, name })
                 description={`${name}'s schedule`}
                 url={url}
             />
-            <Schedule
+            <Calendar
                 owner={owner}
                 schedule={schedule}
                 sharable={sharable}
