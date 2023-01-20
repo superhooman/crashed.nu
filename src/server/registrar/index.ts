@@ -1,9 +1,7 @@
 import request from 'request';
 import { parseSchedule } from './utils/parse';
 
-// Misterious build id
-// Despite the fact that it changes, this value still works
-const BUILD_ID = "form-qMZs1yFM-7KqIUxckoHzaq1ezPqh7dwSaLnUQJn2QHs";
+const BUILD_ID = 'form-Ge0qInuGtfAjDSYP-U-zTNaHfEezxfz2X0ip8lzvTVE';
 
 class Registrar {
     private HOST: string;
@@ -14,14 +12,21 @@ class Registrar {
 
     public async sync(username: string, password: string): Promise<ReturnType<typeof parseSchedule>> {
         const jar = request.jar();
+        jar.setCookie('has_js=1;', this.HOST, {
+            secure: true,
+        });
+
         const r = request.defaults({
             jar
         });
 
-        return new Promise((resolve, reject) => {
+        return new Promise(async (resolve, reject) => {
+            if (!BUILD_ID) return reject('Error occured');
+
             r({
                 method: 'POST',
                 uri: `${this.HOST}/index.php?q=user/login`,
+                strictSSL: false,
                 form: {
                     name: username,
                     pass: password,
@@ -41,6 +46,7 @@ class Registrar {
 
                 r({
                     method: 'GET',
+                    strictSSL: false,
                     uri: `${this.HOST}/my-registrar/personal-schedule/json?method=getTimetable&type=current&page=1&start=0&limit=50`,
                 }, (err, res) => {
                     if (err) {
