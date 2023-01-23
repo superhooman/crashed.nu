@@ -90,7 +90,10 @@ class Posts {
                 id,
                 ...defaultWhere,
             },
-            include: defaultInclude,
+            include: {
+                ...defaultInclude,
+                sub: true,
+            },
         });
 
         if (!post) {
@@ -446,6 +449,47 @@ class Posts {
         });
 
         return ROUTES.ATTACHMENT_UPLOAD.getWithParams({ id: attachemnt.id });
+    }
+
+    public async getUserPosts(userId: string, cursor?: Date) {
+        const take = 10;
+
+        const posts = await prisma.post.findMany({
+            where: {
+                userId,
+                deleted: false,
+                ...cursor ? {
+                    date: {
+                        lt: cursor,
+                    },
+                } : {},
+            },
+            include: {
+                ...defaultInclude,
+                sub: true,
+            },
+            take: take + 1,
+            orderBy: defaultOrder,
+        });
+
+        let nextCursor: string | undefined = undefined;
+
+        if (posts.length > take) {
+            const nextItem = posts.pop();
+            nextCursor = nextItem!.id;
+        }
+
+        const items = posts.map((post) => ({
+            ...post,
+            likes: post.likes.length,
+            comments: post.comments.length,
+            liked: post.likes.some((like) => like.userId === userId),
+        }));
+
+        return {
+            items,
+            nextCursor,
+        };
     }
 }
 

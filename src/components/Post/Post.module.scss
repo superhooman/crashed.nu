@@ -2,6 +2,26 @@
     box-shadow: 0 1px 0 0 var(--c-ring);
     padding: var(--l-4) 0;
 
+    .sub {
+        display: inline-flex;
+        align-items: center;
+        font-size: var(--t-font-s);
+        background-color: var(--c-neutral-100);
+        padding: var(--l-1) var(--l-2);
+        border-radius: var(--l-rounded-md);
+        margin-top: var(--l-3);
+
+        .link {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+
+            &:hover {
+                color: var(--c-primary-500)
+            }
+        }
+    }
+
     .content {
         margin: var(--l-3) 0;
     }

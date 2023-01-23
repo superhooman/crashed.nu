@@ -1,7 +1,10 @@
-import type { Post as PostType, User as UserType } from "@prisma/client"
+import type { Post as PostType, Sub, User as UserType } from "@prisma/client"
 import { ChatBubbleIcon, HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
+import { ROUTES } from "@src/constants/routes";
+import { SLUG_TO_ICON } from "@src/constants/slugToIcon";
 import clsx from "clsx";
 import { format, formatDistance } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../Button";
@@ -16,6 +19,7 @@ export interface Props {
     post: PostType & {
         user: Omit<UserType, 'xp' | 'emailVerified'>, liked: boolean, likes: number, comments: number;
         attachments?: { url: string, id: string }[];
+        sub?: Sub;
     };
     onAttachmentClick?: (id: string) => void;
     onLikeClick?: () => void;
@@ -24,8 +28,15 @@ export interface Props {
     children?: React.ReactNode;
 }
 
-export const Post: React.FC<Props> = ({ post, onLikeClick, onCommentClick, onAttachmentClick, userLink, children }) => {
-    const { date } = post;
+export const Post: React.FC<Props> = ({
+    post,
+    onLikeClick,
+    onCommentClick,
+    onAttachmentClick,
+    userLink,
+    children
+}) => {
+    const { date, sub } = post;
     const [relativeDate, setRelativeDate] = React.useState(() => formatDistance(date, new Date()));
 
     const fullDate = React.useMemo(() => format(date, 'dd.MM.yyyy HH:mm:ss'), [date]);
@@ -36,7 +47,9 @@ export const Post: React.FC<Props> = ({ post, onLikeClick, onCommentClick, onAtt
         return () => clearInterval(interval);
     }, [date]);
 
-    const user = (<User user={post.user} />)
+    const user = (<User user={post.user} />);
+
+    const SubIcon = sub?.slug ? SLUG_TO_ICON[sub.slug] : null;
 
     return (
         <div className={cls.root}>
@@ -44,6 +57,17 @@ export const Post: React.FC<Props> = ({ post, onLikeClick, onCommentClick, onAtt
                 {userLink ? (<Link href={userLink(post.user)}>{user}</Link>) : user}
                 {children}
             </Stack>
+            {sub ? (
+                <div className={cls.sub}>
+                    <Stack alignItems="center" gap={4}>
+                        <span>Posted in</span>
+                        <Link className={cls.link} href={ROUTES.SUB.getWithParams({ id: sub.slug })}>
+                            {SubIcon ? <SubIcon /> : null}
+                            <span>{sub.name}</span>
+                        </Link>
+                    </Stack>
+                </div>
+            ) : null}
             <ContentRenderer content={post.content} className={cls.content} />
             {post.attachments && post.attachments.length > 0 ? (
                 <div className={cls.photos}>
@@ -51,10 +75,11 @@ export const Post: React.FC<Props> = ({ post, onLikeClick, onCommentClick, onAtt
                     <div className={cls.items}>
                         {post.attachments.map((attachment, i) => (
                             <div className={cls.photo} key={attachment.id}>
-                                <img
+                                <Image
                                     onClick={() => onAttachmentClick?.(attachment.id)}
                                     src={attachment.url}
                                     alt={`Attachment ${i + 1}`}
+                                    fill
                                 />
                             </div>
                         ))}

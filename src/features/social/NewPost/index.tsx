@@ -21,6 +21,7 @@ interface FileWithId {
 }
 
 export const NewPost: React.FC<NewPostProps> = ({ sub, onSuccess }) => {
+    const utils = trpc.useContext();
     const { mutateAsync: getUrl } = trpc.posts.getAttachmentUploadUrl.useMutation();
 
     const [content, setContent] = React.useState('');

@@ -3,13 +3,12 @@ import { Container } from "@src/components/Container";
 import { Header } from "@src/components/Header";
 import type { Course } from "@src/server/PCC/typings";
 import React from "react";
-// import { PdfModal } from "./pdfModal";
 import { Builder } from "./Builder";
 import { Search } from "./Search";
 
 export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
     const [term, setTerm] = React.useState('');
-    const [wasOnNext, setWasOnNext] = React.useState(false);
+    // const [wasOnNext, setWasOnNext] = React.useState(false);
     const [courses, setCourses] = React.useState<Course[]>([]);
     const [screen, setScreen] = React.useState<'list' | 'builder'>('list');
 
@@ -38,9 +37,6 @@ export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
                             setScreen('builder')
                         }}
                     />
-                    {/* {pdf || wasOnNext ? null : (
-                        <PdfModal />
-                    )} */}
                 </Container>
             ) : null}
             {screen === 'builder' ? (
@@ -50,7 +46,7 @@ export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
                     pdf={pdf}
                     restart={() => {
                         splitbee.track('Restart');
-                        setWasOnNext(true);
+                        // setWasOnNext(true);
                         setScreen('list')
                     }}
                 />

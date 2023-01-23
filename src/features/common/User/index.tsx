@@ -1,4 +1,4 @@
-import { ExitIcon, GearIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { ExitIcon, GearIcon, MoonIcon, PersonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Avatar } from "@src/components/Avatar";
 import { Button } from "@src/components/Button";
 import Menu, { MenuItemWithIcon, MenuSeparator } from "@src/components/Menu/Menu";
@@ -6,6 +6,7 @@ import { Select } from "@src/components/Select";
 import { Stack } from "@src/components/Stack";
 import { Text } from "@src/components/Typography";
 import { ROUTES } from "@src/constants/routes";
+import { getUserHandle } from "@src/server/social/utils/getUserHandle";
 import { themeContext } from "@src/utils/theme";
 import { signOut, useSession } from "next-auth/react"
 import Link from "next/link";
@@ -78,6 +79,13 @@ export const User: React.FC<UserProps> = ({ showFallback, showName = true }) => 
                         />
                     </Stack>
                     <MenuSeparator />
+                    <Link href={ROUTES.PROFILE.getWithParams({ id: getUserHandle(session.user.email)! })}>
+                        <MenuItemWithIcon
+                            icon={<PersonIcon />}
+                        >
+                            Profile
+                        </MenuItemWithIcon>
+                    </Link>
                     <MenuItemWithIcon
                         icon={<ExitIcon />}
                         onClick={() => signOut({ callbackUrl: ROUTES.HOME.get() })}

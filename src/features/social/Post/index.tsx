@@ -20,6 +20,7 @@ type PostProps = {
         user: Omit<User, 'xp' | 'emailVerified'>, liked: boolean, likes: number, comments: number;
         attachments?: Attachment[];
     };
+    sub?: boolean;
 };
 
 export const Post: React.FC<PostProps> = (props) => {
@@ -44,8 +45,18 @@ export const Post: React.FC<PostProps> = (props) => {
     });
 
     const onLikeClick = React.useCallback(() => {
+        posts.post.setData({ id: props.post.id }, (prev) => {
+            if (!prev) {
+                return prev;
+            }
+            return {
+                ...prev,
+                liked: !prev.liked,
+                likes: prev.liked ? prev.likes - 1 : prev.likes + 1,
+            }
+        });
         like({ id: props.post.id });
-    }, [like, props.post.id]);
+    }, [like, props.post.id, posts.post]);
 
     const onDeleteClick = React.useCallback(() => {
         remove({ id: props.post.id })
@@ -115,6 +126,7 @@ export const Post: React.FC<PostProps> = (props) => {
             <PostComponent
                 post={{
                     ...data,
+                    sub: props.sub ? data.sub : undefined,
                     attachments: data.attachments.map((attachment) => ({
                         ...attachment,
                         url: getAttachmentUrl(attachment.id),

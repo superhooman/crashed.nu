@@ -33,4 +33,7 @@ export const postsRouter = router({
         .mutation(async ({ input: { id }, ctx: { session: { user: { id: userId } } } }) => await Posts.removeComment(id, userId)),
     getAttachmentUploadUrl: protectedProcedure
         .mutation(async ({ ctx: { session: { user: { id: userId } } } }) => await Posts.getAttachmentUploadUrl(userId)),
+    getUserPosts: protectedProcedure
+        .input(z.object({ id: z.string(), cursor: z.date().optional() }))
+        .query(async ({ input: { id, cursor } }) => await Posts.getUserPosts(id, cursor)),
 });

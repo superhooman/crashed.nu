@@ -90,6 +90,7 @@ export const getServerSideProps: GetServerSideProps<Props, { id: string }> = asy
 
     return {
         props: {
+            session,
             schedule: scheduleObject,
             name: schedule.user.name || 'Someone',
             owner,

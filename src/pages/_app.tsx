@@ -43,9 +43,7 @@ const MyApp: AppType<{ session: Session | null, dev: boolean }> = ({
 
   React.useEffect(() => {
     const id = aid as string;
-    if (id) {
-      setAPreview(true);
-    }
+    setAPreview(Boolean(id));
   }, [aid]);
 
   React.useEffect(() => {
