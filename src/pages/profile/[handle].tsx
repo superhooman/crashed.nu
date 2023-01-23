@@ -5,7 +5,7 @@ import { ROUTES } from '@src/constants/routes';
 import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 import { prisma } from '@src/server/db/client';
 import { getEmail } from '@src/server/social/utils/getUserHandle';
-import { Profile } from '@src/features/social/Profile';
+import { Profile } from '@src/parts/social/Profile';
 
 interface ProfilePageProps {
     user: User;

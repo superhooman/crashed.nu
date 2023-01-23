@@ -10,7 +10,7 @@ import { Button } from '@src/components/Button';
 import { Divider } from '@src/components/Divider';
 import { Header } from '@src/components/Header';
 import { Loader } from '@src/components/Loader';
-import { Post } from '@src/features/social/Post';
+import { Post } from '@src/parts/social/Post';
 import { Select } from '@src/components/Select';
 import { Stack } from '@src/components/Stack';
 import { Text } from '@src/components/Typography';

@@ -3,7 +3,7 @@ import { type GetServerSideProps } from 'next';
 import type { NextPage} from 'next';
 
 import { Head } from '@src/components/Head';
-import { Registrar } from '@src/features/schedule/Registrar';
+import { Registrar } from '@src/parts/schedule/Registrar';
 import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 import { prisma } from '@src/server/db/client';
 import { getQuery } from '@src/utils/getQuery';

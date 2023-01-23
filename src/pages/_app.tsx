@@ -15,7 +15,7 @@ import { getThemeServer, themeContext } from '@src/utils/theme';
 import { trpc } from '@src/utils/trpc';
 import { type Theme } from '@src/utils/theme';
 import { isMobileContext } from '@src/utils/isMobileContext';
-import { AttachmentPreview } from '@src/features/social/AttachmentPreview';
+import { AttachmentPreview } from '@src/parts/social/AttachmentPreview';
 
 import '@src/styles/reset.css';
 import '@src/styles/global.scss';

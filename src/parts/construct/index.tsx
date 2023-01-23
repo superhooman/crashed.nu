@@ -5,8 +5,8 @@ import type { Course } from '@src/server/PCC/typings';
 
 import { Container } from '@src/components/Container';
 import { Header } from '@src/components/Header';
-import { Search } from '@src/features/constructor/Search';
-import { Builder } from '@src/features/constructor/Builder';
+import { Search } from '@src/parts/construct/Search';
+import { Builder } from '@src/parts/construct/Builder';
 
 export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
     const [term, setTerm] = React.useState('');

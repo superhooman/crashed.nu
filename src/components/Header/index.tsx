@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 
-import { User } from '@src/features/common/User';
+import { User } from '@src/parts/common/User';
 
 import cls from './Header.module.scss';
 import { Container } from '../Container';

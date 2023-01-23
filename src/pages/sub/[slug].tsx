@@ -4,7 +4,7 @@ import { type Sub as SubType, UserType } from '@prisma/client';
 import type { GetServerSideProps, NextPage } from 'next';
 
 import { prisma } from '@src/server/db/client';
-import { Sub } from '@src/features/social/Sub';
+import { Sub } from '@src/parts/social/Sub';
 import { ROUTES } from '@src/constants/routes';
 import { Head } from '@src/components/Head';
 import { getServerAuthSession } from '@src/server/common/get-server-auth-session';

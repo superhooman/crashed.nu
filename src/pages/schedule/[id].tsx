@@ -4,7 +4,7 @@ import { type NextPage, type GetServerSideProps } from 'next';
 import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 import { prisma } from '@src/server/db/client';
 import { type UserSchedule } from '@src/server/registrar/utils/parse';
-import { Calendar } from '@src/features/schedule/Calendar';
+import { Calendar } from '@src/parts/schedule/Calendar';
 import { Head } from '@src/components/Head';
 import { ROUTES } from '@src/constants/routes';
 

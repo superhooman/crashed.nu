@@ -2,7 +2,7 @@ import type { GetServerSideProps, NextPage } from 'next';
 
 import { Head } from '@src/components/Head';
 import { ROUTES } from '@src/constants/routes';
-import { AuthForm } from '@src/features/auth/AuthForm';
+import { AuthForm } from '@src/parts/auth/AuthForm';
 import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 
 const TITLE = 'crashed.nu - auth';

@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 
 import { Head } from '@src/components/Head';
 import { ROUTES } from '@src/constants/routes';
-import { DefaultError } from '@src/features/error/DefaultError';
+import { DefaultError } from '@src/parts/error/DefaultError';
 
 const PrivatePage: NextPage = () => {
     return (

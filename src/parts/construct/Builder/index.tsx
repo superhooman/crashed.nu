@@ -14,7 +14,7 @@ import { Divider } from '@src/components/Divider';
 import { trpc } from '@src/utils/trpc';
 import Tooltip from '@src/components/Tooltip/Tooltip';
 import { Calendar } from '@src/components/Calendar';
-import { PrintModal } from '@src/features/common/PrintModal';
+import { PrintModal } from '@src/parts/common/PrintModal';
 
 import { Menu } from './components/Menu';
 import { Schedules } from './components/Schedules';

@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 
-import { Landing } from '@src/features/landing';
+import { Landing } from '@src/parts/landing';
 import { Head } from '@src/components/Head';
 import { DOMAIN } from '@src/constants/routes';
 

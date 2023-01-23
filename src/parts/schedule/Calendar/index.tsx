@@ -7,7 +7,7 @@ import { Header } from '@src/components/Header';
 import { Stack } from '@src/components/Stack';
 import { Calendar as CalendarComponent } from '@src/components/Calendar';
 import { SubjectCard } from '@src/components/SubjectCard';
-import { PrintModal } from '@src/features/common/PrintModal';
+import { PrintModal } from '@src/parts/common/PrintModal';
 
 import { ScheduleLayout } from './layout';
 import { ShortModal } from './components/ShortModal';

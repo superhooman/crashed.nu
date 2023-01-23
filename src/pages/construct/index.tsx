@@ -1,7 +1,7 @@
 import React from 'react';
 import { type NextPage } from 'next';
 
-import { Constructor } from '@src/features/constructor';
+import { Constructor } from '@src/parts/construct';
 import { Head } from '@src/components/Head';
 import { ROUTES } from '@src/constants/routes';
 
