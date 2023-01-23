@@ -1,25 +1,26 @@
-import type { Time } from "@src/types/time";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import type { Time } from '@src/types/time';
 
 const WEEKDAYS = [
-    "MONDAY",
-    "TUESDAY",
-    "WEDNESDAY",
-    "THURSDAY",
-    "FRIDAY",
-    "SATURDAY",
-    "SUNDAY"
+    'MONDAY',
+    'TUESDAY',
+    'WEDNESDAY',
+    'THURSDAY',
+    'FRIDAY',
+    'SATURDAY',
+    'SUNDAY'
 ] as const;
 
 const COLORS = [
-    "#DA3A2D",
-    "#EC804F",
-    "#ECC059",
-    "#7BCA8F",
-    "#65A6DA",
-    "#9060EE",
-    "#3F51B5",
-    "#8E24AA",
-    "#616161"
+    '#DA3A2D',
+    '#EC804F',
+    '#ECC059',
+    '#7BCA8F',
+    '#65A6DA',
+    '#9060EE',
+    '#3F51B5',
+    '#8E24AA',
+    '#616161'
 ];
 
 const COURSE_ABBR_TITLE_REGEXP = /([A-Z]{3,4} \d{3}[A-Z]?) (.*?)</;
@@ -57,29 +58,29 @@ const getColorArray = (length: number) => {
 
 const parseTime = (str: string) => {
     return {
-        hh: parseInt(str.split(":")[0]!, 10),
-        mm: parseInt(str.split(":")[1]!, 10)
+        hh: parseInt(str.split(':')[0]!, 10),
+        mm: parseInt(str.split(':')[1]!, 10)
     };
 };
 
 const timeToHM = (str: string) => {
     const r = /\(([^)]+)\)/;
     const match = str.match(r)![1];
-    if (!match) throw new Error("Invalid time format");
+    if (!match) throw new Error('Invalid time format');
     const res = {
-        start: parseTime(match.split("-")[0]!),
-        end: parseTime(match.split("-")[1]!)
+        start: parseTime(match.split('-')[0]!),
+        end: parseTime(match.split('-')[1]!)
     };
     return res;
 };
 
 const parseDay = (input: string) => {
-    const b = input.split("<br>");
+    const b = input.split('<br>');
     const time = timeToHM(b[1]!);
 
     const match = input.match(COURSE_ABBR_TITLE_REGEXP);
 
-    if (!match) throw new Error("Invalid course format");
+    if (!match) throw new Error('Invalid course format');
 
     const abbr = match[1]!;
     const label = match[2]!;
@@ -129,9 +130,9 @@ export const parseSchedule = (json: string) => {
     week.forEach(day => {
         day.forEach((slot, i) => {
             if (
-                slot.label !== "EMPTY" &&
+                slot.label !== 'EMPTY' &&
                 day[i + 1] &&
-                day[i + 1]?.label !== "EMPTY"
+                day[i + 1]?.label !== 'EMPTY'
             ) {
                 if (slot.id === day[i + 1]?.id) {
                     day.slice(i + 1, 1);

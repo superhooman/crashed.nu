@@ -1,24 +1,25 @@
-import React from "react";
-import App, { type AppContext, type AppType } from "next/app";
-import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
+import React from 'react';
+import App, { type AppContext, type AppType } from 'next/app';
+import { type Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
 import splitbee from '@splitbee/web';
-import type { Theme } from "@src/utils/theme";
-import { saveTheme } from "@src/utils/theme";
-import { getThemeServer, themeContext } from "@src/utils/theme";
-import Head from "next/head";
+import Head from 'next/head';
+import { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import { stringifyUrl } from 'query-string';
+import { Inter, Manrope } from '@next/font/google';
+import clsx from 'clsx';
 
-import { trpc } from "@src/utils/trpc";
-
-import { isMobileContext } from "@src/utils/isMobileContext";
+import { saveTheme } from '@src/utils/theme';
+import { getThemeServer, themeContext } from '@src/utils/theme';
+import { trpc } from '@src/utils/trpc';
+import { type Theme } from '@src/utils/theme';
+import { isMobileContext } from '@src/utils/isMobileContext';
+import { AttachmentPreview } from '@src/features/social/AttachmentPreview';
 
 import '@src/styles/reset.css';
 import '@src/styles/global.scss';
-import "@src/styles/markdown.css";
-import { Toaster } from "react-hot-toast";
-import { AttachmentPreview } from "@src/features/social/AttachmentPreview";
-import { useRouter } from "next/router";
-import { stringifyUrl } from "query-string";
+import '@src/styles/markdown.css';
 
 const ProviderIsMobile = isMobileContext.Provider;
 
@@ -27,15 +28,27 @@ const ThemeProvider = themeContext.Provider;
 const LIGHT_THEME_COLOR = '#ffffff';
 const DARK_THEME_COLOR = '#171717';
 
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  variable: '--t-inter',
+});
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  variable: '--t-manrope',
+});
+
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 const MyApp: AppType<{ session: Session | null, dev: boolean }> = ({
   Component,
   pageProps: { session, dev, ...pageProps },
 }) => {
-  const router = useRouter();
+  const { push, query, pathname } = useRouter();
 
-  const { aid } = router.query;
+  const { aid } = query;
 
   const [aPreview, setAPreview] = React.useState(() => !!aid);
   const [isMobile, setIsMobile] = React.useState(false);
@@ -48,15 +61,15 @@ const MyApp: AppType<{ session: Session | null, dev: boolean }> = ({
 
   React.useEffect(() => {
     if (!aPreview) {
-      router.push(stringifyUrl({
-        url: router.pathname,
+      push(stringifyUrl({
+        url: pathname,
         query: {
-          ...router.query,
+          ...query,
           aid: undefined,
         },
       }), undefined, { shallow: true });
     }
-  }, [aPreview]);
+  }, [aPreview, push, pathname, query]);
 
   React.useEffect(() => {
     !dev && splitbee.init({
@@ -81,7 +94,7 @@ const MyApp: AppType<{ session: Session | null, dev: boolean }> = ({
 
     return () => {
       (typeof window !== 'undefined') && window.removeEventListener('resize', handleResize);
-    }
+    };
   }, []);
 
   return (
@@ -124,7 +137,17 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
   const theme = getThemeServer(appContext.ctx.req);
 
-  return { ...appProps, pageProps: { ...appProps.pageProps, theme, dev: process.env.NODE_ENV === 'development' } };
-}
+  const classNames = clsx(inter.className, manrope.className);
+
+  return {
+      ...appProps,
+      pageProps: {
+        ...appProps.pageProps,
+        theme,
+        classNames,
+        dev: process.env.NODE_ENV === 'development'
+      }
+  };
+};
 
 export default trpc.withTRPC(MyApp);

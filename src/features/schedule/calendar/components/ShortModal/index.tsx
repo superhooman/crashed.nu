@@ -1,17 +1,18 @@
-import { CheckCircledIcon, CheckIcon, CrossCircledIcon } from "@radix-ui/react-icons";
-import { Button } from "@src/components/Button";
-import { Input } from "@src/components/Input";
-import { Loader } from "@src/components/Loader";
-import { Modal, ModalTitle } from "@src/components/Modal";
-import { Stack } from "@src/components/Stack";
-import { Paragraph } from "@src/components/Typography";
-import { ROUTES } from "@src/constants/routes";
-import { ALHPANUM_UNDERSCORE_DOT } from "@src/schemas/short";
-import { trpc } from "@src/utils/trpc";
-import useDebounce from "@src/utils/useDebounce";
-import { useRouter } from "next/router";
-import React from "react";
-import { toast } from "react-hot-toast";
+import { CheckCircledIcon, CheckIcon, CrossCircledIcon } from '@radix-ui/react-icons';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { toast } from 'react-hot-toast';
+
+import { Button } from '@src/components/Button';
+import { Input } from '@src/components/Input';
+import { Loader } from '@src/components/Loader';
+import { Modal, ModalTitle } from '@src/components/Modal';
+import { Stack } from '@src/components/Stack';
+import { Paragraph } from '@src/components/Typography';
+import { ROUTES } from '@src/constants/routes';
+import { ALHPANUM_UNDERSCORE_DOT } from '@src/schemas/short';
+import { trpc } from '@src/utils/trpc';
+import useDebounce from '@src/utils/useDebounce';
 
 import cls from './ShortModal.module.scss';
 
@@ -39,7 +40,7 @@ export const ShortModal: React.FC<Props> = ({ open, onOpenChange }) => {
     const debouncedShort = useDebounce(short, 500);
 
     const notTouched = currentShort === short;
-    const wrong = !ALHPANUM_UNDERSCORE_DOT.test(short)
+    const wrong = !ALHPANUM_UNDERSCORE_DOT.test(short);
     const disabled = short.length < 3 || notTouched || wrong || debouncedShort !== short;
 
     const { data: valid, isLoading } = trpc.registrar.checkShort.useQuery({
@@ -54,15 +55,15 @@ export const ShortModal: React.FC<Props> = ({ open, onOpenChange }) => {
             return null;
         }
         if (disabled) {
-            return <CrossCircledIcon />
+            return <CrossCircledIcon />;
         }
         if (isLoading) {
-            return <Loader />
+            return <Loader />;
         }
         if (valid) {
-            return <CheckCircledIcon />
+            return <CheckCircledIcon />;
         }
-        return <CrossCircledIcon />
+        return <CrossCircledIcon />;
     }, [valid, isLoading, disabled, notTouched]);
 
     const saveShort = React.useCallback(() => {
@@ -74,7 +75,7 @@ export const ShortModal: React.FC<Props> = ({ open, onOpenChange }) => {
             } else {
                 toast.error('Failed to set short link');
             }
-        })
+        });
     }, [mutateAsync, short, push, onOpenChange]);
 
     return (
@@ -98,5 +99,5 @@ export const ShortModal: React.FC<Props> = ({ open, onOpenChange }) => {
                 <Button onClick={() => onOpenChange(false)}>Cancel</Button>
             </Stack>
         </Modal>
-    )
-}
+    );
+};

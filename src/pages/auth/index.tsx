@@ -1,8 +1,9 @@
-import { Head } from "@src/components/Head";
-import { ROUTES } from "@src/constants/routes";
-import { AuthForm } from "@src/features/auth/AuthForm";
-import { getServerAuthSession } from "@src/server/common/get-server-auth-session";
-import type { GetServerSideProps, NextPage } from "next";
+import type { GetServerSideProps, NextPage } from 'next';
+
+import { Head } from '@src/components/Head';
+import { ROUTES } from '@src/constants/routes';
+import { AuthForm } from '@src/features/auth/AuthForm';
+import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 
 const TITLE = 'crashed.nu - auth';
 const DESCRIPTION = 'Sign in with your University account.';
@@ -17,8 +18,8 @@ const AuthPage: NextPage = () => {
             />
             <AuthForm />
         </>
-    )
-}
+    );
+};
 
 export default AuthPage;
 
@@ -31,10 +32,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                 destination: ROUTES.SCHEDULE.get(),
                 permanent: false,
             }
-        }
+        };
     }
 
     return {
         props: {},
-    }
+    };
 };

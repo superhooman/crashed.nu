@@ -1,9 +1,11 @@
-import { getServerAuthSession } from "@src/server/common/get-server-auth-session";
-import type { NextApiHandler, NextApiRequest } from "next";
+import busboy from 'busboy';
+
+import type { NextApiHandler, NextApiRequest } from 'next';
+
+import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 import { prisma } from '@src/server/db/client';
-import busboy from "busboy";
-import { env } from "@src/env/server.mjs";
-import { s3 } from "@src/server/s3";
+import { env } from '@src/env/server.mjs';
+import { s3 } from '@src/server/s3';
 
 const processFile = (req: NextApiRequest): Promise<{
     data: Buffer;
@@ -31,7 +33,7 @@ const processFile = (req: NextApiRequest): Promise<{
         });
     });
 
-    bb.once
+    bb.once;
     req.pipe(bb);
 });
 
@@ -93,7 +95,7 @@ const handler: NextApiHandler = async (req, res) => {
         success: true,
         id,
     });
-}
+};
 
 export const config = {
     api: {

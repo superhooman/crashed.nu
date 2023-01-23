@@ -1,5 +1,6 @@
-import { DOMAIN } from "@src/constants/routes";
-import HeadTag from "next/head";
+import HeadTag from 'next/head';
+
+import { DOMAIN } from '@src/constants/routes';
 
 interface HeadProps {
     title: string;
@@ -32,5 +33,5 @@ export const Head: React.FC<HeadProps> = ({
                 <meta property="twitter:description" content={description} />
                 <meta property="twitter:image" content={image} />
         </HeadTag>
-    )
+    );
 };

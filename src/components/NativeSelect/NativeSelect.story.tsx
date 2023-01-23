@@ -1,4 +1,5 @@
 import { PieChartIcon } from '@radix-ui/react-icons';
+
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { NativeSelect } from './index';
@@ -21,4 +22,4 @@ export const Default: Story = {
     icon: <PieChartIcon />,
     value: '1',
   }
-}
+};

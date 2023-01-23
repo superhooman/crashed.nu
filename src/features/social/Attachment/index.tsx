@@ -1,6 +1,7 @@
-import { Attachment as AttachmentComponent } from "@src/components/Attachment";
-import { getAttachmentUrl } from "@src/constants/storage";
-import React from "react";
+import React from 'react';
+
+import { Attachment as AttachmentComponent } from '@src/components/Attachment';
+import { getAttachmentUrl } from '@src/constants/storage';
 
 interface AttachmentProps {
     file?: File;
@@ -24,5 +25,5 @@ export const Attachment: React.FC<AttachmentProps> = ({ file, fileId, onRemoved 
             isUploading={Boolean(file)}
             onRemove={handleRemove}
         />
-    )
-}
+    );
+};

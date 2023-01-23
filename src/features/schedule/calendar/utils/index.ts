@@ -1,4 +1,4 @@
-import type { WeekDay } from "@src/types/time";
+import type { WeekDay } from '@src/types/time';
 
 export const indexToDay = (i: number): WeekDay => {
     switch (i) {
@@ -17,7 +17,7 @@ export const indexToDay = (i: number): WeekDay => {
         default:
             return 'M';
     }
-}
+};
 
 // Helps to render everything right
 // Making the server render as it is in GMT+6
@@ -28,5 +28,5 @@ export const getTimeWithTimezoneOffset = () => {
     return {
         hh: current.getHours() + timezone,
         mm: current.getMinutes(),
-    }
-}
+    };
+};

@@ -1,12 +1,14 @@
-import { Link2Icon } from "@radix-ui/react-icons";
-import { Button } from "@src/components/Button";
-import { TextArea } from "@src/components/Input";
-import { Stack } from "@src/components/Stack";
-import { trpc } from "@src/utils/trpc";
-import React from "react";
-import { toast } from "react-hot-toast";
-import { Attachment } from "../Attachment";
-import { getFileFromInput } from "./utils";
+import { Link2Icon } from '@radix-ui/react-icons';
+import React from 'react';
+import { toast } from 'react-hot-toast';
+
+import { Button } from '@src/components/Button';
+import { TextArea } from '@src/components/Input';
+import { Stack } from '@src/components/Stack';
+import { trpc } from '@src/utils/trpc';
+
+import { Attachment } from '../Attachment';
+import { getFileFromInput } from './utils';
 
 const MAX_LENGTH = 1024;
 
@@ -21,7 +23,7 @@ interface FileWithId {
 }
 
 export const NewPost: React.FC<NewPostProps> = ({ sub, onSuccess }) => {
-    const utils = trpc.useContext();
+    // const utils = trpc.useContext();
     const { mutateAsync: getUrl } = trpc.posts.getAttachmentUploadUrl.useMutation();
 
     const [content, setContent] = React.useState('');

@@ -1,9 +1,10 @@
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import React from 'react';
 
+import type { Course } from '@src/server/PCC/typings';
+
 import { Stack } from '@src/components/Stack';
 import { Text } from '@src/components/Typography';
-import type { Course } from '@src/server/PCC/typings';
 
 import cls from './Menu.module.scss';
 
@@ -18,7 +19,7 @@ export const Menu: React.FC<MenuProps> = ({ courses, selected, setSelected }) =>
         <RadioGroup.Root className={cls.root} value={selected} onValueChange={setSelected}>
             <Stack direction="column" alignItems="stretch" justifyContent="stretch" gap={8}>
             {courses.map(course => {
-                const id = course.id
+                const id = course.id;
     
                 return (
                     <RadioGroup.Item className={cls.item} value={id} id={id} key={id}>

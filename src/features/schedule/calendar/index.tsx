@@ -1,15 +1,18 @@
-import { Header } from "@src/components/Header";
-import { Stack } from "@src/components/Stack";
-import { Calendar as CalendarComponent } from "@src/components/Calendar";
-import type { UserSchedule } from "@src/server/registrar/utils/parse";
-import type { Item, WeekDay } from "@src/types/time";
-import React from "react";
-import { ScheduleLayout } from "./layout";
-import { ShortModal } from "./components/ShortModal";
-import { SubjectCard } from "@src/components/SubjectCard";
-import { PrintModal } from "@src/features/common/PrintModal";
-import { Menu } from "./components/Menu";
-import { getTimeWithTimezoneOffset, indexToDay } from "./utils";
+import React from 'react';
+
+import type { UserSchedule } from '@src/server/registrar/utils/parse';
+import type { Item, WeekDay } from '@src/types/time';
+
+import { Header } from '@src/components/Header';
+import { Stack } from '@src/components/Stack';
+import { Calendar as CalendarComponent } from '@src/components/Calendar';
+import { SubjectCard } from '@src/components/SubjectCard';
+import { PrintModal } from '@src/features/common/PrintModal';
+
+import { ScheduleLayout } from './layout';
+import { ShortModal } from './components/ShortModal';
+import { Menu } from './components/Menu';
+import { getTimeWithTimezoneOffset, indexToDay } from './utils';
 
 const getWeek = (schedule: UserSchedule) => {
     const week: Record<WeekDay, Item[]> = {
@@ -39,13 +42,13 @@ const getWeek = (schedule: UserSchedule) => {
                 ),
                 startTime: item.time.start,
                 endTime: item.time.end,
-            }
+            };
             week[indexToDay(i)].push(card);
         });
     });
 
     return week;
-}
+};
 
 interface Props {
     schedule: UserSchedule;
@@ -105,5 +108,5 @@ export const Calendar: React.FC<Props> = ({ schedule, sharable, owner, url, name
             <PrintModal open={printModal} onOpenChange={setPrintModal} />
             <ShortModal open={shortModal} onOpenChange={setShortModal} />
         </ScheduleLayout>
-    )
+    );
 };

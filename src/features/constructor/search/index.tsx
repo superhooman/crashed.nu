@@ -1,29 +1,32 @@
-import { ArrowLeftIcon, ArrowRightIcon, BackpackIcon, CardStackMinusIcon, CardStackPlusIcon, CookieIcon, Cross1Icon, CrumpledPaperIcon, InfoCircledIcon, MagnifyingGlassIcon, MinusIcon, UpdateIcon } from "@radix-ui/react-icons";
-import { Button } from "@src/components/Button";
+import { ArrowLeftIcon, ArrowRightIcon, BackpackIcon, CardStackMinusIcon, CardStackPlusIcon, CookieIcon, Cross1Icon, CrumpledPaperIcon, InfoCircledIcon, MagnifyingGlassIcon, MinusIcon, UpdateIcon } from '@radix-ui/react-icons';
 import splitbee from '@splitbee/web';
-import { Divider } from "@src/components/Divider";
-import { Empty } from "@src/components/Empty";
-import { Input } from "@src/components/Input";
-import { Loader } from "@src/components/Loader";
-import { Modal, ModalActions, ModalTitle } from "@src/components/Modal";
-import { Select } from "@src/components/Select";
-import { Stack } from "@src/components/Stack";
-import { Toolbar } from "@src/components/Toolbar";
-import { Paragraph, Text } from "@src/components/Typography";
-import { LEVELS } from "@src/constants/levels";
-import type { QueryFormSchema } from "@src/schemas/query";
-import type { Course } from "@src/server/PCC/typings";
-import { getTypes, typeDict, typeReg } from "@src/utils/data/getScheduleTypes";
-import { useIsMobile } from "@src/utils/isMobileContext";
-import { trpc } from "@src/utils/trpc";
-import { useFormik } from "formik";
-import React from "react"
+import { useFormik } from 'formik';
+import React from 'react';
+import Link from 'next/link';
+
+import type { QueryFormSchema } from '@src/schemas/query';
+import type { Course } from '@src/server/PCC/typings';
+
+import { Button } from '@src/components/Button';
+import { Divider } from '@src/components/Divider';
+import { Empty } from '@src/components/Empty';
+import { Input } from '@src/components/Input';
+import { Loader } from '@src/components/Loader';
+import { Modal, ModalActions, ModalTitle } from '@src/components/Modal';
+import { Select } from '@src/components/Select';
+import { Stack } from '@src/components/Stack';
+import { Toolbar } from '@src/components/Toolbar';
+import { Paragraph, Text } from '@src/components/Typography';
+import { LEVELS } from '@src/constants/levels';
+import { getTypes, typeDict, typeReg } from '@src/utils/data/getScheduleTypes';
+import { useIsMobile } from '@src/utils/isMobileContext';
+import { trpc } from '@src/utils/trpc';
+import { Card } from '@src/components/Card';
 
 import cls from './Search.module.scss';
-import { CourseCard } from "./components/CourseCard";
-import { ScheduleItem, ScheduleItemSkeleton } from "./components/ScheduleItem";
-import { Card } from "@src/components/Card";
-import Link from "next/link";
+import { CourseCard } from './components/CourseCard';
+import { ScheduleItem, ScheduleItemSkeleton } from './components/ScheduleItem';
+
 
 export const Search: React.FC<{
     term: string;
@@ -287,7 +290,7 @@ export const Search: React.FC<{
             </Modal>
         </Stack>
     );
-}
+};
 
 const AboutCourse: React.FC<{
     course: Course,
@@ -307,8 +310,8 @@ const AboutCourse: React.FC<{
             </CourseCard>
             <Schedule course={course} term={term} pdf={pdf} />
         </>
-    )
-}
+    );
+};
 
 const Schedule: React.FC<{ course: Course, term: string, pdf: boolean }> = ({ course, term, pdf }) => {
     const { data: schedules, isLoading } = trpc.pcc.schedule.useQuery({
@@ -345,5 +348,5 @@ const Schedule: React.FC<{ course: Course, term: string, pdf: boolean }> = ({ co
                 </Stack>
             ) : null}
         </Stack>
-    )
-}
+    );
+};

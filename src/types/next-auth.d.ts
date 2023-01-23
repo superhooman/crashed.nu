@@ -1,7 +1,7 @@
-import type { UserType } from "@prisma/client";
-import type { DefaultSession } from "next-auth";
+import type { UserType } from '@prisma/client';
+import type { DefaultSession } from 'next-auth';
 
-declare module "next-auth" {
+declare module 'next-auth' {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
@@ -9,6 +9,6 @@ declare module "next-auth" {
     user?: {
       id: string;
       userType: UserType;
-    } & DefaultSession["user"];
+    } & DefaultSession['user'];
   }
 }

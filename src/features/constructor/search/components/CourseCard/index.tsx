@@ -1,9 +1,11 @@
 
-import { Property } from "@src/components/Property";
-import { Stack } from "@src/components/Stack"
-import { Paragraph, Text } from "@src/components/Typography"
-import type { Course } from "@src/server/PCC/typings";
-import React from "react";
+import React from 'react';
+
+import type { Course } from '@src/server/PCC/typings';
+
+import { Property } from '@src/components/Property';
+import { Stack } from '@src/components/Stack';
+import { Paragraph, Text } from '@src/components/Typography';
 
 import cls from './CourseCard.module.scss';
 
@@ -35,5 +37,5 @@ export const CourseCard: React.FC<React.PropsWithChildren<CourseCardProps>> = ({
                 </Stack>
             )}
         </div>
-    )
-}
+    );
+};

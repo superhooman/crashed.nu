@@ -1,13 +1,14 @@
-import type { Comment as CommentType, User as UserType } from "@prisma/client"
-import { format, formatDistance } from "date-fns";
-import React from "react";
-import { Button } from "../Button";
-import { ContentRenderer } from "../ContentRenderer";
-import { Stack } from "../Stack";
-import { Tooltip } from "../Tooltip";
-import { Text } from "../Typography";
-import { User } from "../User";
+import { format, formatDistance } from 'date-fns';
+import React from 'react';
 
+import type { Comment as CommentType, User as UserType } from '@prisma/client';
+
+import { Button } from '../Button';
+import { ContentRenderer } from '../ContentRenderer';
+import { Stack } from '../Stack';
+import { Tooltip } from '../Tooltip';
+import { Text } from '../Typography';
+import { User } from '../User';
 import cls from './Comment.module.scss';
 
 export type CommentProp = CommentType & { user: Omit<UserType, 'xp' | 'emailVerified'> };
@@ -57,5 +58,5 @@ export const Comment: React.FC<CommentProps> = ({ comment, onReplyClick, childre
                 </Tooltip>
             </Stack>
         </Stack>
-    )
+    );
 };

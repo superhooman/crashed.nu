@@ -15,4 +15,4 @@ const meta: Meta<typeof Switch> = {
 export default meta;
 type Story = StoryObj<typeof Switch>;
 
-export const Default: Story = {}
+export const Default: Story = {};

@@ -1,14 +1,16 @@
-import { type User as IUser, UserType } from "@prisma/client"
-import { Container } from "@src/components/Container";
-import { Divider } from "@src/components/Divider";
-import { Empty } from "@src/components/Empty";
-import { Header } from "@src/components/Header";
-import { Stack } from "@src/components/Stack";
-import { Paragraph, Title } from "@src/components/Typography";
-import { User } from "@src/components/User";
-import { trpc } from "@src/utils/trpc";
-import React from "react";
-import { Post } from "../Post";
+import { type User as IUser, UserType } from '@prisma/client';
+import React from 'react';
+
+import { Container } from '@src/components/Container';
+import { Divider } from '@src/components/Divider';
+import { Empty } from '@src/components/Empty';
+import { Header } from '@src/components/Header';
+import { Stack } from '@src/components/Stack';
+import { Paragraph, Title } from '@src/components/Typography';
+import { User } from '@src/components/User';
+import { trpc } from '@src/utils/trpc';
+
+import { Post } from '../Post';
 import cls from './Profile.module.scss';
 
 interface ProfileProps {
@@ -57,5 +59,5 @@ export const Profile: React.FC<ProfileProps> = ({ user }) => {
                 ) : null}
             </Container>
         </>
-    )
+    );
 };

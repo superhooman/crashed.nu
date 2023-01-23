@@ -1,5 +1,6 @@
 import AvatarFallback from 'boring-avatars';
 import clsx from 'clsx';
+
 import cls from './Avatar.module.scss';
 
 interface AvatarProps {
@@ -29,5 +30,5 @@ export const Avatar: React.FC<AvatarProps> = ({ id, img, size, className }) => {
             }} />
             {!img && (<AvatarFallback size={size} name={id} colors={COLORS} variant="beam" />)}
         </div>
-    )
-}
+    );
+};

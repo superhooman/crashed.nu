@@ -1,10 +1,12 @@
-import { HeartIcon } from "@radix-ui/react-icons";
-import { Button } from "@src/components/Button";
-import { Card } from "@src/components/Card";
-import { Stack } from "@src/components/Stack";
-import { Paragraph, Text } from "@src/components/Typography";
-import Link from "next/link";
-import React from "react";
+import { HeartIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
+import React from 'react';
+
+import { Button } from '@src/components/Button';
+import { Card } from '@src/components/Card';
+import { Stack } from '@src/components/Stack';
+import { Paragraph, Text } from '@src/components/Typography';
+
 import cls from './PdfModal.module.scss';
 
 export const PdfModal = () => {
@@ -30,5 +32,5 @@ export const PdfModal = () => {
                 </Stack>
             </Card>
         </div>
-    )
-}
+    );
+};

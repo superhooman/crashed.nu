@@ -1,10 +1,11 @@
-import { Button } from "@src/components/Button"
-import { Container } from "@src/components/Container"
-import { Glyph } from "@src/components/Header"
-import { Stack } from "@src/components/Stack"
-import { Paragraph, Text } from "@src/components/Typography"
-import { ROUTES } from "@src/constants/routes"
-import Link from "next/link"
+import Link from 'next/link';
+
+import { Button } from '@src/components/Button';
+import { Container } from '@src/components/Container';
+import { Glyph } from '@src/components/Header';
+import { Stack } from '@src/components/Stack';
+import { Paragraph, Text } from '@src/components/Typography';
+import { ROUTES } from '@src/constants/routes';
 
 interface Props {
     title: string;
@@ -39,5 +40,5 @@ export const DefaultError: React.FC<Props> = ({ title, text }) => {
                 </Link>
             </Stack>
         </Container>
-    )
-}
+    );
+};

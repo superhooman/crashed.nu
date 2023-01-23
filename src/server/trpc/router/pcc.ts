@@ -1,9 +1,11 @@
-import type { Schedule } from "@prisma/client";
-import { queryFormSchema } from "@src/schemas/query";
-import PCC from "@src/server/PCC";
-import { z } from "zod";
+import { z } from 'zod';
 
-import { router, publicProcedure } from "../trpc";
+import type { Schedule } from '@prisma/client';
+
+import { queryFormSchema } from '@src/schemas/query';
+import PCC from '@src/server/PCC';
+
+import { router, publicProcedure } from '../trpc';
 
 export const pccRouter = router({
   semesters: publicProcedure

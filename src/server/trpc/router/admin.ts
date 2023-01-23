@@ -1,5 +1,6 @@
-import { subSchema } from "@src/schemas/sub";
-import { adminProcedure, router } from "../trpc";
+import { subSchema } from '@src/schemas/sub';
+
+import { adminProcedure, router } from '../trpc';
 
 export const adminRouter = router({
     subs: adminProcedure

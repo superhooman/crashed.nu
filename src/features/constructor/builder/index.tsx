@@ -1,26 +1,27 @@
 import React from 'react';
 import { ArrowLeftIcon, DownloadIcon, FileIcon } from '@radix-ui/react-icons';
+import splitbee from '@splitbee/web';
+
+import type { Course } from '@src/server/PCC/typings';
+import type { SelectedSchedule } from './types';
 
 import { Button } from '@src/components/Button';
 import { Header } from '@src/components/Header';
-import { BuilderLayout } from './layout';
-import type { Course } from '@src/server/PCC/typings';
 import { Stack } from '@src/components/Stack';
 import { Loader } from '@src/components/Loader';
 import { Text } from '@src/components/Typography';
 import { Divider } from '@src/components/Divider';
-
-import { Menu } from './components/Menu';
-import { Schedules } from './components/Schedules';
-import type { SelectedSchedule } from './types';
-import { getWeek } from './utils/getWeek';
-import { getCalendarItems } from './utils/getCalendarItems';
-import { exportData } from './utils/exportData';
 import { trpc } from '@src/utils/trpc';
-import splitbee from '@splitbee/web';
 import Tooltip from '@src/components/Tooltip/Tooltip';
 import { Calendar } from '@src/components/Calendar';
 import { PrintModal } from '@src/features/common/PrintModal';
+
+import { Menu } from './components/Menu';
+import { Schedules } from './components/Schedules';
+import { getWeek } from './utils/getWeek';
+import { getCalendarItems } from './utils/getCalendarItems';
+import { exportData } from './utils/exportData';
+import { BuilderLayout } from './layout';
 
 interface BuilderProps {
     courses: Course[];

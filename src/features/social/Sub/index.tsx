@@ -1,26 +1,27 @@
-import type { Sub as SubType } from "@prisma/client";
-import { Button } from "@src/components/Button";
-import { Divider } from "@src/components/Divider";
-import { Header } from "@src/components/Header";
-import { Loader } from "@src/components/Loader";
-import { Post } from "@src/features/social/Post";
-import { Select } from "@src/components/Select";
-import { Stack } from "@src/components/Stack";
-import { Text } from "@src/components/Typography";
-import { trpc } from "@src/utils/trpc";
-import React from "react";
-import type { Sort } from "@src/schemas/sub";
-import { HeartIcon, MagicWandIcon } from "@radix-ui/react-icons";
-import { Empty } from "@src/components/Empty";
+import React from 'react';
+import { HeartIcon, MagicWandIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
+import clsx from 'clsx';
 
-import { SLUG_TO_ICON } from "@src/constants/slugToIcon";
+import type { Sub as SubType } from '@prisma/client';
+import type { Sort } from '@src/schemas/sub';
+
+import { Button } from '@src/components/Button';
+import { Divider } from '@src/components/Divider';
+import { Header } from '@src/components/Header';
+import { Loader } from '@src/components/Loader';
+import { Post } from '@src/features/social/Post';
+import { Select } from '@src/components/Select';
+import { Stack } from '@src/components/Stack';
+import { Text } from '@src/components/Typography';
+import { trpc } from '@src/utils/trpc';
+import { Empty } from '@src/components/Empty';
+import { SLUG_TO_ICON } from '@src/constants/slugToIcon';
+import { ROUTES } from '@src/constants/routes';
 
 import cls from './Sub.module.scss';
-import { SubLayout } from "./layout";
-import Link from "next/link";
-import clsx from "clsx";
-import { ROUTES } from "@src/constants/routes";
-import { NewPost } from "../NewPost";
+import { SubLayout } from './layout';
+import { NewPost } from '../NewPost';
 
 interface Props {
     subs: SubType[];
@@ -62,7 +63,7 @@ export const Sub: React.FC<Props> = ({ subs, sub: propSub }) => {
     React.useEffect(() => {
         setSub(propSub);
         updateDate();
-    }, [propSub, updateDate])
+    }, [propSub, updateDate]);
 
     const { data, isLoading, hasNextPage, fetchNextPage, isFetchingNextPage } = trpc.posts.getPostsBySub.useInfiniteQuery({ sub, date, sort }, {
         getNextPageParam: (lastPage) => {
@@ -105,7 +106,7 @@ export const Sub: React.FC<Props> = ({ subs, sub: propSub }) => {
                                 {Icon && <Icon />}
                                 <Text className={cls.name}>{name}</Text>
                             </Link>
-                        )
+                        );
                     })}
                 </Stack>
             }
@@ -155,5 +156,5 @@ export const Sub: React.FC<Props> = ({ subs, sub: propSub }) => {
                     ) : null}
                 </Stack>
         </SubLayout>
-    )
-}
+    );
+};

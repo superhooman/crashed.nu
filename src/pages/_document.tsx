@@ -1,25 +1,25 @@
-import { Theme } from '@src/utils/theme';
+import clsx from 'clsx';
 import { Head, Html, Main, NextScript } from 'next/document';
+
+import type { Theme } from '@src/utils/theme';
 
 interface Props {
     __NEXT_DATA__: {
         props: {
             pageProps: {
                 theme: Theme;
+                className: string;
             };
         }
     }
 }
 
 const Document = ({ __NEXT_DATA__ }: Props) => {
-    const { theme } = __NEXT_DATA__.props.pageProps;
+    const { theme, className } = __NEXT_DATA__.props.pageProps;
 
     return (
-        <Html className={theme}>
+        <Html className={clsx(className, theme)}>
             <Head>
-                <link rel="preconnect" href="https://fonts.googleapis.com" />
-                <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-                <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
                 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
                 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
                 <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
@@ -36,7 +36,7 @@ const Document = ({ __NEXT_DATA__ }: Props) => {
                 <NextScript />
             </body>
         </Html>
-    )
+    );
 };
 
 export default Document;

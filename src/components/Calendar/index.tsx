@@ -1,11 +1,12 @@
-import { ArrowLeftIcon, ArrowRightIcon, CalendarIcon, ExclamationTriangleIcon } from '@radix-ui/react-icons'
+import { ArrowLeftIcon, ArrowRightIcon, CalendarIcon, ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import clsx from 'clsx';
-import type { PropsWithChildren } from 'react';
 import React from 'react';
+
+import type { PropsWithChildren } from 'react';
+import type { Item, Time, WeekDay } from '@src/types/time';
 
 import { Button } from '@src/components/Button';
 import { Stack } from '@src/components/Stack';
-import type { Item, Time, WeekDay } from '@src/types/time';
 import { calculateOverlap, formatTime } from '@src/utils/data/time';
 
 import cls from './Calendar.module.scss';
@@ -51,21 +52,22 @@ const defaultGetCurrentTime = () => {
     return {
         hh: current.getHours(),
         mm: current.getMinutes(),
-    }
-}
+    };
+};
 
 const getDayFromDate = (date: Date) => {
     const day = date.getDay();
-    if (day === 0) {
+    const weekDay = WEEK_DAYS_ONLY[day - 1];
+    if (day === 0 || !weekDay) {
         return 'SS';
     }
-    return WEEK_DAYS_ONLY[day - 1]!;
-}
+    return weekDay;
+};
 
 const defaultGetCurrentDay = () => {
     const current = new Date();
     return getDayFromDate(current);
-}
+};
 
 export const Calendar: React.FC<CalendarProps> = ({
     week,
@@ -84,7 +86,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         const tick = () => {
             setNow(getCurrentTime());
             setToday(getCurrentDay());
-        }
+        };
         const interval = setInterval(tick, 5 * 1000);
         return () => clearInterval(interval);
     }, [getCurrentDay, getCurrentTime]);

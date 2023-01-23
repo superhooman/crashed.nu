@@ -1,7 +1,8 @@
-import { Head } from "@src/components/Head";
-import { ROUTES } from "@src/constants/routes";
-import { DefaultError } from "@src/features/error/DefaultError";
-import type { NextPage } from "next";
+import type { NextPage } from 'next';
+
+import { Head } from '@src/components/Head';
+import { ROUTES } from '@src/constants/routes';
+import { DefaultError } from '@src/features/error/DefaultError';
 
 const PrivatePage: NextPage = () => {
     return (
@@ -17,6 +18,6 @@ const PrivatePage: NextPage = () => {
             />
         </>
     );
-}
+};
 
 export default PrivatePage;

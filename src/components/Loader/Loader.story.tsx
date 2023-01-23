@@ -1,5 +1,6 @@
 import type { Meta } from '@storybook/react';
 import type { ComponentProps } from 'react';
+
 import { Stack } from '../Stack';
 
 import { Loader } from './index';
@@ -15,4 +16,4 @@ export const Default = (args: ComponentProps<typeof Loader>) => (
   <Stack alignItems="center" justifyContent="start">
     <Loader {...args} />
   </Stack>
-)
+);

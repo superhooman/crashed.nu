@@ -1,21 +1,22 @@
-import { CalendarIcon, CopyIcon, FileIcon, HeartIcon, Link1Icon, Share2Icon, UpdateIcon } from "@radix-ui/react-icons";
-import splitbee from "@splitbee/web";
-import { Adaptive } from "@src/components/Adaptive";
-import { Button } from "@src/components/Button";
-import { Card } from "@src/components/Card";
-import { Copyright } from "@src/components/Copyright";
-import { Divider } from "@src/components/Divider";
-import { Input } from "@src/components/Input";
-import { Stack } from "@src/components/Stack";
-import { Switch } from "@src/components/Switch";
-import { Text } from "@src/components/Typography";
-import { ROUTES } from "@src/constants/routes";
-import { trpc } from "@src/utils/trpc";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React from "react";
-import { toast } from "react-hot-toast";
-import QRCode from "react-qr-code";
+import { CalendarIcon, CopyIcon, FileIcon, HeartIcon, Link1Icon, Share2Icon, UpdateIcon } from '@radix-ui/react-icons';
+import splitbee from '@splitbee/web';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React from 'react';
+import { toast } from 'react-hot-toast';
+import QRCode from 'react-qr-code';
+
+import { Adaptive } from '@src/components/Adaptive';
+import { Button } from '@src/components/Button';
+import { Card } from '@src/components/Card';
+import { Copyright } from '@src/components/Copyright';
+import { Divider } from '@src/components/Divider';
+import { Input } from '@src/components/Input';
+import { Stack } from '@src/components/Stack';
+import { Switch } from '@src/components/Switch';
+import { Text } from '@src/components/Typography';
+import { ROUTES } from '@src/constants/routes';
+import { trpc } from '@src/utils/trpc';
 
 interface MenuProps {
     isSharable: boolean;
@@ -143,5 +144,5 @@ export const Menu: React.FC<MenuProps> = ({
                 <Copyright />
             </Stack>
         </Stack>
-    )
+    );
 };

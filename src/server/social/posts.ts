@@ -1,10 +1,13 @@
-import { type Prisma, UserType, AttachmentType } from "@prisma/client";
-import { NotificationsType } from "@prisma/client";
-import { ROUTES } from "@src/constants/routes";
-import type { Sort } from "@src/schemas/sub";
-import { TRPCError } from "@trpc/server";
-import { prisma } from "../db/client";
-import { getEmail } from "./utils/getUserHandle";
+import { type Prisma, UserType, AttachmentType } from '@prisma/client';
+import { NotificationsType } from '@prisma/client';
+import { TRPCError } from '@trpc/server';
+
+import type { Sort } from '@src/schemas/sub';
+
+import { ROUTES } from '@src/constants/routes';
+
+import { prisma } from '../db/client';
+import { getEmail } from './utils/getUserHandle';
 
 const defaultWhere = {
     deleted: false,
@@ -256,7 +259,7 @@ class Posts {
         let nextCursor: string | undefined = undefined;
 
         if (posts.length > take) {
-            nextCursor = posts.pop()!.id;
+            nextCursor = posts.pop()?.id;
         }
 
         const items = posts.map((post) => ({
@@ -368,7 +371,7 @@ class Posts {
 
         if (comments.length > take) {
             const nextItem = comments.pop();
-            nextCursor = nextItem!.date;
+            nextCursor = nextItem?.date;
         }
 
         return {
@@ -476,7 +479,7 @@ class Posts {
 
         if (posts.length > take) {
             const nextItem = posts.pop();
-            nextCursor = nextItem!.id;
+            nextCursor = nextItem?.id;
         }
 
         const items = posts.map((post) => ({

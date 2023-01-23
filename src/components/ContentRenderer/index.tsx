@@ -1,8 +1,9 @@
-import clsx from "clsx";
+import clsx from 'clsx';
 import ReactMarkdown from 'react-markdown';
-import type { Position } from 'react-markdown/lib/ast-to-react';
-import type { Node } from "react-markdown/lib/rehype-filter";
 import remarkGfm from 'remark-gfm';
+
+import type { Position } from 'react-markdown/lib/ast-to-react';
+import type { Node } from 'react-markdown/lib/rehype-filter';
 
 import cls from './ContentRenderer.module.scss';
 
@@ -14,21 +15,21 @@ interface ContentRendererProps {
 const fallback = (content: string) => {
     const Fallback = ({ node }: { node: Node }) => {
         const payload = getOriginalPayload(content, node.position);
-        return <span className={cls.fallback}>{payload}</span>
-    }
+        return <span className={cls.fallback}>{payload}</span>;
+    };
     return Fallback;
-}
+};
 
 const getOriginalPayload = (input: string, position?: Position) => {
     if (!position) {
-        return ''
+        return '';
     }
     const lines = input.split('\n');
     const start = position.start.line - 1;
     const end = position.end.line;
     const payload = lines.slice(start, end).join('\n');
     return payload;
-}
+};
 
 const IGNORE = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'hr', 'img', 'table', 'input'];
 
@@ -47,5 +48,5 @@ export const ContentRenderer: React.FC<ContentRendererProps> = ({ content, class
         >
             {content}
         </ReactMarkdown>
-    )
-}
+    );
+};

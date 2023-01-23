@@ -1,10 +1,11 @@
 import React from 'react';
 
+import type { Time } from '@src/types/time';
+
 import { Text } from '@src/components/Typography';
 import { getTimeRange } from '@src/utils/data/time';
 
 import cls from './SubjectCard.module.scss';
-import type { Time } from '@src/types/time';
 
 interface SubjectCardProps {
     time: {

@@ -1,10 +1,13 @@
-import splitbee from "@splitbee/web";
-import { Container } from "@src/components/Container";
-import { Header } from "@src/components/Header";
-import type { Course } from "@src/server/PCC/typings";
-import React from "react";
-import { Builder } from "./Builder";
-import { Search } from "./Search";
+import splitbee from '@splitbee/web';
+import React from 'react';
+
+import type { Course } from '@src/server/PCC/typings';
+
+import { Container } from '@src/components/Container';
+import { Header } from '@src/components/Header';
+
+import { Builder } from './Builder';
+import { Search } from './Search';
 
 export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
     const [term, setTerm] = React.useState('');
@@ -24,7 +27,7 @@ export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
         <>
             {screen === 'list' ? (
                 <Container>
-                    <Header fixed sub={pdf ? "pdf" : undefined} />
+                    <Header fixed sub={pdf ? 'pdf' : undefined} />
                     <Search
                         term={term}
                         setTerm={setTerm}
@@ -34,7 +37,7 @@ export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
                         pdf={pdf}
                         proceed={() => {
                             splitbee.track('Proceed');
-                            setScreen('builder')
+                            setScreen('builder');
                         }}
                     />
                 </Container>
@@ -47,10 +50,10 @@ export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
                     restart={() => {
                         splitbee.track('Restart');
                         // setWasOnNext(true);
-                        setScreen('list')
+                        setScreen('list');
                     }}
                 />
             ) : null}
         </>
     );
-}
+};

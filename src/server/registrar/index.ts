@@ -1,4 +1,5 @@
 import request from 'request';
+
 import { parseSchedule } from './utils/parse';
 
 const BUILD_ID = 'form-Ge0qInuGtfAjDSYP-U-zTNaHfEezxfz2X0ip8lzvTVE';
@@ -58,8 +59,8 @@ class Registrar {
 
                     resolve(schedule);
                 });
-            })
-        })
+            });
+        });
     }
 }
 

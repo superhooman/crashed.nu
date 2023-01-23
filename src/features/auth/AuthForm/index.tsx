@@ -1,14 +1,15 @@
-import { Paragraph, Text } from "@src/components/Typography"
-import { Container } from "@src/components/Container"
-import { Stack } from "@src/components/Stack"
-import { Button } from "@src/components/Button"
-import { GoogleIcon } from "@src/components/Icon"
-import React from "react"
-import { signIn } from "next-auth/react"
-import { ArrowLeftIcon } from "@radix-ui/react-icons"
-import Link from "next/link"
-import { ROUTES } from "@src/constants/routes"
-import { Glyph } from "@src/components/Header"
+import React from 'react';
+import { signIn } from 'next-auth/react';
+import { ArrowLeftIcon } from '@radix-ui/react-icons';
+import Link from 'next/link';
+
+import { Paragraph, Text } from '@src/components/Typography';
+import { Container } from '@src/components/Container';
+import { Stack } from '@src/components/Stack';
+import { Button } from '@src/components/Button';
+import { GoogleIcon } from '@src/components/Icon';
+import { ROUTES } from '@src/constants/routes';
+import { Glyph } from '@src/components/Header';
 
 interface Props {
     callbackUrl?: string;
@@ -57,5 +58,5 @@ export const AuthForm: React.FC<Props> = ({
                 </Link>
             </Stack>
         </Container>
-    )
-}
+    );
+};

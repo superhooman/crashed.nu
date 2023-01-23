@@ -1,8 +1,9 @@
-import { SCHOOLS } from '@src/constants/schools';
-import type { StringifiableRecord} from 'query-string';
 import { stringifyUrl } from 'query-string';
 
+import type { StringifiableRecord} from 'query-string';
 import type { Course, RegistrarCourse, RegistrarSchedule, RegistrarSemester, RequestOptions, Schedule } from './typings';
+
+import { SCHOOLS } from '@src/constants/schools';
 
 const getSchool = (school: string) => SCHOOLS[school] || school;
 

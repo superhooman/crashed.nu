@@ -2,9 +2,10 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import React from 'react';
 
+import { User } from '@src/features/common/User';
+
 import cls from './Header.module.scss';
 import { Container } from '../Container';
-import { User } from '@src/features/common/User';
 
 export const Glyph: React.FC<React.ComponentProps<'svg'> & { size?: number }> = ({ size = 16, ...props }) => (
     <svg
@@ -31,7 +32,7 @@ export const Header: React.FC<Props> = ({ className, sub, children, fixed, noCon
     const Wrap = React.useMemo(() => {
         return noContainer ? 
             ({ children }: { children: React.ReactNode }) => <div className={cls.container}>{children}</div>
-            : ({ children }: { children: React.ReactNode }) => <Container className={cls.container}>{children}</Container>
+            : ({ children }: { children: React.ReactNode }) => <Container className={cls.container}>{children}</Container>;
     }, [noContainer]);
 
     return (
@@ -69,5 +70,5 @@ export const Header: React.FC<Props> = ({ className, sub, children, fixed, noCon
                 {fixed && <div className={cls.placeholder} />}
             </>
         )
-    )
+    );
 };

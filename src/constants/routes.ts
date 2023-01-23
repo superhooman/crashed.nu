@@ -1,4 +1,4 @@
-import { type StringifiableRecord, stringifyUrl } from "query-string";
+import { type StringifiableRecord, stringifyUrl } from 'query-string';
 
 export const DOMAIN = 'https://crashed.nu';
 
@@ -21,7 +21,7 @@ class Route {
         query,
     });
 
-    getWithParams = (params: { [key: string]: string }, { query, full }: RouteOptions = {}) => {
+    getWithParams = (params: { [key: string]: string | undefined }, { query, full }: RouteOptions = {}) => {
         let path = this.path;
 
         Object.keys(params).forEach((key) => {
@@ -32,7 +32,7 @@ class Route {
             url: this.formatUrl(path, full),
             query,
         });
-    }
+    };
 }
 
 export const ROUTES = {

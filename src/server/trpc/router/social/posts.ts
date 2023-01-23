@@ -1,8 +1,10 @@
-import { commentSchema, postSchema } from "@src/schemas/post";
-import { getPostsBySubSchema } from "@src/schemas/sub";
-import Posts from "@src/server/social/posts";
-import { z } from "zod";
-import { protectedProcedure, router } from "../../trpc";
+import { z } from 'zod';
+
+import { commentSchema, postSchema } from '@src/schemas/post';
+import { getPostsBySubSchema } from '@src/schemas/sub';
+import Posts from '@src/server/social/posts';
+
+import { protectedProcedure, router } from '../../trpc';
 
 export const postsRouter = router({
     addPost: protectedProcedure

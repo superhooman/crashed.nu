@@ -13,7 +13,7 @@ const meta: Meta<typeof Calendar> = {
         return {
             hh: 9,
             mm: 41,
-        }
+        };
     }
   }
 };
@@ -23,4 +23,4 @@ type Story = StoryObj<typeof Calendar>;
 
 export const Default: Story = {
 
-}
+};

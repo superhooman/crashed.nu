@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
-import { Container } from '../Container';
 
+import { Container } from '../Container';
 import cls from './Toolbar.module.scss';
 
 export const Toolbar: React.FC<React.ComponentProps<'div'>> = ({ className, children, ...props }) => (

@@ -1,12 +1,16 @@
-import { Card } from "@src/components/Card";
-import { CircularProgress } from "@src/components/CircularProgress";
-import { Property } from "@src/components/Property";
-import { Stack } from "@src/components/Stack";
-import { Tooltip } from "@src/components/Tooltip";
-import { Text, TextSkeleton } from "@src/components/Typography";
-import type { Schedule } from "@src/server/PCC/typings";
-import { typeDict, typeReg } from "@src/utils/data/getScheduleTypes";
-import React from "react";
+import React from 'react';
+
+import type { Schedule } from '@src/server/PCC/typings';
+
+import { Card } from '@src/components/Card';
+import { CircularProgress } from '@src/components/CircularProgress';
+import { Property } from '@src/components/Property';
+import { Stack } from '@src/components/Stack';
+import { Tooltip } from '@src/components/Tooltip';
+import { Text, TextSkeleton } from '@src/components/Typography';
+import { typeDict, typeReg } from '@src/utils/data/getScheduleTypes';
+
+
 import cls from './ScheduleItem.module.scss';
 
 const WEEK_DAYS = ['M', 'T', 'W', 'R', 'F', 'S'];
@@ -30,8 +34,8 @@ export const ScheduleItemSkeleton: React.FC = () => {
                 </Stack>
             </Stack>
         </Card>
-    )
-}
+    );
+};
 
 export const ScheduleItem: React.FC<{ schedule: Schedule }> = ({ schedule }) => {
     const type = schedule.st.match(typeReg)?.[0] || '';

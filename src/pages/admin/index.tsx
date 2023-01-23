@@ -1,19 +1,21 @@
-import { ROUTES } from "@src/constants/routes";
-import { getServerAuthSession } from "@src/server/common/get-server-auth-session";
-import type { GetServerSideProps, NextPage } from "next";
+import { UserType } from '@prisma/client';
+import React from 'react';
+
+import type { GetServerSideProps, NextPage } from 'next';
+
+import { ROUTES } from '@src/constants/routes';
+import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 import { prisma } from '@src/server/db/client';
-import { UserType } from "@prisma/client";
-import { Container } from "@src/components/Container";
-import { Header } from "@src/components/Header";
-import { trpc } from "@src/utils/trpc";
-import { Card } from "@src/components/Card";
-import { Text, Title } from "@src/components/Typography";
-import { Stack } from "@src/components/Stack";
-import { Button } from "@src/components/Button";
-import { Empty } from "@src/components/Empty";
-import { Input } from "@src/components/Input";
-import React from "react";
-import { Divider } from "@src/components/Divider";
+import { Container } from '@src/components/Container';
+import { Header } from '@src/components/Header';
+import { trpc } from '@src/utils/trpc';
+import { Card } from '@src/components/Card';
+import { Text, Title } from '@src/components/Typography';
+import { Stack } from '@src/components/Stack';
+import { Button } from '@src/components/Button';
+import { Empty } from '@src/components/Empty';
+import { Input } from '@src/components/Input';
+import { Divider } from '@src/components/Divider';
 
 const Admin: NextPage = () => {
     const { data: subs } = trpc.admin.subs.useQuery();
@@ -43,7 +45,7 @@ const Admin: NextPage = () => {
         createSub({
             name,
             slug,
-        })
+        });
     }, [name, slug, createSub]);
 
     return (
@@ -96,7 +98,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                 destination: ROUTES.AUTH.get(),
                 permanent: false,
             }
-        }
+        };
     }
 
     const user = await prisma.user.findUnique({ where: { id: session.user.id } });
@@ -107,7 +109,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                 destination: ROUTES.AUTH.get(),
                 permanent: false,
             }
-        }
+        };
     }
 
     if (user.userType !== UserType.ADMIN) {
@@ -116,12 +118,12 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                 destination: ROUTES.HOME.get(),
                 permanent: false,
             }
-        }
+        };
     }
 
     return {
         props: {
             session,
         }
-    }
+    };
 };

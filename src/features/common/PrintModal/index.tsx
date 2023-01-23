@@ -1,9 +1,11 @@
-import { Button } from "@src/components/Button";
-import { Modal, ModalTitle } from "@src/components/Modal";
-import { Stack } from "@src/components/Stack";
-import { Paragraph } from "@src/components/Typography";
-import React from "react";
-import { Video } from "./components/Video";
+import React from 'react';
+
+import { Button } from '@src/components/Button';
+import { Modal, ModalTitle } from '@src/components/Modal';
+import { Stack } from '@src/components/Stack';
+import { Paragraph } from '@src/components/Typography';
+
+import { Video } from './components/Video';
 
 interface Props {
     open: boolean;
@@ -32,5 +34,5 @@ export const PrintModal: React.FC<Props> = ({ open, onOpenChange }) => {
                 <Button onClick={() => onOpenChange(false)} fullWidth>Cancel</Button>
             </Stack>
         </Modal>
-    )
+    );
 };

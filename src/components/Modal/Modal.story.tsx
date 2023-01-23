@@ -1,6 +1,8 @@
 import { EyeClosedIcon, EyeOpenIcon, LockClosedIcon, PersonIcon, UpdateIcon } from '@radix-ui/react-icons';
-import type { Meta } from '@storybook/react';
 import React from 'react';
+
+import type { Meta } from '@storybook/react';
+
 import { Button } from '../Button';
 import { Input } from '../Input';
 import { Stack } from '../Stack';
@@ -54,5 +56,5 @@ export const Default = () => {
         </Stack>
       </Modal>
     </>
-  )
-}
+  );
+};

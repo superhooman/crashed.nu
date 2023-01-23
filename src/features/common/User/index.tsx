@@ -1,16 +1,18 @@
-import { ExitIcon, GearIcon, MoonIcon, PersonIcon, SunIcon } from "@radix-ui/react-icons";
-import { Avatar } from "@src/components/Avatar";
-import { Button } from "@src/components/Button";
-import Menu, { MenuItemWithIcon, MenuSeparator } from "@src/components/Menu/Menu";
-import { Select } from "@src/components/Select";
-import { Stack } from "@src/components/Stack";
-import { Text } from "@src/components/Typography";
-import { ROUTES } from "@src/constants/routes";
-import { getUserHandle } from "@src/server/social/utils/getUserHandle";
-import { themeContext } from "@src/utils/theme";
-import { signOut, useSession } from "next-auth/react"
-import Link from "next/link";
-import React from "react";
+import { ExitIcon, GearIcon, MoonIcon, PersonIcon, SunIcon } from '@radix-ui/react-icons';
+import { signOut, useSession } from 'next-auth/react';
+import Link from 'next/link';
+import React from 'react';
+
+import { Avatar } from '@src/components/Avatar';
+import { Button } from '@src/components/Button';
+import Menu, { MenuItemWithIcon, MenuSeparator } from '@src/components/Menu/Menu';
+import { Select } from '@src/components/Select';
+import { Stack } from '@src/components/Stack';
+import { Text } from '@src/components/Typography';
+import { ROUTES } from '@src/constants/routes';
+import { getUserHandle } from '@src/server/social/utils/getUserHandle';
+import { themeContext } from '@src/utils/theme';
+
 import cls from './User.module.scss';
 
 interface UserProps {
@@ -31,7 +33,7 @@ export const User: React.FC<UserProps> = ({ showFallback, showName = true }) => 
             <Link href={ROUTES.AUTH.get()}>
                 <Button>Sign in</Button>
             </Link>
-        )
+        );
     }
 
     return (
@@ -79,13 +81,17 @@ export const User: React.FC<UserProps> = ({ showFallback, showName = true }) => 
                         />
                     </Stack>
                     <MenuSeparator />
-                    <Link href={ROUTES.PROFILE.getWithParams({ id: getUserHandle(session.user.email)! })}>
-                        <MenuItemWithIcon
-                            icon={<PersonIcon />}
-                        >
-                            Profile
-                        </MenuItemWithIcon>
-                    </Link>
+                    {
+                        session.user.email ? (
+                            <Link href={ROUTES.PROFILE.getWithParams({ id: getUserHandle(session.user.email) })}>
+                                <MenuItemWithIcon
+                                    icon={<PersonIcon />}
+                                >
+                                    Profile
+                                </MenuItemWithIcon>
+                            </Link>
+                        ) : null
+                    }
                     <MenuItemWithIcon
                         icon={<ExitIcon />}
                         onClick={() => signOut({ callbackUrl: ROUTES.HOME.get() })}
@@ -105,5 +111,5 @@ export const User: React.FC<UserProps> = ({ showFallback, showName = true }) => 
                 {showName && <Text size="small" color="secondary">{session.user.name}</Text>}
             </Stack>
         </Menu>
-    )
-}
+    );
+};

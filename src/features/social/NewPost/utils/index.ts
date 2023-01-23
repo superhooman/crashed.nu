@@ -1,6 +1,6 @@
-import type React from "react";
+import type React from 'react';
 
-export const getFileFromInput = (e: React.ChangeEvent<HTMLInputElement>): Promise<File> => new Promise((resolve, reject) => {
+export const getFileFromInput = (e: React.ChangeEvent<HTMLInputElement>): Promise<File> => new Promise((resolve) => {
     const { files } = e.target;
 
     if (!files) {

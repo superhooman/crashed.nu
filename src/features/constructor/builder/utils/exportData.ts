@@ -1,6 +1,7 @@
 import type { Course, Schedule } from '@src/server/PCC/typings';
-import { getType } from '@src/utils/data/getScheduleTypes';
 import type { ScheduleList, SelectedSchedule } from '../types';
+
+import { getType } from '@src/utils/data/getScheduleTypes';
 
 const dataToText = (data: SelectedSchedule, courses: Course[], scheduleList: ScheduleList) => {
     const courseIdMap = courses.reduce<Record<string, Course>>((dict, course) => {

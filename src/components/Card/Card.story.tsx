@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { Text } from '../Typography';
 
 import { Card } from './index';

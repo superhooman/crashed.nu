@@ -1,13 +1,14 @@
 
-import type { ReactNode } from 'react';
 import React from 'react';
+import { HamburgerMenuIcon } from '@radix-ui/react-icons';
+
+import type { ReactNode } from 'react';
 
 import { Button } from '@src/components/Button';
 import { Stack } from '@src/components/Stack';
+import { Modal } from '@src/components/Modal';
 
 import cls from './ScheduleLayout.module.scss';
-import { HamburgerMenuIcon } from '@radix-ui/react-icons';
-import { Modal } from '@src/components/Modal';
 
 interface ScheduleLayoutProps {
     side?: ReactNode;

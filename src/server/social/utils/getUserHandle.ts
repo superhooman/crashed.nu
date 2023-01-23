@@ -1,4 +1,4 @@
-import { ORG_DOMAIN } from "@src/constants/org";
+import { ORG_DOMAIN } from '@src/constants/org';
 
 export const getUserHandle = (email?: string | null) => {
     const handle = email?.split('@')[0];
@@ -9,4 +9,4 @@ export const getEmail = (handle?: string) => {
     const email = handle + '@' + ORG_DOMAIN;
 
     return email;
-}
+};

@@ -1,6 +1,7 @@
 import type { Course, Schedule } from '@src/server/PCC/typings';
-import { getType } from '@src/utils/data/getScheduleTypes';
 import type { ScheduleList, SelectedCourse, SelectedSchedule } from '../types';
+
+import { getType } from '@src/utils/data/getScheduleTypes';
 
 export const getCalendarItems = (selection: SelectedSchedule, courses: Course[], schedule?: ScheduleList): SelectedCourse[] => {
   if (!schedule) {

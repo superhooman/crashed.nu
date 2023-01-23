@@ -1,12 +1,13 @@
 import React, { type HTMLAttributes } from 'react';
 import * as Dialog from '@radix-ui/react-dialog';
 import clsx from 'clsx';
+import { AnimatePresence, motion } from 'framer-motion';
+
+import type { PanInfo } from 'framer-motion';
 
 import { withClassName } from 'src/components/_hocs/withClassName';
 
 import cls from './Modal.module.scss';
-import type { PanInfo } from 'framer-motion';
-import { AnimatePresence, motion } from 'framer-motion';
 
 interface Props extends Dialog.DialogProps {
   maxWidth?: 'xs' | 'sm' | 'md' | 'lg';
@@ -86,7 +87,7 @@ const Modal: React.FC<Props> = ({ children, maxWidth = 'sm', open, noPrint, clas
                 initial={{ opacity: 0 }}
                 animate={{
                   opacity: 1,
-                  transition: { type: "spring", duration: 0.5 },
+                  transition: { type: 'spring', duration: 0.5 },
                 }}
                 exit={{ opacity: 0, transition: { duration: 0.2 } }}
                 className={cls.overlay}
@@ -99,7 +100,7 @@ const Modal: React.FC<Props> = ({ children, maxWidth = 'sm', open, noPrint, clas
                     animate={{
                       translateY: 0,
                       opacity: 1,
-                      transition: { type: "spring", duration: 0.5 },
+                      transition: { type: 'spring', duration: 0.5 },
                     }}
                     drag="y"
                     dragConstraints={dragConstraints}

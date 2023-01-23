@@ -1,6 +1,7 @@
 import React from 'react';
 
 import type { Schedule } from '@src/server/PCC/typings';
+
 import { getTypes, typeDict, typeReg } from '@src/utils/data/getScheduleTypes';
 import { Text } from '@src/components/Typography';
 import { getRange } from '@src/utils/data/time';
@@ -45,7 +46,7 @@ interface TypeProps {
     onSelect: (v: string) => void;
 }
 
-const ScheduleItem: React.FC<Schedule> = ({ st, times, days, faculty, room }) => (
+const ScheduleItem: React.FC<Schedule> = ({ st, times, days, faculty }) => (
     <div className={cls.scheduleItem}>
         <Text overflow size="small" block>{st} • {getRange(times)} {days}</Text>
         <Text overflow size="small" block>{faculty}</Text>

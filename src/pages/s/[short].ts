@@ -1,6 +1,7 @@
-import type { GetServerSideProps } from "next"
+import type { GetServerSideProps } from 'next';
+
 import { prisma } from '@src/server/db/client';
-import { ROUTES } from "@src/constants/routes";
+import { ROUTES } from '@src/constants/routes';
 
 export default function Short() {
     return null;
@@ -12,7 +13,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (!short) {
         return {
             notFound: true
-        }
+        };
     }
 
     const schedule = await prisma.userSchedule.findUnique({ where: { short }, select: { id: true } });
@@ -20,7 +21,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     if (!schedule) {
         return {
             notFound: true,
-        }
+        };
     }
 
     return {
@@ -29,4 +30,4 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             permanent: true,
         },
     };
-}
+};

@@ -1,12 +1,13 @@
-import { z } from "zod";
-import { ALHPANUM_UNDERSCORE_DOT } from "./short";
+import { z } from 'zod';
+
+import { ALHPANUM_UNDERSCORE_DOT } from './short';
 
 export const subSchema = z.object({
     slug: z.string().regex(ALHPANUM_UNDERSCORE_DOT),
     name: z.string(),
 });
 
-export const sort = z.union([z.literal("new"), z.literal("hot"), z.literal("top")]);
+export const sort = z.union([z.literal('new'), z.literal('hot'), z.literal('top')]);
 
 export type Sort = z.infer<typeof sort>;
 

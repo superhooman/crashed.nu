@@ -1,6 +1,7 @@
-import type { IncomingMessage } from "http";
-import type { NextRequest } from "next/server";
-import React from "react";
+import React from 'react';
+
+import type { IncomingMessage } from 'http';
+import type { NextRequest } from 'next/server';
 
 const COOKIE_NAME = 'theme';
 
@@ -13,7 +14,7 @@ export const getTheme = () => {
         ?.split('=')[1]) || 'system';
 
     return theme as Theme;
-}
+};
 
 type Request = IncomingMessage & {
     cookies?: {
@@ -33,7 +34,7 @@ export const getThemeServer = (req?: Request | NextRequest) => {
     }
 
     return (req.cookies.get(COOKIE_NAME) || 'system') as Theme;
-}
+};
 
 export const saveTheme = (theme: Theme) => {
     const notCurrentTheme = ['dark', 'light', 'system'].filter((t) => t !== theme);
@@ -44,11 +45,11 @@ export const saveTheme = (theme: Theme) => {
 
     document.documentElement.classList.add(theme);
     document.cookie = `${COOKIE_NAME}=${theme}; expires=Thu, 09 Sep 2100 12:00:00 UTC`;
-}
+};
 
 export const purgeTheme = () => {
     document.cookie = `${COOKIE_NAME}=; expires=Thu, 01 Jan 1970 00:00:00 UTC`;
-}
+};
 
 interface ThemeContext {
     theme: Theme;

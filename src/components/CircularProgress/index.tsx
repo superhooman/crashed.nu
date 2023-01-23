@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface CircularProgressProps extends React.ComponentProps<'div'> {
     size?: number;
@@ -70,4 +70,4 @@ export const CircularProgress: React.FC<CircularProgressProps> = ({
             </svg>
         </div>
     );
-}
+};

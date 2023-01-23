@@ -1,8 +1,9 @@
-import { Cross1Icon } from "@radix-ui/react-icons";
-import Image from "next/image";
-import React from "react";
-import { Loader } from "../Loader";
-import cls from "./Attachment.module.scss";
+import { Cross1Icon } from '@radix-ui/react-icons';
+import Image from 'next/image';
+import React from 'react';
+
+import { Loader } from '../Loader';
+import cls from './Attachment.module.scss';
 
 interface AttachmentProps {
     url: string;
@@ -23,7 +24,7 @@ export const Attachment: React.FC<AttachmentProps> = ({
                 width={64}
                 height={64}
                 alt="Attachment"
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: 'cover' }}
             />
             {isUploading ? (
                 <div className={cls.loader}>
@@ -37,5 +38,5 @@ export const Attachment: React.FC<AttachmentProps> = ({
                 </div>
             )}
         </div>
-    )
-}
+    );
+};

@@ -20,4 +20,4 @@ export const Default: Story = {
       image: null,
     }
   }
-}
+};

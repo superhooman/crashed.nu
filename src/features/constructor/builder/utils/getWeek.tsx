@@ -1,6 +1,7 @@
 import type { Item, WeekDay } from '@src/types/time';
-import { getEndTime, getStartTime, parseTime } from '@src/utils/data/time';
 import type { SelectedCourse } from '../types';
+
+import { getEndTime, getStartTime, parseTime } from '@src/utils/data/time';
 import { WEEK_DAYS } from '@src/components/Calendar';
 import { SubjectCard } from '@src/components/SubjectCard';
 

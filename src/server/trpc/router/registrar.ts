@@ -1,9 +1,11 @@
-import { RESTRICTED_OR_RESERVED_SLUGS } from "@src/constants/slugs";
-import { ALHPANUM_UNDERSCORE_DOT, shortSchema } from "@src/schemas/short";
-import Registrar from "@src/server/registrar";
-import { TRPCError } from "@trpc/server";
-import { z } from "zod";
-import { protectedProcedure, router } from "../trpc";
+import { TRPCError } from '@trpc/server';
+import { z } from 'zod';
+
+import { RESTRICTED_OR_RESERVED_SLUGS } from '@src/constants/slugs';
+import { ALHPANUM_UNDERSCORE_DOT, shortSchema } from '@src/schemas/short';
+import Registrar from '@src/server/registrar';
+
+import { protectedProcedure, router } from '../trpc';
 
 export const registrarRouter = router({
     sync: protectedProcedure
@@ -11,6 +13,7 @@ export const registrarRouter = router({
             password: z.string(),
         }))
         .mutation(async ({ input: { password }, ctx: { session, prisma } }) => {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             const username = session.user.email!.split('@')[0]!;
 
             if (!username) throw new Error('No username found');

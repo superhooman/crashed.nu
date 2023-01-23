@@ -1,8 +1,8 @@
-import { Container } from "@src/components/Container";
-import { Head } from "@src/components/Head";
-import { Header } from "@src/components/Header";
-import { Paragraph, Title } from "@src/components/Typography";
-import { ROUTES } from "@src/constants/routes";
+import { Container } from '@src/components/Container';
+import { Head } from '@src/components/Head';
+import { Header } from '@src/components/Header';
+import { Paragraph, Title } from '@src/components/Typography';
+import { ROUTES } from '@src/constants/routes';
 
 export default function Privacy() {
     return (
@@ -48,5 +48,5 @@ export default function Privacy() {
                 </Paragraph>
             </Container>
         </>
-    )
+    );
 }

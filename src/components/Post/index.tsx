@@ -1,18 +1,21 @@
-import type { Post as PostType, Sub, User as UserType } from "@prisma/client"
-import { ChatBubbleIcon, HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
-import { ROUTES } from "@src/constants/routes";
-import { SLUG_TO_ICON } from "@src/constants/slugToIcon";
-import clsx from "clsx";
-import { format, formatDistance } from "date-fns";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
-import { Button } from "../Button";
-import { ContentRenderer } from "../ContentRenderer";
-import { Stack } from "../Stack";
-import { Tooltip } from "../Tooltip";
-import { Text } from "../Typography";
-import { User } from "../User";
+import { ChatBubbleIcon, HeartFilledIcon, HeartIcon } from '@radix-ui/react-icons';
+import clsx from 'clsx';
+import { format, formatDistance } from 'date-fns';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
+
+import type { Post as PostType, Sub, User as UserType } from '@prisma/client';
+
+import { SLUG_TO_ICON } from '@src/constants/slugToIcon';
+import { ROUTES } from '@src/constants/routes';
+
+import { Button } from '../Button';
+import { ContentRenderer } from '../ContentRenderer';
+import { Stack } from '../Stack';
+import { Tooltip } from '../Tooltip';
+import { Text } from '../Typography';
+import { User } from '../User';
 import cls from './Post.module.scss';
 
 export interface Props {

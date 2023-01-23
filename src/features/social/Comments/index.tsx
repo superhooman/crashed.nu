@@ -1,16 +1,17 @@
-import { DotsVerticalIcon, PaperPlaneIcon, TrashIcon } from "@radix-ui/react-icons";
-import { Avatar } from "@src/components/Avatar";
-import { Button } from "@src/components/Button";
-import { type CommentProp, Comment } from "@src/components/Comment";
-import { TextArea } from "@src/components/Input";
-import { Loader } from "@src/components/Loader";
-import { Menu, MenuItemWithIcon } from "@src/components/Menu";
-import { Stack } from "@src/components/Stack";
-import { Text } from "@src/components/Typography";
-import { getUserHandle } from "@src/server/social/utils/getUserHandle";
-import { trpc } from "@src/utils/trpc";
-import { useSession } from "next-auth/react";
-import React from "react";
+import { DotsVerticalIcon, PaperPlaneIcon, TrashIcon } from '@radix-ui/react-icons';
+import { useSession } from 'next-auth/react';
+import React from 'react';
+
+import { Avatar } from '@src/components/Avatar';
+import { Button } from '@src/components/Button';
+import { type CommentProp, Comment } from '@src/components/Comment';
+import { TextArea } from '@src/components/Input';
+import { Loader } from '@src/components/Loader';
+import { Menu, MenuItemWithIcon } from '@src/components/Menu';
+import { Stack } from '@src/components/Stack';
+import { Text } from '@src/components/Typography';
+import { getUserHandle } from '@src/server/social/utils/getUserHandle';
+import { trpc } from '@src/utils/trpc';
 
 import cls from './Comments.module.scss';
 
@@ -65,15 +66,15 @@ const CommentWrap: React.FC<{ comment: CommentProp }> = ({ comment }) => {
             >
                 <Button size="small" icon={<DotsVerticalIcon />} variant="link" />
             </Menu>
-        )
+        );
     }, [comment, handleRemoveClick, session]);
 
     return (
         <Comment comment={comment} onReplyClick={handleReplyClick}>
             {menu}
         </Comment>
-    )
-}
+    );
+};
 
 const MAX_LENGTH = 256;
 
@@ -173,5 +174,5 @@ export const Comments: React.FC<CommentsProps> = ({ postId }) => {
                 </form>
             </Stack>
         </Provider>
-    )
-}
+    );
+};

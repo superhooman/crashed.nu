@@ -1,10 +1,11 @@
-import type { User } from "@prisma/client";
-import { ROUTES } from "@src/constants/routes";
-import { getServerAuthSession } from "@src/server/common/get-server-auth-session";
-import type { GetServerSideProps, NextPage } from "next";
+import type { User } from '@prisma/client';
+import type { GetServerSideProps, NextPage } from 'next';
+
+import { ROUTES } from '@src/constants/routes';
+import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 import { prisma } from '@src/server/db/client';
-import { getEmail } from "@src/server/social/utils/getUserHandle";
-import { Profile } from "@src/features/social/Profile";
+import { getEmail } from '@src/server/social/utils/getUserHandle';
+import { Profile } from '@src/features/social/Profile';
 
 interface ProfilePageProps {
     user: User;
@@ -18,7 +19,7 @@ const ProfilePage: NextPage<ProfilePageProps> = ({ user }) => {
             />
         </>
     );
-}
+};
 
 export default ProfilePage;
 
@@ -56,4 +57,4 @@ export const getServerSideProps: GetServerSideProps<ProfilePageProps> = async (c
             user,
         },
     };
-}
+};

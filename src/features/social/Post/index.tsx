@@ -1,19 +1,22 @@
-import type { Attachment, User} from '@prisma/client';
 import { UserType } from '@prisma/client';
 import { DotsVerticalIcon, Link1Icon, TrashIcon } from '@radix-ui/react-icons';
-import { Button } from '@src/components/Button';
-import { Menu, MenuItemWithIcon } from '@src/components/Menu';
 import { type Post as PostType } from '@prisma/client';
-import { Post as PostComponent } from '@src/components/Post';
-import { ROUTES } from '@src/constants/routes';
-import { getAttachmentUrl } from '@src/constants/storage';
-import { trpc } from '@src/utils/trpc';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { stringifyUrl } from 'query-string';
 import React from 'react';
-import { Comments } from '../Comments';
+
+import type { Attachment, User} from '@prisma/client';
+
+import { Button } from '@src/components/Button';
+import { Menu, MenuItemWithIcon } from '@src/components/Menu';
+import { Post as PostComponent } from '@src/components/Post';
+import { ROUTES } from '@src/constants/routes';
+import { getAttachmentUrl } from '@src/constants/storage';
+import { trpc } from '@src/utils/trpc';
 import { getUserHandle } from '@src/server/social/utils/getUserHandle';
+
+import { Comments } from '../Comments';
 
 type PostProps = {
     post: PostType & {
@@ -38,7 +41,7 @@ export const Post: React.FC<PostProps> = (props) => {
 
     const { mutate: remove } = trpc.posts.removePost.useMutation({
         onSettled: () => posts.getPostsBySub.invalidate(),
-    })
+    });
 
     const { mutate: like } = trpc.posts.likePost.useMutation({
         onSettled: () => posts.post.invalidate({ id: props.post.id }),
@@ -53,13 +56,13 @@ export const Post: React.FC<PostProps> = (props) => {
                 ...prev,
                 liked: !prev.liked,
                 likes: prev.liked ? prev.likes - 1 : prev.likes + 1,
-            }
+            };
         });
         like({ id: props.post.id });
     }, [like, props.post.id, posts.post]);
 
     const onDeleteClick = React.useCallback(() => {
-        remove({ id: props.post.id })
+        remove({ id: props.post.id });
     }, [props.post.id, remove]);
 
     const onCopyLinkClick = React.useCallback(() => {
@@ -99,7 +102,7 @@ export const Post: React.FC<PostProps> = (props) => {
             >
                 <Button size="small" icon={<DotsVerticalIcon />} variant="link" />
             </Menu>
-        )
+        );
     }, [session, props.post.userId, onCopyLinkClick, onDeleteClick]);
 
     const onAttachmentClick = React.useCallback((id: string) => {
@@ -143,5 +146,5 @@ export const Post: React.FC<PostProps> = (props) => {
                 <Comments postId={props.post.id} />
             )}
         </div>
-    )
-}
+    );
+};

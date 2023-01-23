@@ -1,11 +1,13 @@
-import { Head } from "@src/components/Head";
-import { Registrar } from "@src/features/schedule/Registrar";
-import type { NextPage} from "next";
-import { type GetServerSideProps } from "next";
+import { type GetServerSideProps } from 'next';
+
+import type { NextPage} from 'next';
+
+import { Head } from '@src/components/Head';
+import { Registrar } from '@src/features/schedule/Registrar';
 import { getServerAuthSession } from '@src/server/common/get-server-auth-session';
 import { prisma } from '@src/server/db/client';
-import { getQuery } from "@src/utils/getQuery";
-import { ROUTES } from "@src/constants/routes";
+import { getQuery } from '@src/utils/getQuery';
+import { ROUTES } from '@src/constants/routes';
 
 interface Props {
     refetch?: boolean;
@@ -21,8 +23,8 @@ const Schedule: NextPage<Props> = ({ refetch }) => {
             />
             <Registrar refetch={refetch} />
         </>
-    )
-}
+    );
+};
 
 export default Schedule;
 
@@ -35,7 +37,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
                 destination: ROUTES.AUTH.get(),
                 permanent: false,
             }
-        }
+        };
     }
 
     const schedule = await prisma.userSchedule.findFirst({
@@ -55,7 +57,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
                 session,
                 refetch: Boolean(refetch),
             },
-        }
+        };
     }
 
     return {
@@ -63,5 +65,5 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
             destination: ROUTES.SCHEDULE_ID.getWithParams({ id: schedule.id }),
             permanent: false,
         }
-    }
-}
+    };
+};

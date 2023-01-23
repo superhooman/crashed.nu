@@ -1,16 +1,16 @@
 import Image from 'next/image';
 import React from 'react';
+import Link from 'next/link';
 
 import { Container } from '@src/components/Container';
 import { Glyph, Header } from '@src/components/Header';
 import { Stack } from '@src/components/Stack';
 import { Paragraph, Text } from '@src/components/Typography';
-
-import cls from './Landing.module.scss';
 import { ROUTES } from '@src/constants/routes';
-import Link from 'next/link';
 import { Divider } from '@src/components/Divider';
 import { Copyright } from '@src/components/Copyright';
+
+import cls from './Landing.module.scss';
 
 export const Landing: React.FC = () => {
     return (

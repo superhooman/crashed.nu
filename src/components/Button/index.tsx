@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
-import { LoadingIcon } from '../Icon';
 
+import { LoadingIcon } from '../Icon';
 import cls from './Button.module.scss';
 
 type Props = React.ComponentProps<'button'> & {

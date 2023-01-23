@@ -1,18 +1,19 @@
-import { Paragraph, Text } from "@src/components/Typography"
-import { Container } from "@src/components/Container"
+import React from 'react';
+import { EyeClosedIcon, EyeOpenIcon, LockClosedIcon, PersonIcon, UpdateIcon } from '@radix-ui/react-icons';
+import { useSession } from 'next-auth/react';
+import { toast } from 'react-hot-toast';
+import { useRouter } from 'next/router';
+import splitbee from '@splitbee/web';
+import Link from 'next/link';
+
+import { Paragraph, Text } from '@src/components/Typography';
+import { Container } from '@src/components/Container';
 import { Glyph } from '@src/components/Header';
-import { Stack } from "@src/components/Stack"
-import React from "react"
-import { Input } from "@src/components/Input"
-import { EyeClosedIcon, EyeOpenIcon, LockClosedIcon, PersonIcon, UpdateIcon } from "@radix-ui/react-icons"
-import { Button } from "@src/components/Button"
-import { trpc } from "@src/utils/trpc";
-import { useSession } from "next-auth/react";
-import { toast } from "react-hot-toast";
-import { useRouter } from "next/router";
-import splitbee from "@splitbee/web";
-import Link from "next/link";
-import { ROUTES } from "@src/constants/routes";
+import { Stack } from '@src/components/Stack';
+import { Input } from '@src/components/Input';
+import { Button } from '@src/components/Button';
+import { trpc } from '@src/utils/trpc';
+import { ROUTES } from '@src/constants/routes';
 
 interface Props {
     refetch?: boolean;
@@ -110,5 +111,5 @@ export const Registrar: React.FC<Props> = ({ refetch }) => {
                 </form>
             </Stack>
         </Container>
-    )
-}
+    );
+};

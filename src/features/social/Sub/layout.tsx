@@ -1,16 +1,16 @@
 
-import type { ReactNode } from 'react';
 import React from 'react';
+import { CaretSortIcon } from '@radix-ui/react-icons';
+
+import type { ReactNode } from 'react';
+import type { Sub } from '@prisma/client';
 
 import { Button } from '@src/components/Button';
 import { Stack } from '@src/components/Stack';
-
-import { CaretSortIcon } from '@radix-ui/react-icons';
 import { Modal, ModalTitle } from '@src/components/Modal';
+import { SLUG_TO_ICON } from '@src/constants/slugToIcon';
 
 import cls from './SubLayout.module.scss';
-import type { Sub } from '@prisma/client';
-import { SLUG_TO_ICON } from '@src/constants/slugToIcon';
 
 interface SubLayoutProps {
     side?: ReactNode;

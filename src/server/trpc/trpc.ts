@@ -1,8 +1,8 @@
-import { UserType } from "@prisma/client";
-import { initTRPC, TRPCError } from "@trpc/server";
-import superjson from "superjson";
+import { UserType } from '@prisma/client';
+import { initTRPC, TRPCError } from '@trpc/server';
+import superjson from 'superjson';
 
-import { type Context } from "./context";
+import { type Context } from './context';
 
 const t = initTRPC.context<Context>().create({
   transformer: superjson,
@@ -21,7 +21,7 @@ export const publicProcedure = t.procedure;
  */
 const isAuthed = t.middleware(({ ctx, next }) => {
   if (!ctx.session || !ctx.session.user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
   return next({
     ctx: {
@@ -33,7 +33,7 @@ const isAuthed = t.middleware(({ ctx, next }) => {
 
 const isAdmin = t.middleware(async ({ ctx, next }) => {
   if (!ctx.session || !ctx.session.user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
 
   const user = await ctx.prisma.user.findUnique({
@@ -43,7 +43,7 @@ const isAdmin = t.middleware(async ({ ctx, next }) => {
   });
 
   if (!user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: 'UNAUTHORIZED' });
   }
 
   if (user.userType !== UserType.ADMIN) {

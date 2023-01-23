@@ -1,6 +1,7 @@
 import clsx from 'clsx';
-import type { HTMLAttributes, CSSProperties } from 'react';
 import React from 'react';
+
+import type { HTMLAttributes, CSSProperties } from 'react';
 
 import cls from './Stack.module.scss';
 
@@ -23,7 +24,7 @@ const getMinHeight = (minHeight?: number | string) => {
   }
 
   return minHeight;
-}
+};
 
 export const Stack = React.forwardRef<HTMLDivElement, Props>(
   ({ className, direction = 'row', alignItems = 'stretch', justifyContent = 'start', gap = 0, grow = 'unset', fullWidth, wrap, minHeight, ...props }, ref) => (

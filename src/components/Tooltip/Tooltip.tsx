@@ -1,4 +1,5 @@
 import * as TooltipBase from '@radix-ui/react-tooltip';
+
 import cls from './Tooltip.module.scss';
 
 export interface TooltipProps extends TooltipBase.TooltipProps {
@@ -23,7 +24,7 @@ const Tooltip: React.FC<TooltipProps> = ({ children, content, arrow, delayDurati
                 </TooltipBase.Portal>
             </TooltipBase.Root>
         </TooltipBase.Provider>
-    )
-}
+    );
+};
 
 export default Tooltip;

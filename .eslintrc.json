@@ -12,6 +12,40 @@
     "plugin:storybook/recommended"
   ],
   "rules": {
-    "@typescript-eslint/consistent-type-imports": "warn"
+    "@typescript-eslint/consistent-type-imports": "warn",
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "import/order": [
+      "warn",
+      {
+        "pathGroups": [
+          {
+            "pattern": "**/*.scss",
+            "group": "index",
+            "position": "after"
+          }
+        ],
+        "groups": [
+          "builtin",
+          "external",
+          "type",
+          "internal",
+          ["sibling", "parent"],
+          "index",
+          "object"
+        ],
+        "newlines-between": "always"
+      }
+    ]
   }
 }

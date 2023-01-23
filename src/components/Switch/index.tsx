@@ -1,8 +1,8 @@
 import * as SwitchBase from '@radix-ui/react-switch';
 import clsx from 'clsx';
 import React from 'react';
-import { Loader } from '../Loader';
 
+import { Loader } from '../Loader';
 import cls from './Switch.module.scss';
 
 export interface Props extends SwitchBase.SwitchProps {

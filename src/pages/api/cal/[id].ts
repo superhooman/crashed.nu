@@ -1,11 +1,14 @@
-import type { NextApiHandler } from "next";
-import { endOfWeek, startOfWeek, add, format } from "date-fns";
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { endOfWeek, startOfWeek, add, format } from 'date-fns';
 import ical, { ICalEventRepeatingFreq } from 'ical-generator';
-import { env } from "@src/env/server.mjs";
-import { prisma } from "@src/server/db/client";
-import type { UserSchedule } from "@src/server/registrar/utils/parse";
-import { pad2 } from "@src/utils/data/time";
-import { getCurrentSemester, getSemesterDates } from "@src/utils/getCurrentSemester";
+
+import type { NextApiHandler } from 'next';
+import type { UserSchedule } from '@src/server/registrar/utils/parse';
+
+import { env } from '@src/env/server.mjs';
+import { prisma } from '@src/server/db/client';
+import { pad2 } from '@src/utils/data/time';
+import { getCurrentSemester, getSemesterDates } from '@src/utils/getCurrentSemester';
 
 const getCurrentWeek = () => {
     const now = new Date();
@@ -26,14 +29,14 @@ const handler: NextApiHandler = async (req, res) => {
     const id = req.query.id as string;
 
     if (!id) {
-        res.status(404).json({ error: "Not found" });
+        res.status(404).json({ error: 'Not found' });
         return;
     }
 
     const schedule = await prisma.userSchedule.findUnique({ where: { id } });
 
     if (!schedule) {
-        res.status(404).json({ error: "Not found" });
+        res.status(404).json({ error: 'Not found' });
         return;
     }
 
@@ -69,9 +72,9 @@ const handler: NextApiHandler = async (req, res) => {
 
     const payload = calendar.toString();
 
-    res.setHeader("Content-type", "application/octet-stream");
-    res.setHeader("Content-disposition", "attachment; filename=export.ics");
+    res.setHeader('Content-type', 'application/octet-stream');
+    res.setHeader('Content-disposition', 'attachment; filename=export.ics');
     res.send(payload);
-}
+};
 
 export default handler;

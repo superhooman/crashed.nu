@@ -28,14 +28,14 @@ export const getSemesterDates = (opts: ReturnType<typeof getCurrentSemester>) =>
         return {
             start: new Date(`${year}-06-01`),
             end: new Date(`${year}-07-31`),
-        }
+        };
     }
 
     return {
         start: new Date(`${year}-08-12`),
         end: new Date(`${year}-11-25`),
-    }
-}
+    };
+};
 
 export const getCurrentSemester = (date: Date) => {
     const year = date.getFullYear();
@@ -47,5 +47,5 @@ export const getCurrentSemester = (date: Date) => {
     return {
         semester,
         year,
-    }
+    };
 };

@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 export const ALHPANUM_UNDERSCORE_DOT = /^[a-z0-9._]+$/i;
 
