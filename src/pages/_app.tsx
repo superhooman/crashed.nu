@@ -69,7 +69,7 @@ const MyApp: AppType<{ session: Session | null, dev: boolean }> = ({
         },
       }), undefined, { shallow: true });
     }
-  }, [aPreview, push, pathname, query]);
+  }, [aPreview]);
 
   React.useEffect(() => {
     !dev && splitbee.init({
