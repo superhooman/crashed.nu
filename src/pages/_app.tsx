@@ -137,7 +137,7 @@ MyApp.getInitialProps = async (appContext: AppContext) => {
 
   const theme = getThemeServer(appContext.ctx.req);
 
-  const classNames = clsx(inter.className, manrope.className);
+  const classNames = clsx(inter.variable, manrope.variable);
 
   return {
       ...appProps,

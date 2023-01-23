@@ -8,17 +8,17 @@ interface Props {
         props: {
             pageProps: {
                 theme: Theme;
-                className: string;
+                classNames: string;
             };
         }
     }
 }
 
 const Document = ({ __NEXT_DATA__ }: Props) => {
-    const { theme, className } = __NEXT_DATA__.props.pageProps;
+    const { theme, classNames } = __NEXT_DATA__.props.pageProps;
 
     return (
-        <Html className={clsx(className, theme)}>
+        <Html className={clsx(classNames, theme)}>
             <Head>
                 <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-touch-icon.png" />
                 <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
