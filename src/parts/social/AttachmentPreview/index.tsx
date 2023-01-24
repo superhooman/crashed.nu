@@ -18,7 +18,7 @@ export const AttachmentPreview: React.FC<AttachmentPreviewProps> = ({ id, onOpen
             maxWidth="lg"
             className={cls.root}
         >
-            <Image fill className={cls.attachment} src={getAttachmentUrl(id)} alt="Attachment" />
+            <img className={cls.attachment} src={getAttachmentUrl(id)} alt="Attachment" />
         </Modal>
     );
 };
