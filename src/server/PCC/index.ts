@@ -1,3 +1,6 @@
+import { Agent } from 'https';
+import fetch, { RequestInit } from 'node-fetch';
+
 import { stringifyUrl } from 'query-string';
 
 import type { StringifiableRecord} from 'query-string';
@@ -6,6 +9,10 @@ import type { Course, RegistrarCourse, RegistrarSchedule, RegistrarSemester, Req
 import { SCHOOLS } from '@src/constants/schools';
 
 const getSchool = (school: string) => SCHOOLS[school] || school;
+
+const httpsAgent = new Agent({
+    rejectUnauthorized: false,
+});
 
 // Public Course Catalog
 class PCC {
@@ -45,7 +52,10 @@ class PCC {
             },
         });
 
-        const response = await fetch(url, requestOptions);
+        const response = await fetch(url, {
+            ...requestOptions,
+            agent: httpsAgent,
+        });
 
         return response.json() as unknown as T;
     }
