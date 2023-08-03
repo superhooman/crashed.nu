@@ -89,6 +89,15 @@ export const getServerSideProps: GetServerSideProps<Props, { id: string }> = asy
         url = ROUTES.SCHEDULE_ID.getWithParams({ id }, { full: true });
     }
 
+    console.log({
+        session,
+        schedule: scheduleObject,
+        name: schedule.user.name || 'Someone',
+        owner,
+        sharable,
+        url,
+    });
+
     return {
         props: {
             session,

@@ -22,6 +22,7 @@ import { getTypes, typeDict, typeReg } from '@src/utils/data/getScheduleTypes';
 import { useIsMobile } from '@src/utils/isMobileContext';
 import { trpc } from '@src/utils/trpc';
 import { Card } from '@src/components/Card';
+import { dateToSemester } from '@src/utils/dateToSemester';
 
 import cls from './Search.module.scss';
 import { CourseCard } from './components/CourseCard';
@@ -65,9 +66,13 @@ export const Search: React.FC<{
         },
     });
 
-    const { data: semesters } = trpc.pcc.semesters.useQuery({ pdf }, {
+    const { data: semesters, isLoading: semestersAreLoading } = trpc.pcc.semesters.useQuery({ pdf }, {
         onSuccess: (data) => {
-            setFieldValue('term', values.term || data[0]?.value);
+            const preferredSemester = dateToSemester(new Date());
+
+            const value = data.find((semester) => semester.label.includes(preferredSemester));
+
+            setFieldValue('term', values.term || value?.value || data[0]?.value);
         }
     });
 
@@ -144,16 +149,17 @@ export const Search: React.FC<{
                                 onValueChange={(v) => setFieldValue('level', v)}
                             />
                         )}
-                        {semesters && semesters.length > 1 ? (
+                        {semesters && semesters.length > 1 || semestersAreLoading ? (
                             <Select
                                 label="Semester"
                                 disabled={courses.length > 0}
                                 value={values.term}
                                 items={semesters || []}
+                                isLoading={semestersAreLoading}
                                 onValueChange={(v) => setFieldValue('term', v)}
                             />
                         ) : null}
-                        <Button type="submit" fullWidth variant="primary">Search</Button>
+                        <Button disabled={semestersAreLoading} type="submit" fullWidth variant="primary">Search</Button>
                     </Stack>
                 </form>
                 <Stack className={cls.results} direction="column" justifyContent="center" gap={12}>

@@ -24,7 +24,7 @@ export const Menu: React.FC<MenuProps> = ({ courses, selected, setSelected }) =>
                 return (
                     <RadioGroup.Item className={cls.item} value={id} id={id} key={id}>
                         <label htmlFor={id}>
-                            <Text size="small">{course.abbr}</Text>
+                            <Text bold size="small">{course.abbr}</Text>
                             <h2 className={cls.name}>{course.title}</h2>
                         </label>
                     </RadioGroup.Item>

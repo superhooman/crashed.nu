@@ -3,8 +3,6 @@ import GoogleProvider from 'next-auth/providers/google';
 // Prisma adapter for NextAuth, optional and can be removed
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 
-import type { User } from '@prisma/client';
-
 import { ROUTES } from '@src/constants/routes';
 
 import { env } from '../../../env/server.mjs';
@@ -18,7 +16,6 @@ export const authOptions: NextAuthOptions = {
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
-        session.user.userType = (user as User).userType;
       }
       return session;
     },

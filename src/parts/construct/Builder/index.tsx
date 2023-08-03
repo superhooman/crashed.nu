@@ -28,6 +28,7 @@ interface BuilderProps {
     term: string;
     restart: () => void;
     pdf: boolean;
+    hidden?: boolean;
 }
 
 const getInitialSelection = (courses: Course[]) => courses.reduce((res: SelectedSchedule, course) => {
@@ -35,13 +36,21 @@ const getInitialSelection = (courses: Course[]) => courses.reduce((res: Selected
     return res;
 }, {});
 
-export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf }) => {
-    const { data: schedule, isLoading } = trpc.pcc.schedulesForIds.useQuery({ ids: courses.map(({ id }) => id), term, pdf });
-    const [selection, setSelection] = React.useState<SelectedSchedule>(getInitialSelection(courses));
+export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf, hidden }) => {
+    const ids = React.useMemo(() => courses.map(({ id }) => id), [courses]);
+    const { data: schedule, isLoading } = trpc.pcc.schedulesForIds.useQuery({ ids, term, pdf });
+    const [selection, setSelection] = React.useState<SelectedSchedule>(() => getInitialSelection(courses));
     const [selected, setSelected] = React.useState(courses[0]?.id || '');
     const week = React.useMemo(() => getWeek(getCalendarItems(selection, courses, schedule)), [selection, courses, schedule]);
 
     const [printModal, setPrintModal] = React.useState(false);
+
+    React.useEffect(() => {
+        setSelection((prev) => ({
+            ...getInitialSelection(courses),
+            ...prev,
+        }));
+    }, [courses]);
 
     const getSelectionHandler = React.useCallback((type: string) => (v: string) => {
         setSelection((s) => ({
@@ -68,6 +77,7 @@ export const Builder: React.FC<BuilderProps> = ({ courses, term, restart, pdf })
     return (
         <>
             <BuilderLayout
+                hidden={hidden}
                 side={(
                     <Stack
                         direction="column"

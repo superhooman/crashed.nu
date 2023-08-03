@@ -1,5 +1,7 @@
 import splitbee from '@splitbee/web';
 import React from 'react';
+import { useRouter } from 'next/router';
+import { stringifyUrl } from 'query-string';
 
 import type { Course } from '@src/server/PCC/typings';
 
@@ -10,9 +12,29 @@ import { Builder } from '@src/parts/construct/Builder';
 
 export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
     const [term, setTerm] = React.useState('');
-    // const [wasOnNext, setWasOnNext] = React.useState(false);
+    const [wasOnNext, setWasOnNext] = React.useState(false);
     const [courses, setCourses] = React.useState<Course[]>([]);
-    const [screen, setScreen] = React.useState<'list' | 'builder'>('list');
+
+    const router = useRouter();
+
+    const setScreen = React.useCallback((screen: 'list' | 'builder') => {
+        let url: string;
+
+        if (screen === 'list') {
+            url = router.pathname;
+        } else {
+            url = stringifyUrl({
+                url: router.pathname,
+                query: {
+                    screen: 'builder',
+                }
+            });
+        }
+
+        router.push(url);
+    }, [router]);
+
+    const screen = (router.query.screen === 'builder') ? 'builder' : 'list';
 
     const addCourse = React.useCallback((course: Course) => {
         setCourses((courses) => [...courses, course]);
@@ -41,14 +63,15 @@ export const Constructor: React.FC<{ pdf?: boolean }> = ({ pdf = false }) => {
                     />
                 </Container>
             ) : null}
-            {screen === 'builder' ? (
+            {screen === 'builder' || wasOnNext ? (
                 <Builder
                     courses={courses}
+                    hidden={screen !== 'builder'}
                     term={term}
                     pdf={pdf}
                     restart={() => {
                         splitbee.track('Restart');
-                        // setWasOnNext(true);
+                        setWasOnNext(true);
                         setScreen('list');
                     }}
                 />

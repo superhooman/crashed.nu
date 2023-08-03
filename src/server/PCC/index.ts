@@ -1,8 +1,9 @@
 import { Agent } from 'https';
-import fetch, { RequestInit } from 'node-fetch';
 
+import fetch from 'node-fetch';
 import { stringifyUrl } from 'query-string';
 
+import type { RequestInit } from 'node-fetch';
 import type { StringifiableRecord} from 'query-string';
 import type { Course, RegistrarCourse, RegistrarSchedule, RegistrarSemester, RequestOptions, Schedule } from './typings';
 
@@ -155,7 +156,7 @@ class PCC {
                 capacity: CAPACITY,
                 days: DAYS,
                 enr: ENR,
-                faculty: FACULTY,
+                faculty: FACULTY.replaceAll('<br>', '; '),
                 finalExam: FINALEXAM,
                 id: INSTANCEID,
                 room: ROOM,

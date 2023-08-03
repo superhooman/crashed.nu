@@ -20,6 +20,20 @@
         }
     }
 
+    @media screen and (max-width: 768px) {
+        .col {
+            width: 100%;
+
+            &:not(:last-of-type):not([data-full="true"]) {
+                padding-right: 0;
+            }
+        }
+
+        .col + .col {
+            display: none;
+        }
+    }
+
     @media screen and (min-width: 768px) {
         .button, .close {
             transition: margin var(--a-time-xs) var(--a-slide), border-radius var(--a-time-xs) var(--a-slide);

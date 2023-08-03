@@ -69,32 +69,16 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
-enum UserType {
-  PREUSER
-  USER
-  ADMIN
-  MODERATOR
-}
-
 model       User {
   id            String    @id @default(cuid())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  xp            Int       @default(0)
-  userType      UserType  @default(PREUSER)
   accounts      Account[]
   sessions      Session[]
 
   schedule          UserSchedule?
-  posts             Post[]
-  likes             Like[]
-  notifications     Notifications[] @relation("for")
-  leftNotifications Notifications[] @relation("from")
-  comments          Comment[]
-  attachments       Attachment[]
-  invites           Invite[]
 }
 
 model UserSchedule {
@@ -107,94 +91,4 @@ model UserSchedule {
   short       String?  @unique
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model Invite {
-  id        String  @id @default(cuid())
-  userId    String
-  used      Boolean @default(false)
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model Sub {
-  slug String @id @unique
-  name String
-
-  posts Post[]
-}
-
-model Post {
-  id            String   @id @default(cuid())
-  content       String   @db.Text
-  date          DateTime @default(now())
-  userId        String
-  deleted       Boolean  @default(false)
-  subId         String
-
-  sub           Sub       @relation(fields: [subId], references: [slug], onDelete: Cascade)
-  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  likes         Like[]
-  comments      Comment[]
-  attachments   Attachment[]
-}
-
-enum AttachmentType {
-  IMAGE
-  FILE
-}
-
-model Attachment {
-  id        String  @id @default(cuid())
-  userId    String
-  uploaded  Boolean @default(false)
-  type      AttachmentType @default(FILE)
-  size      Int @default(0)
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  posts Post[]
-}
-
-model Like {
-  userId String
-  postId String
-  date   DateTime @default(now())
-
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([userId, postId])
-}
-
-model Comment {
-  id      String   @id @default(cuid())
-  content String   @db.Text
-  date    DateTime @default(now())
-  userId  String
-  postId  String
-  deleted Boolean  @default(false)
-
-  post Post @relation(fields: [postId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-enum NotificationsType {
-  LIKE
-  COMMENT
-  MENTION
-  MENTION_COMMENT
-}
-
-model Notifications {
-  id       String            @id @default(cuid())
-  forId    String
-  fromId   String
-  read     Boolean           @default(false)
-  type     NotificationsType
-  entityId String
-
-  @@unique([forId, fromId, type, entityId])
-
-  for  User @relation("for", fields: [forId], references: [id], onDelete: Cascade)
-  from User @relation("from", fields: [fromId], references: [id], onDelete: Cascade)
 }

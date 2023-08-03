@@ -39,12 +39,22 @@
         text-overflow: ellipsis;
     }
 
-    .chevron {
+    .skeleton {
+        height: var(--l-5);
+    }
+
+    .chevron, .loading {
         display: block;
         width: var(--l-5);
         height: var(--l-5);
         margin-left: var(--l-2);
         color: var(--c-neutral-500);
+    }
+
+    .loading {
+        width: var(--l-4);
+        height: var(--l-4);
+        animation: var(--a-rotate) var(--a-time-xl) steps(12) infinite;
     }
 }
 

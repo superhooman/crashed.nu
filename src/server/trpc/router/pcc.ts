@@ -12,7 +12,7 @@ export const pccRouter = router({
     .input(z.object({ pdf: z.boolean().optional() }))
     .query(async ({ input: { pdf } }) => {
       if (pdf) {
-        const semesters = [{ label: 'Spring 2023', value: '1' }];
+        const semesters = [{ label: 'Fall 2023', value: '1' }];
         return semesters;
       }
 

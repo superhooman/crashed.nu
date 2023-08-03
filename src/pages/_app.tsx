@@ -5,8 +5,6 @@ import { SessionProvider } from 'next-auth/react';
 import splitbee from '@splitbee/web';
 import Head from 'next/head';
 import { Toaster } from 'react-hot-toast';
-import { useRouter } from 'next/router';
-import { stringifyUrl } from 'query-string';
 import { Inter, Manrope } from '@next/font/google';
 import clsx from 'clsx';
 
@@ -15,7 +13,6 @@ import { getThemeServer, themeContext } from '@src/utils/theme';
 import { trpc } from '@src/utils/trpc';
 import { type Theme } from '@src/utils/theme';
 import { isMobileContext } from '@src/utils/isMobileContext';
-import { AttachmentPreview } from '@src/parts/social/AttachmentPreview';
 
 import '@src/styles/reset.css';
 import '@src/styles/global.scss';
@@ -46,30 +43,8 @@ const MyApp: AppType<{ session: Session | null, dev: boolean }> = ({
   Component,
   pageProps: { session, dev, ...pageProps },
 }) => {
-  const { push, query, pathname } = useRouter();
-
-  const { aid } = query;
-
-  const [aPreview, setAPreview] = React.useState(() => !!aid);
   const [isMobile, setIsMobile] = React.useState(false);
   const [theme, setThemeValue] = React.useState((pageProps as { theme?: Theme }).theme || 'system');
-
-  React.useEffect(() => {
-    const id = aid as string;
-    setAPreview(Boolean(id));
-  }, [aid]);
-
-  React.useEffect(() => {
-    if (!aPreview) {
-      push(stringifyUrl({
-        url: pathname,
-        query: {
-          ...query,
-          aid: undefined,
-        },
-      }), undefined, { shallow: true });
-    }
-  }, [aPreview]);
 
   React.useEffect(() => {
     !dev && splitbee.init({
@@ -119,11 +94,6 @@ const MyApp: AppType<{ session: Session | null, dev: boolean }> = ({
             }
           </Head>
           <Component {...pageProps} />
-          <AttachmentPreview
-            id={aid as string}
-            open={aPreview}
-            onOpenChange={setAPreview}
-          />
         </ProviderIsMobile>
       </SessionProvider>
     </ThemeProvider>

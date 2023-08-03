@@ -81,17 +81,6 @@ export const User: React.FC<UserProps> = ({ showFallback, showName = true }) => 
                         />
                     </Stack>
                     <MenuSeparator />
-                    {
-                        session.user.email ? (
-                            <Link href={ROUTES.PROFILE.getWithParams({ id: getUserHandle(session.user.email) })}>
-                                <MenuItemWithIcon
-                                    icon={<PersonIcon />}
-                                >
-                                    Profile
-                                </MenuItemWithIcon>
-                            </Link>
-                        ) : null
-                    }
                     <MenuItemWithIcon
                         icon={<ExitIcon />}
                         onClick={() => signOut({ callbackUrl: ROUTES.HOME.get() })}

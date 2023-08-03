@@ -2,6 +2,8 @@ import { CaretSortIcon, CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix
 import * as SelectBase from '@radix-ui/react-select';
 
 import cls from './Select.module.scss';
+import { LoadingIcon } from '../Icon';
+import { TextSkeleton } from '../Typography';
 
 interface AdvanceOption {
     label: React.ReactNode;
@@ -11,17 +13,18 @@ interface AdvanceOption {
 type Props = SelectBase.SelectProps & {
     items: AdvanceOption[];
     label?: string;
+    isLoading?: boolean;
 }
 
-export const Select: React.FC<Props> = ({ label, items, ...props }) => {
+export const Select: React.FC<Props> = ({ label, items, isLoading, ...props }) => {
     return (
         <SelectBase.Root  {...props}>
-            <SelectBase.Trigger className={cls.root}>
+            <SelectBase.Trigger disabled={isLoading} className={cls.root}>
                 {label && <label className={cls.label}>{label}</label>}
                 <div className={cls.select}>
-                    <SelectBase.Value className={cls.value} />
+                    {isLoading ? <TextSkeleton className={cls.skeleton} /> : <SelectBase.Value className={cls.value} />}
                     <SelectBase.Icon>
-                        <CaretSortIcon className={cls.chevron} />
+                        {isLoading ? <LoadingIcon className={cls.loading} /> : <CaretSortIcon className={cls.chevron} />}
                     </SelectBase.Icon>
                 </div>
             </SelectBase.Trigger>

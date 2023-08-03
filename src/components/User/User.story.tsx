@@ -16,7 +16,6 @@ export const Default: Story = {
       name: 'John Doe',
       email: 'mail@example.com',
       id: '1',
-      userType: 'USER',
       image: null,
     }
   }

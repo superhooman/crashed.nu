@@ -14,15 +14,18 @@ interface BuilderLayoutProps {
     side?: ReactNode;
     children?: ReactNode;
     button?: ReactNode;
+    hidden?: boolean;
 }
 
-export const BuilderLayout: React.FC<BuilderLayoutProps> = ({ side, children, button }) => {
+export const BuilderLayout: React.FC<BuilderLayoutProps> = ({ side, children, button, hidden }) => {
     const [drawer, setDrawer] = React.useState(false);
 
     const openDrawer = React.useCallback(() => setDrawer(true), []);
 
     return (
-        <div className={cls.root}>
+        <div className={cls.root} style={{
+            display: hidden ? 'none' : undefined,
+        }}>
             <Modal noPrint open={drawer} onOpenChange={setDrawer}>
                 {side}
             </Modal>
