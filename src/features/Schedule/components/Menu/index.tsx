@@ -77,10 +77,10 @@ export const Menu: React.FC<Props> = ({ schedule, isOwner }) => {
                     Export PDF
                 </Button>
                 <Button asChild variant="surface">
-                    <Link target="_blank" href={ROUTES.ICAL.get({ query: { id: schedule.id } })}>
+                    <a download="export.ics" href={ROUTES.ICAL.get({ query: { id: schedule.id } })}>
                         <CalendarIcon />
                         Download iCal
-                    </Link>
+                    </a>
                 </Button>
                 <Separator size="4" />
                 <Button asChild variant="soft">
