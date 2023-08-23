@@ -23,14 +23,12 @@ export const MicrosoftModal: React.FC = () => {
         <Modal open={open} onOpenChange={setOpen}>
             <Heading mb="2" size="4">Important!</Heading>
             <Text mb="4" as="p" size="2">
-                Soon our univeristy will switch to Microsoft Office 365 from Google Workspace.
-                Please add your Microsoft account to your profile to continue using crashed.nu.
-                Otherwise, you will lost access to your account.
+                Soon our university will switch to Microsoft Office 365 from Google Workspace. Please add your Microsoft account to your profile to continue using crashed.nu. Otherwise, you will lose access to your account.
             </Text>
             <Flex direction="column" width="100%" align="stretch">
                 <Button disabled={loading} onClick={handleMicrosoftSignIn} size="3" variant="outline" color="gray" radius="large">
                     <MicrosoftIcon size={16} />
-                    <Text size="2">Connect with Microsoft</Text>
+                    <Text size="2">Connect Microsoft account</Text>
                 </Button>
             </Flex>
         </Modal>

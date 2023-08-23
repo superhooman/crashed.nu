@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarIcon, HeartFilledIcon, Pencil2Icon } from '@radix-ui/react-icons';
+import { CalendarIcon, GitHubLogoIcon, HeartFilledIcon, Pencil2Icon } from '@radix-ui/react-icons';
 import { Button, Container, Flex, Heading, Text } from '@radix-ui/themes';
 import Link from 'next/link';
 
@@ -8,6 +8,7 @@ import { Glyph } from '@src/components/Logo';
 import { ROUTES } from '@src/constants/routes';
 
 const SUPPORT_LINK = 'https://superhooman.lemonsqueezy.com/checkout/buy/4da4bbb2-2250-4085-9bc4-5325ddf04b91';
+const GITHUB_LINK = 'https://github.com/superhooman/crashed.nu';
 
 export const Landing = () => {
     return (
@@ -52,7 +53,7 @@ export const Landing = () => {
                     xs: '3',
                     sm: '5',
                     md: '6'
-                }}>Share you schedule with friends.</Text>
+                }}>Share your schedule with friends.</Text>
                 <Text as="p" size={{
                     initial: '2',
                     xs: '3',
@@ -92,7 +93,10 @@ export const Landing = () => {
                 <Flex justify={{
                     initial: 'center',
                     xs: 'start'
-                }} mt="9">
+                }} mt="9" gap={{
+                    initial: '2',
+                    md: '3'
+                }}>
                     <Button variant="soft" size={{
                         initial: '2',
                         md: '3'
@@ -100,6 +104,14 @@ export const Landing = () => {
                         <a target="_blank" href={SUPPORT_LINK}>
                             <HeartFilledIcon />
                             Support
+                        </a>
+                    </Button>
+                    <Button variant="soft" size={{
+                        initial: '2',
+                        md: '3'
+                    }} asChild>
+                        <a target="_blank" href={GITHUB_LINK}>
+                            <GitHubLogoIcon />
                         </a>
                     </Button>
                 </Flex>
