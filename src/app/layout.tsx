@@ -21,6 +21,8 @@ export default function RootLayout({
         <meta name="application-name" content="crashed" />
         <meta name="msapplication-TileColor" content="#10a37f" />
         <meta name="msapplication-config" content="/icons/browserconfig.xml" />
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#191719" media="(prefers-color-scheme: dark)" />
       </head>
       <body>
         <Providers>
