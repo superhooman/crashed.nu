@@ -16,6 +16,11 @@ const nextConfig = {
                 destination: '/builder',
                 permanent: true,
             },
+            {
+                source: '/constructor',
+                destination: '/builder',
+                permanent: true,
+            }
         ];
     }
 }
