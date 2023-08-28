@@ -5,6 +5,8 @@ import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import React from 'react';
 import { SWRConfig } from 'swr';
+import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
+import { green } from '@radix-ui/colors';
 
 import type { PropsWithChildren } from 'react';
 
@@ -18,6 +20,7 @@ export const Providers: React.FC<PropsWithChildren> = ({ children }) => {
             <SessionProvider>
                 <ThemeProvider attribute="class">
                     <Theme accentColor="green" grayColor="mauve" panelBackground="solid" radius="large">
+                        <ProgressBar color={green.green9} />
                         {children}
                     </Theme>
                 </ThemeProvider>
