@@ -1,50 +1,41 @@
 {
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
-  "plugins": [
-    "@typescript-eslint"
-  ],
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:@typescript-eslint/recommended"
-  ],
-  "rules": {
-    "@typescript-eslint/consistent-type-imports": "warn",
-    "quotes": [
-      "error",
-      "single"
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "plugins": ["@typescript-eslint"],
+    "extends": [
+        "next/core-web-vitals",
+        "plugin:@typescript-eslint/recommended"
     ],
-    "semi": [
-      "error",
-      "always"
-    ],
-    "eol-last": [
-      "error",
-      "always"
-    ],
-    "import/order": [
-      "warn",
-      {
-        "pathGroups": [
-          {
-            "pattern": "**/*.css.ts",
-            "group": "index",
-            "position": "after"
-          }
-        ],
-        "groups": [
-          "builtin",
-          "external",
-          "type",
-          "internal",
-          ["sibling", "parent"],
-          "index",
-          "object"
-        ],
-        "newlines-between": "always"
-      }
-    ]
-  }
+    "ignorePatterns": ["next.config.mjs"],
+    "rules": {
+        "@typescript-eslint/consistent-type-imports": "warn",
+        "quotes": ["error", "single"],
+        "indent": ["error", 4],
+        "semi": ["error", "always"],
+        "eol-last": ["error", "always"],
+        "import/order": [
+            "warn",
+            {
+                "pathGroups": [
+                    {
+                        "pattern": "**/*.css.ts",
+                        "group": "index",
+                        "position": "after"
+                    }
+                ],
+                "groups": [
+                    "builtin",
+                    "external",
+                    "type",
+                    "internal",
+                    ["sibling", "parent"],
+                    "index",
+                    "object"
+                ],
+                "newlines-between": "always"
+            }
+        ]
+    }
 }

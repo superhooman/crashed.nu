@@ -7,38 +7,38 @@ import { prisma } from '@src/server/db';
 import { createAction } from '@src/utils/action';
 
 export const toggleSharable = createAction({
-  schema: z.object({
-    shared: z.boolean(),
-  }),
-  ctx: async () => {
-    const session = await getServerSession(authOptions);
+    schema: z.object({
+        shared: z.boolean(),
+    }),
+    ctx: async () => {
+        const session = await getServerSession(authOptions);
 
-    if (!session) {
-      throw new Error('Not authenticated');
-    }
+        if (!session) {
+            throw new Error('Not authenticated');
+        }
 
-    return {
-      session,
-    };
-  },
-  action: async (input, { session }) => {
-    const schedule = await prisma.userSchedule.findFirst({ where: {
-        userId: session.user.id,
-    } });
+        return {
+            session,
+        };
+    },
+    action: async (input, { session }) => {
+        const schedule = await prisma.userSchedule.findFirst({ where: {
+            userId: session.user.id,
+        } });
 
-    if (!schedule) {
-        throw new Error('No schedule found');
-    };
+        if (!schedule) {
+            throw new Error('No schedule found');
+        };
 
-    const { shared } =  await prisma.userSchedule.update({
-        where: {
-            id: schedule.id,
-        },
-        data: {
-            shared: input.shared,
-        },
-    });
+        const { shared } =  await prisma.userSchedule.update({
+            where: {
+                id: schedule.id,
+            },
+            data: {
+                shared: input.shared,
+            },
+        });
 
-    return shared;
-  },
+        return shared;
+    },
 });

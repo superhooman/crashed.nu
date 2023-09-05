@@ -17,7 +17,7 @@ export const Calendar = () => {
     const [enabled, setEnabled] = React.useState(false);
 
     React.useLayoutEffect(() => {
-      setEnabled(true);
+        setEnabled(true);
     }, []);
 
     const week = React.useMemo(() => {

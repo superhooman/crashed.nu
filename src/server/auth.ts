@@ -1,9 +1,9 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { type GetServerSidePropsContext } from 'next';
 import {
-  getServerSession,
-  type NextAuthOptions,
-  type DefaultSession,
+    getServerSession,
+    type NextAuthOptions,
+    type DefaultSession,
 } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import AzureADProvider from 'next-auth/providers/azure-ad';
@@ -22,30 +22,30 @@ declare module 'next-auth' {
 }
 
 export const authOptions: NextAuthOptions = {
-  callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
-  },
-  pages: {
-    signIn: ROUTES.AUTH.get(),
-    error: ROUTES.AUTH.get(),
-  },
-  adapter: PrismaAdapter(prisma),
-  providers: [
-    GoogleProvider({
-      clientId: env.GOOGLE_CLIENT_ID,
-      clientSecret: env.GOOGLE_CLIENT_SECRET,
-    }),
-    AzureADProvider({
-      clientId: env.AZURE_AD_CLIENT_ID,
-      clientSecret: env.AZURE_AD_CLIENT_SECRET,
-      tenantId: env.AZURE_AD_TENANT_ID,
-    }),
+    callbacks: {
+        session: ({ session, user }) => ({
+            ...session,
+            user: {
+                ...session.user,
+                id: user.id,
+            },
+        }),
+    },
+    pages: {
+        signIn: ROUTES.AUTH.get(),
+        error: ROUTES.AUTH.get(),
+    },
+    adapter: PrismaAdapter(prisma),
+    providers: [
+        GoogleProvider({
+            clientId: env.GOOGLE_CLIENT_ID,
+            clientSecret: env.GOOGLE_CLIENT_SECRET,
+        }),
+        AzureADProvider({
+            clientId: env.AZURE_AD_CLIENT_ID,
+            clientSecret: env.AZURE_AD_CLIENT_SECRET,
+            tenantId: env.AZURE_AD_TENANT_ID,
+        }),
     /**
      * ...add more providers here.
      *
@@ -55,7 +55,7 @@ export const authOptions: NextAuthOptions = {
      *
      * @see https://next-auth.js.org/providers/github
      */
-  ],
+    ],
 };
 
 /**
@@ -67,5 +67,5 @@ export const getServerAuthSession = (ctx: {
   req: GetServerSidePropsContext['req'];
   res: GetServerSidePropsContext['res'];
 }) => {
-  return getServerSession(ctx.req, ctx.res, authOptions);
+    return getServerSession(ctx.req, ctx.res, authOptions);
 };

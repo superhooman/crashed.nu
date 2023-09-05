@@ -66,9 +66,9 @@ class PCC {
             const exists = dict[schedule.st];
             if (exists) {
                 exists.days += schedule.days;
-                    if (!exists.room.includes(schedule.room)) {
-                        exists.room += ` / ${schedule.room}`;
-                    }
+                if (!exists.room.includes(schedule.room)) {
+                    exists.room += ` / ${schedule.room}`;
+                }
                 dict[schedule.st] = exists;
             } else {
                 dict[schedule.st] = schedule;

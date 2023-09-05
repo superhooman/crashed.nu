@@ -11,8 +11,8 @@ export const createAction = <Schema extends z.ZodTypeAny, Data, Context>({
     ctx,
     action,
 }: CreateActionProps<Schema, Data, Context>) => async (input: z.infer<Schema>) => {
-    const parsedInput = schema.parse(input);
-    const context = typeof ctx === 'function' ? (await ctx()) : ctx;
-    const data = await action(parsedInput, context);
-    return data;
-};
+        const parsedInput = schema.parse(input);
+        const context = typeof ctx === 'function' ? (await ctx()) : ctx;
+        const data = await action(parsedInput, context);
+        return data;
+    };

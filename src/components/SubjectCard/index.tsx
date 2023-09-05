@@ -22,25 +22,25 @@ interface SubjectCardProps {
 }
 
 export const SubjectCard: React.FC<SubjectCardProps> = ({
-  time,
-  abbr,
-  title,
-  label,
-  room,
-  color = 'var(--accent-9)',
+    time,
+    abbr,
+    title,
+    label,
+    room,
+    color = 'var(--accent-9)',
 }) => (
-  <div className={cls.root}>
-    <div className={cls.color} style={{
-      backgroundColor: color,
-    }} />
-    <div className={cls.colorLine} style={{
-      backgroundColor: color,
-    }} />
-    <Text className={cls.text} weight="bold">{abbr} • {title}</Text>
-    <div className={cls.details}>
-      <Text className={clsx(cls.text, cls.overflow)}>{label}</Text>
-      <Text className={cls.text}>Time: {getTimeRange(time)}</Text>
-      <Text className={cls.text}>Room: {room}</Text>
+    <div className={cls.root}>
+        <div className={cls.color} style={{
+            backgroundColor: color,
+        }} />
+        <div className={cls.colorLine} style={{
+            backgroundColor: color,
+        }} />
+        <Text className={cls.text} weight="bold">{abbr} • {title}</Text>
+        <div className={cls.details}>
+            <Text className={clsx(cls.text, cls.overflow)}>{label}</Text>
+            <Text className={cls.text}>Time: {getTimeRange(time)}</Text>
+            <Text className={cls.text}>Room: {room}</Text>
+        </div>
     </div>
-  </div>
 );

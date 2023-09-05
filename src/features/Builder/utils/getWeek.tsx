@@ -22,45 +22,45 @@ export const getWeek = (courses: (SelectedCourse & { schedules?: Schedule[] })[]
 
         ((types.map((type) => (
             schedules?.filter(({ st }) => getType(st) === type)[Number(selection[type])]
-          )).filter((s) => s) ?? []) as Schedule[])
+        )).filter((s) => s) ?? []) as Schedule[])
             .forEach((schedule) => {
-            if (!schedule.days) {
-                return;
-            }
+                if (!schedule.days) {
+                    return;
+                }
 
-            const days = schedule.days.trim().split(' ') as WeekDay[];
-            const times = schedule.times.split('-');
+                const days = schedule.days.trim().split(' ') as WeekDay[];
+                const times = schedule.times.split('-');
 
-            if (times.length < 2) {
-                return;
-            }
+                if (times.length < 2) {
+                    return;
+                }
 
-            if (!times[0] || !times[1]) {
-                return;
-            }
+                if (!times[0] || !times[1]) {
+                    return;
+                }
 
-            const range = {
-                startTime: parseTime(times[0]),
-                endTime: parseTime(times[1]),
-            };
+                const range = {
+                    startTime: parseTime(times[0]),
+                    endTime: parseTime(times[1]),
+                };
 
-            const card: Item = {
-                content: (
-                    <SubjectCard
-                        abbr={abbr}
-                        title={schedule.st}
-                        time={range}
-                        label={schedule.faculty}
-                        room={schedule.room}
-                    />
-                ),
-                ...range,
-            };
+                const card: Item = {
+                    content: (
+                        <SubjectCard
+                            abbr={abbr}
+                            title={schedule.st}
+                            time={range}
+                            label={schedule.faculty}
+                            room={schedule.room}
+                        />
+                    ),
+                    ...range,
+                };
 
-            days.forEach((day) => {
-                week[day].push(card);
+                days.forEach((day) => {
+                    week[day].push(card);
+                });
             });
-        });
     });
 
     WEEK_DAYS.forEach(([key]) => {

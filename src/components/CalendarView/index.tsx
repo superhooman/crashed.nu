@@ -102,16 +102,16 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
 
     const nextDay = React.useCallback(() => {
         setSelected((day) => {
-          const index = WEEK_DAYS_ONLY.indexOf(day);
-          return WEEK_DAYS_ONLY[(index + 1) % WEEK_DAYS_ONLY.length] as WeekDay;
+            const index = WEEK_DAYS_ONLY.indexOf(day);
+            return WEEK_DAYS_ONLY[(index + 1) % WEEK_DAYS_ONLY.length] as WeekDay;
         });
-      }, []);
+    }, []);
     
     const prevDay = React.useCallback(() => {
-    setSelected((day) => {
-        const index = WEEK_DAYS_ONLY.indexOf(day);
-        return WEEK_DAYS_ONLY[(index === 0 ? WEEK_DAYS_ONLY.length : index) - 1 % WEEK_DAYS_ONLY.length] as WeekDay;
-    });
+        setSelected((day) => {
+            const index = WEEK_DAYS_ONLY.indexOf(day);
+            return WEEK_DAYS_ONLY[(index === 0 ? WEEK_DAYS_ONLY.length : index) - 1 % WEEK_DAYS_ONLY.length] as WeekDay;
+        });
     }, []);
     
     const toToday = React.useCallback(() => {
