@@ -24,11 +24,15 @@ export const env = createEnv({
         AZURE_AD_TENANT_ID: z.string(),
     },
     client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
+        NEXT_PUBLIC_NODE_ENV: z.preprocess(
+            (str) => process.env.NODE_ENV ?? str,
+            z.enum(['development', 'test', 'production'])
+        ),
     },
     runtimeEnv: {
         DATABASE_URL: process.env.DATABASE_URL,
         NODE_ENV: process.env.NODE_ENV,
+        NEXT_PUBLIC_NODE_ENV: process.env.NODE_ENV,
         NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
         NEXTAUTH_URL: process.env.NEXTAUTH_URL,
         GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,

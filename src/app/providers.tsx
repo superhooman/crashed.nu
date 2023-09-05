@@ -13,7 +13,7 @@ import type { PropsWithChildren } from 'react';
 
 import { env } from '@src/env.mjs';
 
-const isProd = env.NODE_ENV === 'production';
+const isProd = env.NEXT_PUBLIC_NODE_ENV === 'production';
 
 export const Providers: React.FC<PropsWithChildren> = ({ children }) => {
     React.useEffect(() => {
