@@ -5,13 +5,24 @@ import { SessionProvider } from 'next-auth/react';
 import { ThemeProvider } from 'next-themes';
 import React from 'react';
 import { SWRConfig } from 'swr';
+import splitbee from '@splitbee/web';
 import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 import { green } from '@radix-ui/colors';
 
 import type { PropsWithChildren } from 'react';
 
+import { env } from '@src/env.mjs';
+
+const isProd = env.NODE_ENV === 'production';
 
 export const Providers: React.FC<PropsWithChildren> = ({ children }) => {
+    React.useEffect(() => {
+        isProd && splitbee.init({
+            scriptUrl: '/bee.js',
+            apiUrl: '/_hive',
+        });
+    }, []);
+
     return (
         <SWRConfig value={{
             provider: () => new Map(),
