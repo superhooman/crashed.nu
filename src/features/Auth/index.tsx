@@ -4,9 +4,11 @@ import { ExclamationTriangleIcon } from '@radix-ui/react-icons';
 import { Button, Callout, Flex, Heading, Link, Text } from '@radix-ui/themes';
 import { signIn } from 'next-auth/react';
 import React from 'react';
+import NextLink from 'next/link';
 
 import { GoogleIcon, MicrosoftIcon } from '@src/components/Icon';
 import { Glyph } from '@src/components/Logo';
+import { ROUTES } from '@src/constants/routes';
 
 interface Props {
     callbackUrl?: string;
@@ -72,7 +74,9 @@ export const Auth: React.FC<Props> = ({ callbackUrl, error }) => {
                 </Button>
             </Flex>
             <Flex justify="center">
-                <Link color="gray" size="1">Privacy policy</Link>
+                <Link color="gray" size="1" asChild>
+                    <NextLink href={ROUTES.PRIVACY.get()}>Privacy policy</NextLink>
+                </Link>
             </Flex>
         </Flex>
     );

@@ -62,28 +62,28 @@ export const Menu: React.FC<Props> = ({ schedule, isOwner }) => {
         <Flex direction="column" grow="1" p="4" gap="4">
             <PrintModal open={printModal} onOpenChange={setPrintModal} onPrint={handlePrint} />
             <Flex direction="row" align="center" justify="between" gap="2">
-                <Text size="1" color="gray">Share your schedule</Text>
+                <Text weight="bold" size="2" color="gray">Share your schedule</Text>
                 <Switch radius="full" checked={shared} onCheckedChange={handleSharedClick} disabled={isSharedLoading} />
             </Flex>
             {shared ? (
                 <Flex align="center" gap="2">
-                    <Input size="2" value={url} readOnly />
-                    <Button onClick={copyLink}><CopyIcon /></Button>
+                    <Input size="3" value={url} readOnly />
+                    <Button size="3" onClick={copyLink}><CopyIcon /></Button>
                 </Flex>
             ) : null}
             <Flex direction="column" gap="3">
-                <Button onClick={showPrintModal} variant="surface">
+                <Button onClick={showPrintModal} size="3" variant="surface">
                     <FileIcon />
                     Export PDF
                 </Button>
-                <Button asChild variant="surface">
-                    <a download="export.ics" href={ROUTES.ICAL.get({ query: { id: schedule.id } })}>
+                <Button asChild size="3" variant="surface">
+                    <a download="export.ics" target="_blank" href={ROUTES.ICAL.get({ query: { id: schedule.id } })}>
                         <CalendarIcon />
                         Download iCal
                     </a>
                 </Button>
                 <Separator size="4" />
-                <Button asChild variant="soft">
+                <Button asChild size="3" variant="soft">
                     <Link href={ROUTES.SCHEDULE.get({ query: { refetch: 1 } })}>
                         <UpdateIcon />
                         Resync schedule

@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 import { authOptions } from '@src/server/auth';
 import { prisma } from '@src/server/db';
-import registrar from '@src/server/registrar';
+import { Registrar } from '@src/server/registrar';
 import { createAction } from '@src/utils/action';
 
 export const syncRegistrar = createAction({
@@ -26,6 +26,8 @@ export const syncRegistrar = createAction({
         const username = session.user.email!.split('@')[0]!;
 
         if (!username) throw new Error('No username found');
+
+        const registrar = new Registrar();
 
         const { data, preferences } = await registrar.sync(username, password);
 

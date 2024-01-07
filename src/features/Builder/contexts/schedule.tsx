@@ -51,6 +51,7 @@ export const ScheduleProvider: React.FC<React.PropsWithChildren> = ({ children }
             abbr,
             selection: {}
         }]);
+        setSelectedCourse(id);
     }, [selected, setSelected]);
 
     const addCourse = React.useCallback((course: SelectedCourse) => {

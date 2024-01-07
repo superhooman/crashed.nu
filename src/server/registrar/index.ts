@@ -1,37 +1,39 @@
 import request from 'request';
 
 import { parseSchedule } from './utils/parse';
+import { scheduleTypeResolver } from './utils/scheduleTypeResolver';
 
+const HOST = 'https://registrar.nu.edu.kz';
 const BUILD_ID = 'form-Ge0qInuGtfAjDSYP-U-zTNaHfEezxfz2X0ip8lzvTVE';
 
-class Registrar {
-    private HOST: string;
+export class Registrar {
+    private HOST = HOST;
+    private BUILD_ID = BUILD_ID;
+    private jar: request.CookieJar;
+    private request: request.RequestAPI<request.Request, request.CoreOptions, request.RequiredUriUrl>;
 
-    constructor(host: string) {
-        this.HOST = host;
-    }
+    constructor() {
+        this.jar = request.jar();
 
-    public async sync(username: string, password: string): Promise<ReturnType<typeof parseSchedule>> {
-        const jar = request.jar();
-        jar.setCookie('has_js=1;', this.HOST, {
+        this.jar.setCookie('has_js=1;', this.HOST, {
             secure: true,
         });
 
-        const r = request.defaults({
-            jar
+        this.request = request.defaults({
+            jar: this.jar,
         });
+    }
 
-        return new Promise(async (resolve, reject) => {
-            if (!BUILD_ID) return reject('Error occured');
-
-            r({
+    private login(username: string, password: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.request({
                 method: 'POST',
                 uri: `${this.HOST}/index.php?q=user/login`,
                 strictSSL: false,
                 form: {
                     name: username,
                     pass: password,
-                    form_build_id: BUILD_ID,
+                    form_build_id: this.BUILD_ID,
                     form_id: 'user_login',
                     op: 'Log in',
                 }
@@ -42,29 +44,56 @@ class Registrar {
                 const redirect = res.headers.location;
 
                 if (!redirect?.includes('my-registrar')) {
-                    console.log('INVALID CREDENTIALS', redirect);
                     return reject('Invalid credentials');
                 }
 
-                r({
-                    method: 'GET',
-                    strictSSL: false,
-                    uri: `${this.HOST}/my-registrar/personal-schedule/json?method=getTimetable&type=current&page=1&start=0&limit=50`,
-                }, (err, res) => {
-                    if (err) {
-                        return reject('Error occured');
-                    }
-                    const data = res.body as string;
-                    const schedule = parseSchedule(data);
+                resolve();
+            });
+        });
+    };
 
-                    resolve(schedule);
-                });
+    private getScheduleType(): Promise<'reg' | 'current'> {
+        return new Promise((resolve, reject) => {
+            this.request({
+                method: 'GET',
+                uri: `${this.HOST}/my-registrar/personal-schedule`,
+                strictSSL: false,
+            }, (err, res) => {
+                if (err) {
+                    return reject('Error occured');
+                }
+                
+                const type = scheduleTypeResolver(res.body as string);
+
+                resolve(type);
+            });
+        });
+    };
+
+    private getSchedule(type: 'reg' | 'current'): Promise<ReturnType<typeof parseSchedule>> {
+        return new Promise((resolve, reject) => {
+            this.request({
+                method: 'GET',
+                strictSSL: false,
+                uri: `${this.HOST}/my-registrar/personal-schedule/json?method=getTimetable&type=${type}&page=1&start=0&limit=50`,
+            }, (err, res) => {
+                if (err) {
+                    return reject('Error occured');
+                }
+                const data = res.body as string;
+                const schedule = parseSchedule(data);
+
+                resolve(schedule);
             });
         });
     }
+
+    public async sync(username: string, password: string): Promise<ReturnType<typeof parseSchedule>> {
+        await this.login(username, password);
+
+        const type = await this.getScheduleType();
+        const schedule = await this.getSchedule(type);
+
+        return schedule;
+    }
 }
-
-const registrar = new Registrar('https://registrar.nu.edu.kz');
-
-export default registrar;
-

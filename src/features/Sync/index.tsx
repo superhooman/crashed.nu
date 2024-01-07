@@ -71,15 +71,15 @@ export const Sync: React.FC<Props> = ({ isRefetch }) => {
             )}
             <Flex direction="column" gap="3" asChild>
                 <form onSubmit={handleSubmit}>
-                    <Input size="2" variant="surface" icon={<PersonIcon />} value={username} disabled />
+                    <Input size="3" variant="surface" icon={<PersonIcon />} value={username} disabled />
                     <Flex gap="2" align="center">
-                        <Input size="2" variant="surface" placeholder="Registrar password" icon={<LockClosedIcon />} type={showPassword ? 'text' : 'password'} value={password} onChange={handlePasswordChange} />
-                        <Button type="button" variant="outline" color="gray" size="2" onClick={toggleShowPassword}>
+                        <Input size="3" variant="surface" placeholder="Registrar password" icon={<LockClosedIcon />} type={showPassword ? 'text' : 'password'} value={password} onChange={handlePasswordChange} />
+                        <Button type="button" variant="outline" color="gray" size="3" onClick={toggleShowPassword}>
                             {showPassword ? <EyeOpenIcon /> : <EyeClosedIcon />}
                         </Button>
                     </Flex>
-                    <Button type="submit" size="2">{loading ? <Loader /> : <UpdateIcon />} Sync with Registrar</Button>
-                    {isRefetch && (<Button type="button" variant="soft" color="gray" size="2" asChild>
+                    <Button type="submit" size="3">{loading ? <Loader /> : <UpdateIcon />} Sync with Registrar</Button>
+                    {isRefetch && (<Button type="button" variant="soft" color="gray" size="3" asChild>
                         <Link href={ROUTES.SCHEDULE.get()}>Cancel</Link>
                     </Button>)}
                 </form>

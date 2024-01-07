@@ -58,17 +58,6 @@ const Page = async ({ params: { id } }: Props) => {
 
     const isOwner = session?.user?.id === schedule.userId;
 
-    let hasMicrosoft: boolean | undefined = undefined;
-
-    if (isOwner) {
-        hasMicrosoft = !!(await prisma.account.findFirst({
-            where: {
-                userId: session.user.id,
-                provider: 'azure-ad',
-            },
-        }));
-    }
-
     if (!schedule.shared && !isOwner) {
         return redirect(ROUTES.PRIVATE.get());
     }
@@ -76,7 +65,6 @@ const Page = async ({ params: { id } }: Props) => {
     return (
         <Schedule
             isOwner={isOwner}
-            hasMicrosoft={hasMicrosoft}
             schedule={schedule}
         />
     );

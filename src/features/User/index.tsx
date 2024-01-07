@@ -1,6 +1,6 @@
 'use client';
 
-import { ExitIcon, MixerVerticalIcon } from '@radix-ui/react-icons';
+import { ExitIcon } from '@radix-ui/react-icons';
 import { Avatar, Button, DropdownMenu, Flex } from '@radix-ui/themes';
 import { signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
@@ -46,15 +46,6 @@ export const User: React.FC<Props> = ({ showFallback }) => {
                 </button>
             </DropdownMenu.Trigger>
             <DropdownMenu.Content align="end">
-                <DropdownMenu.Item asChild>
-                    <Link href={ROUTES.SETTINGS.get()}>
-                        <Flex gap="2" align="center">
-                            <MixerVerticalIcon />
-                            Settings
-                        </Flex>
-                    </Link>
-                </DropdownMenu.Item>
-                <DropdownMenu.Separator />
                 <DropdownMenu.Item onClick={handleSignOut} color="red">
                     <Flex gap="2" align="center">
                         <ExitIcon />
