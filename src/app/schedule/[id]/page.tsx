@@ -3,7 +3,7 @@ import { notFound, redirect } from 'next/navigation';
 
 import type { Metadata } from 'next';
 
-import { ROUTES } from '@src/constants/routes';
+import { DOMAIN, ROUTES } from '@src/constants/routes';
 import { Schedule } from '@src/features/Schedule';
 import { authOptions } from '@src/server/auth';
 import { prisma } from '@src/server/db';
@@ -35,6 +35,7 @@ export async function generateMetadata(
         openGraph: {
             title: `${schedule?.user.name}'s Schedule | crashed.nu`,
         },
+        metadataBase: new URL(DOMAIN),
     };
 }
 

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import { Builder } from '@src/features/Builder';
 import PCC from '@src/server/PCC';
+import { DOMAIN } from '@src/constants/routes';
 
 export const metadata: Metadata = {
     title: 'crashed.nu | builder',
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
             '/og.png'
         ]
     },
+    metadataBase: new URL(DOMAIN),
 };
 
 export default async function Home() {

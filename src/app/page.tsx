@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { Landing } from '@src/features/Landing';
+import { DOMAIN } from '@src/constants/routes';
 
 export const metadata: Metadata = {
     title: 'crashed.nu | home',
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
             '/og.png'
         ]
     },
+    metadataBase: new URL(DOMAIN),
 };
 
 export default async function Home() {

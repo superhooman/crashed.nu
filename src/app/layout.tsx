@@ -1,4 +1,7 @@
+import { Suspense } from 'react';
+
 import { Providers } from './providers';
+
 import '@src/styles/reset.css';
 import '@src/styles/global.css';
 import '@radix-ui/themes/styles.css';
@@ -25,9 +28,11 @@ export default function RootLayout({
                 <meta name="theme-color" content="#191719" media="(prefers-color-scheme: dark)" />
             </head>
             <body>
-                <Providers>
-                    {children}
-                </Providers>
+                <Suspense>
+                    <Providers>
+                        {children}
+                    </Providers>
+                </Suspense>
             </body>
         </html>
     );

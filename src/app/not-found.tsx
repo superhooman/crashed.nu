@@ -5,12 +5,13 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 import { Glyph } from '@src/components/Logo';
-import { ROUTES } from '@src/constants/routes';
+import { DOMAIN, ROUTES } from '@src/constants/routes';
 import { FormLayout } from '@src/layouts/Form';
 
 export const metadata: Metadata = {
     title: '404 | crashed.nu',
     description: 'Something went wrong?',
+    metadataBase: new URL(DOMAIN),
 };
 
 const Page = () => {
