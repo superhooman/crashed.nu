@@ -1,91 +1,98 @@
-import request from 'request';
+import { Agent } from 'https';
+
+import makeFetchCookie from 'fetch-cookie';
+import fetch from 'node-fetch';
+import { CookieJar } from 'tough-cookie';
+import { stringifyUrl } from 'query-string';
 
 import { parseSchedule } from './utils/parse';
 import { scheduleTypeResolver } from './utils/scheduleTypeResolver';
 
 const HOST = 'https://registrar.nu.edu.kz';
-const BUILD_ID = 'form-Ge0qInuGtfAjDSYP-U-zTNaHfEezxfz2X0ip8lzvTVE';
+const BUILD_ID = 'form-tFAqQhbP6TRrM1eFFrnkFOGsb2ExDtyBNHcywT3RB8s';
 
 export class Registrar {
     private HOST = HOST;
     private BUILD_ID = BUILD_ID;
-    private jar: request.CookieJar;
-    private request: request.RequestAPI<request.Request, request.CoreOptions, request.RequiredUriUrl>;
+    private jar: CookieJar;
+    private agent: Agent;
+    private fetch: typeof fetch;
+    private request: typeof fetch;
 
     constructor() {
-        this.jar = request.jar();
+        this.jar = new CookieJar();
+
+        this.agent = new Agent({
+            rejectUnauthorized: false,
+        });
 
         this.jar.setCookie('has_js=1;', this.HOST, {
             secure: true,
         });
 
-        this.request = request.defaults({
-            jar: this.jar,
-        });
+        this.fetch = makeFetchCookie(fetch, this.jar);
+
+        this.request = (url, init) => this.fetch(url, { ...init, agent: this.agent });
     }
 
-    private login(username: string, password: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.request({
-                method: 'POST',
-                uri: `${this.HOST}/index.php?q=user/login`,
-                strictSSL: false,
-                form: {
-                    name: username,
-                    pass: password,
-                    form_build_id: this.BUILD_ID,
-                    form_id: 'user_login',
-                    op: 'Log in',
-                }
-            }, (err, res) => {
-                if (err) {
-                    return reject('Error occured');
-                }
-                const redirect = res.headers.location;
-
-                if (!redirect?.includes('my-registrar')) {
-                    return reject('Invalid credentials');
-                }
-
-                resolve();
-            });
+    private async login(username: string, password: string) {
+        const url = stringifyUrl({
+            url: `${this.HOST}/index.php`,
+            query: { q: 'user/login' }
         });
+
+        await this.request(url, {
+            method: 'POST',
+            body: `name=${username}&pass=${password}&form_build_id=${this.BUILD_ID}&form_id=user_login&op=Log+in`,
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        }).catch(() => {
+            throw new Error('Error occured');
+        });
+
+        const cookies = await this.jar.getCookies(this.HOST);
+
+        const authed = cookies.some((cookie) => cookie.key === 'AUTHSSL');
+
+        if (authed) {
+            return true;
+        };
+
+        throw new Error('Invalid credentials');
     };
 
-    private getScheduleType(): Promise<'reg' | 'current'> {
-        return new Promise((resolve, reject) => {
-            this.request({
-                method: 'GET',
-                uri: `${this.HOST}/my-registrar/personal-schedule`,
-                strictSSL: false,
-            }, (err, res) => {
-                if (err) {
-                    return reject('Error occured');
-                }
-                
-                const type = scheduleTypeResolver(res.body as string);
+    private async getScheduleType() {
+        const url = `${this.HOST}/my-registrar/personal-schedule`;
 
-                resolve(type);
-            });
+        const text = await this.request(url).then((res) => res.text()).catch(() => {
+            throw new Error('Error occured');
         });
+
+        const type = scheduleTypeResolver(text);
+
+        return type;
     };
 
-    private getSchedule(type: 'reg' | 'current'): Promise<ReturnType<typeof parseSchedule>> {
-        return new Promise((resolve, reject) => {
-            this.request({
-                method: 'GET',
-                strictSSL: false,
-                uri: `${this.HOST}/my-registrar/personal-schedule/json?method=getTimetable&type=${type}&page=1&start=0&limit=50`,
-            }, (err, res) => {
-                if (err) {
-                    return reject('Error occured');
-                }
-                const data = res.body as string;
-                const schedule = parseSchedule(data);
-
-                resolve(schedule);
-            });
+    private async getSchedule(type: 'reg' | 'current') {
+        const url = stringifyUrl({
+            url: `${this.HOST}/my-registrar/personal-schedule/json`,
+            query: {
+                method: 'getTimetable',
+                type,
+                page: 1,
+                start: 0,
+                limit: 50,
+            }
         });
+
+        const text = await this.request(url).then((res) => res.text()).catch(() => {
+            throw new Error('Error occured');
+        });
+
+        const schedule = parseSchedule(text);
+
+        return schedule;
     }
 
     public async sync(username: string, password: string): Promise<ReturnType<typeof parseSchedule>> {

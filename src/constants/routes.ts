@@ -1,6 +1,6 @@
 import { stringifyUrl } from 'query-string';
 
-import type { StringifiableRecord} from 'query-string';
+import type { StringifiableRecord } from 'query-string';
 
 export const DOMAIN = 'https://crashed.nu';
 
