@@ -78,7 +78,22 @@ class PCC {
     }
 
     public async getSemesters() {
-        const semesters: RegistrarSemester[] = await this.request({ method: 'getSemesters' });
+        let semesters: RegistrarSemester[] = await this.request({ method: 'getSemesters' });
+
+        const has803 = semesters.find(({ ID }) => ID === '803');
+
+        if (has803) {
+            semesters = semesters.filter(({ ID }) => ID !== '803');
+        }
+
+        semesters = [
+            {
+                ID: '803',
+                NAME: 'Fall 2024',
+            },
+            ...semesters,
+        ];
+
         return semesters.map(({ ID, NAME }) => ({ label: NAME, value: ID }));
     }
 
@@ -105,7 +120,9 @@ class PCC {
             }
         });
 
-        const items = result.data.map(({
+        
+
+        const items = result.data.filter(({ SCHOOL }) => getSchool(SCHOOL) !== 'SST').map(({
             COURSEID,
             ABBR,
             ANTIREQ,

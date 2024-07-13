@@ -7,15 +7,15 @@ enum SemesterType {
 export const dateToSemester = (date: Date) => {
     const month = date.getMonth();
 
-    if (month < 3) {
+    if (month <= 3) {
         return SemesterType.SPRING;
     }
 
-    if (month < 6) {
+    if (month <= 5) {
         return SemesterType.SUMMER;
     }
 
-    if (month < 10) {
+    if (month <= 10) {
         return SemesterType.FALL;
     }
 
