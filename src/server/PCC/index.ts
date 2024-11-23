@@ -78,21 +78,7 @@ class PCC {
     }
 
     public async getSemesters() {
-        let semesters: RegistrarSemester[] = await this.request({ method: 'getSemesters' });
-
-        const has803 = semesters.find(({ ID }) => ID === '803');
-
-        if (has803) {
-            semesters = semesters.filter(({ ID }) => ID !== '803');
-        }
-
-        semesters = [
-            {
-                ID: '803',
-                NAME: 'Fall 2024',
-            },
-            ...semesters,
-        ];
+        const semesters: RegistrarSemester[] = await this.request({ method: 'getSemesters' });
 
         return semesters.map(({ ID, NAME }) => ({ label: NAME, value: ID }));
     }
