@@ -13,7 +13,6 @@ import type { SelectedCourse } from '@src/schemas/builder';
 import { Input } from '@src/components/Input';
 import { Select } from '@src/components/Select';
 import { LEVELS } from '@src/constants/levels';
-import { dateToSemester } from '@src/utils/semester/dateToSemester';
 import { search } from '@src/app/actions/search';
 import { LoadingContainer } from '@src/components/Loading';
 import { Empty } from '@src/components/Empty';
@@ -48,13 +47,6 @@ export const Search: React.FC<Props> = ({ back }) => {
     const [level, setLevel] = useLocalStorage('search.level', z.string(), LEVELS[0].value);
 
     const [semester, setSemester] = React.useState<string>(() => {
-        const preferredSemester = dateToSemester(new Date());
-        const semester = semesters.find(({ label }) => label.includes(preferredSemester));
-
-        if (semester) {
-            return semester?.value;
-        }
-
         return semesters[0].value;
     });
 
