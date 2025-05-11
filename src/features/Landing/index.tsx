@@ -1,13 +1,12 @@
 'use client';
 
-import { CalendarIcon, GitHubLogoIcon, HeartFilledIcon, Pencil2Icon } from '@radix-ui/react-icons';
+import { CalendarIcon, GitHubLogoIcon, Pencil2Icon } from '@radix-ui/react-icons';
 import { Button, Container, Flex, Heading, Text } from '@radix-ui/themes';
 import Link from 'next/link';
 
 import { Glyph } from '@src/components/Logo';
 import { ROUTES } from '@src/constants/routes';
 
-const SUPPORT_LINK = 'https://superhooman.lemonsqueezy.com/checkout/buy/4da4bbb2-2250-4085-9bc4-5325ddf04b91';
 const GITHUB_LINK = 'https://github.com/superhooman/crashed.nu';
 
 export const Landing = () => {
@@ -97,15 +96,6 @@ export const Landing = () => {
                     initial: '2',
                     md: '3'
                 }}>
-                    <Button variant="soft" size={{
-                        initial: '2',
-                        md: '3'
-                    }} asChild>
-                        <a target="_blank" href={SUPPORT_LINK}>
-                            <HeartFilledIcon />
-                            Support
-                        </a>
-                    </Button>
                     <Button variant="soft" size={{
                         initial: '2',
                         md: '3'
