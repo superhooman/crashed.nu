@@ -46,7 +46,7 @@ export const Landing = () => {
                     xs: '3',
                     sm: '5',
                     md: '6'
-                }}>Use your schedule in a convinient way.</Text>
+                }}>Use your schedule in a convenient way.</Text>
                 <Text as="p" mb="1" size={{
                     initial: '2',
                     xs: '3',
